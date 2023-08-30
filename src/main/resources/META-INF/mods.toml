@@ -1,0 +1,24 @@
+modLoader="javafml" #mandatory
+loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+[[mods]] #mandatory
+modId="bugging_out" #mandatory
+version="1.0.0" #mandatory
+displayName="Bugging Out!" #mandatory
+credits="Ralof for the art, superlord9362 for the code, and hellu_helli for ideas" #optional
+authors="superlord9362" #optional
+description='''
+Explore a world where invertabrates rule supreme. 
+'''
+[[dependencies.bugging_out]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[40,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.bugging_out]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"

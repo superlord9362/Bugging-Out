@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "facing=down,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole_vertical",
+      "x": 180
+    },
+    "facing=east,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 90
+    },
+    "facing=north,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole"
+    },
+    "facing=south,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 180
+    },
+    "facing=up,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole_vertical"
+    },
+    "facing=west,has_glowworm=true": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 270
+    },
+    "facing=down,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole_vertical",
+      "x": 180
+    },
+    "facing=east,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 90
+    },
+    "facing=north,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole"
+    },
+    "facing=south,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 180
+    },
+    "facing=up,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole_vertical"
+    },
+    "facing=west,has_glowworm=false": {
+      "model": "bugging_out:block/glow_worm_hole",
+      "y": 270
+    }
+  }
+}

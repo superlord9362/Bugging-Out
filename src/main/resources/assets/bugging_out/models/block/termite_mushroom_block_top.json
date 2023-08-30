@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "textures": {
+    "texture": "bugging_out:block/giant_termitomyces_top"
+  }
+}

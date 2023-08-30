@@ -1,0 +1,26 @@
+{
+	"type": "bugging_out:bugs",
+	"forge:use_server_seed": true,
+	"generator": {
+		"type": "minecraft:noise",
+		"seed": 9,
+		"settings": "bugging_out:bugs_noise_settings",
+		"biome_source": {
+			"type": "minecraft:multi_noise",
+			"biomes": [
+				{
+					"biome": "bugging_out:termite_mound",
+					"parameters": {
+						"temperature": 0.9,
+						"humidity": 0.9,
+						"depth": 0,
+						"weirdness": -1.5,
+						"continentalness": -0.5,
+						"erosion": 1.7,
+						"offset": 0
+					}
+				}
+			]
+		}
+	}
+}

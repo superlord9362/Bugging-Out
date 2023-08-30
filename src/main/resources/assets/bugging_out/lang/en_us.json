@@ -1,0 +1,31 @@
+{
+	"block.bugging_out.termostone": "Termostone",
+	"block.bugging_out.porous_termostone": "Porous Termostone",
+	"block.bugging_out.ferrous_termostone": "Ferrous Termostone",
+	"block.bugging_out.royal_termostone": "Royal Termostone",
+	"block.bugging_out.termite_mushroom": "Termite Mushroom",
+	"block.bugging_out.termite_mushroom_stem": "Termite Mushroom Stem",
+	"block.bugging_out.termite_mushroom_block": "Termite Mushroom Block",
+	"block.bugging_out.bug_lamp": "Bug Lamp",
+	"block.bugging_out.termite_mushroom_mycelium": "Termite Mushroom Mycelium",
+	"block.bugging_out.glow_worm_hole": "Glowworm Hole",
+	
+	"item.bugging_out.termite_worker_spawn_egg": "Termite Worker Spawn Egg",
+	"item.bugging_out.termite_nymph_spawn_egg": "Termite Nymph Spawn Egg",
+	"item.bugging_out.termite_soldier_spawn_egg": "Termite Soldier Spawn Egg",
+	"item.bugging_out.glowworm_spawn_egg": "Glowworm Spawn Egg",
+	
+	"item.bugging_out.termite_mushroom_spores": "Termite Mushroom Spores",
+	
+	"entity.bugging_out.termite_nymph": "Termite Nymph",
+	"entity.bugging_out.termite_worker": "Termite Worker",
+	"entity.bugging_out.termite_soldier": "Termite Soldier",
+	"entity.bugging_out.glowworm": "Glowworm",
+	
+	"itemGroup.bugs_building_tab": "Bugging Out! Building Blocks",
+	"itemGroup.bugs_decoration_tab": "Bugging Out! Decoration Blocks",
+	"itemGroup.bugs_spawn_eggs_tab": "Bugging Out! Spawn Eggs",
+	"itemGroup.bugs_misc_tab": "Bugging Out! Miscellaneous",
+	
+	"effect.bugging_out.termites_vengeance": "Termites Vengeance"
+}

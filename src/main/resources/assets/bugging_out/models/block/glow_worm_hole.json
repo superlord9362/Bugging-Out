@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "bugging_out:block/termostone",
+    "front": "bugging_out:block/glowworm_hole",
+    "side": "bugging_out:block/termostone"
+  }
+}

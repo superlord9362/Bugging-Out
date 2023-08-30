@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "bugging_out:block/giant_termitomyces_stem"
+  }
+}
