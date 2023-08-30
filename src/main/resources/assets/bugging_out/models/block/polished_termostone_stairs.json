@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "bugging_out:block/polished_termostone",
+		"top": "bugging_out:block/polished_termostone",
+		"side": "bugging_out:block/polished_termostone"
+	}
+}

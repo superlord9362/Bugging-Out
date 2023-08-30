@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+		"bugging_out:termostone_slab",
+		"bugging_out:termostone_brick_slab",
+		"bugging_out:polished_termostone_slab"
+	]
+}

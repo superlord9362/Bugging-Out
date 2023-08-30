@@ -13,17 +13,19 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import superlord.bugs.client.ClientProxy;
 import superlord.bugs.common.CommonProxy;
 import superlord.bugs.common.entity.Glowworm;
+import superlord.bugs.common.entity.TermiteKamikaze;
 import superlord.bugs.common.entity.TermiteNymph;
 import superlord.bugs.common.entity.TermiteSoldier;
 import superlord.bugs.common.entity.TermiteWorker;
-import superlord.bugs.init.BOBiomes;
 import superlord.bugs.init.BOBlocks;
 import superlord.bugs.init.BOConfiguredFeatures;
+import superlord.bugs.init.BOConfiguredWorldCarvers;
 import superlord.bugs.init.BOEffects;
 import superlord.bugs.init.BOEntities;
 import superlord.bugs.init.BOFeatures;
 import superlord.bugs.init.BOItems;
 import superlord.bugs.init.BOPlacedFeatures;
+import superlord.bugs.init.BOWorldCarvers;
 
 @Mod(BuggingOut.MOD_ID)
 public class BuggingOut {
@@ -43,8 +45,9 @@ public class BuggingOut {
 		BOConfiguredFeatures.REGISTER.register(bus);
 		BOEntities.REGISTER.register(bus);
 		BOEffects.REGISTER.register(bus);
-		BOBiomes.REGISTER.register(bus);
 		BOPlacedFeatures.REGISTER.register(bus);
+		BOWorldCarvers.REGISTER.register(bus);
+		BOConfiguredWorldCarvers.REGISTER.register(bus);
 		
 		bus.addListener(this::registerEntityAttributes);
 	}
@@ -81,6 +84,7 @@ public class BuggingOut {
 		event.put(BOEntities.TERMITE_WORKER.get(), TermiteWorker.createAttributes().build());
 		event.put(BOEntities.TERMITE_SOLDIER.get(), TermiteSoldier.createAttributes().build());
 		event.put(BOEntities.TERMITE_NYMPH.get(), TermiteNymph.createAttributes().build());
+		event.put(BOEntities.TERMITE_KAMIKAZE.get(), TermiteKamikaze.createAttributes().build());
 		event.put(BOEntities.GLOWWORM.get(), Glowworm.createAttributes().build());
 	}
 	

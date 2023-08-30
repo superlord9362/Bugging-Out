@@ -5,6 +5,17 @@
 		"bugging_out:porous_termostone",
 		"bugging_out:ferrous_termostone",
 		"bugging_out:royal_termostone",
-		"bugging_out:termite_mushroom_mycelium"  
+		"bugging_out:termite_mushroom_mycelium",
+		"bugging_out:termostone_wall",
+		"bugging_out:termostone_brick_wall",
+		"bugging_out:termostone_slab",
+		"bugging_out:termostone_stairs",
+		"bugging_out:polished_termostone",
+		"bugging_out:termostone_bricks",
+		"bugging_out:polished_termostone_slab",
+		"bugging_out:polished_termostone_stairs",
+		"bugging_out:termostone_brick_slab",
+		"bugging_out:termostone_brick_stairs",
+		"bugging_out:infested_porous_termostone"
 	]
 }

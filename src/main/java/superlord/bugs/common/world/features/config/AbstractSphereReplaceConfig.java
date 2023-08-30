@@ -1,10 +1,12 @@
 package superlord.bugs.common.world.features.config;
 
+import java.util.Random;
+
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -16,38 +18,30 @@ public class AbstractSphereReplaceConfig extends Feature<DiskConfiguration> {
 	}
 
 	public boolean place(FeaturePlaceContext<DiskConfiguration> context) {
-		DiskConfiguration diskconfiguration = context.config();
-		BlockPos blockpos = context.origin();
-		WorldGenLevel worldgenlevel = context.level();
-		RandomSource randomsource = context.random();
+		BlockPos pos = context.origin();
+		WorldGenLevel world = context.level();
+		Random rand = context.random();
 		boolean flag = false;
-		int i = blockpos.getY();
-		int j = i + diskconfiguration.halfHeight();
-		int k = i - diskconfiguration.halfHeight() - 1;
-		int l = diskconfiguration.radius().sample(randomsource);
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		int i = context.config().radius().sample(rand);
 
-		for(BlockPos blockpos1 : BlockPos.betweenClosed(blockpos.offset(-l, 0, -l), blockpos.offset(l, 0, l))) {
-			int i1 = blockpos1.getX() - blockpos.getX();
-			int j1 = blockpos1.getZ() - blockpos.getZ();
-			if (i1 * i1 + j1 * j1 <= l * l) {
-				flag |= this.placeColumn(diskconfiguration, worldgenlevel, randomsource, j, k, blockpos$mutableblockpos.set(blockpos1));
-			}
-		}
+		for(int j = pos.getX() - i; j <= pos.getX() + i; ++j) {
+			for(int k = pos.getZ() - i; k <= pos.getZ() + i; ++k) {
+				int l = j - pos.getX();
+				int i1 = k - pos.getZ();
+				if (l * l + i1 * i1 <= i * i) {
+					for(int j1 = pos.getY() - context.config().halfHeight(); j1 <= pos.getY() + context.config().halfHeight(); ++j1) {
+						BlockPos blockpos = new BlockPos(j, j1, k);
+						Block block = world.getBlockState(blockpos).getBlock();
 
-		return flag;
-	}
-
-	protected boolean placeColumn(DiskConfiguration p_224996_, WorldGenLevel p_224997_, RandomSource p_224998_, int p_224999_, int p_225000_, BlockPos.MutableBlockPos p_225001_) {
-		boolean flag = false;
-
-		for(int i = p_224999_; i > p_225000_; --i) {
-			p_225001_.setY(i);
-			if (p_224996_.target().test(p_224997_, p_225001_)) {
-				BlockState blockstate1 = p_224996_.stateProvider().getState(p_224997_, p_224998_, p_225001_);
-				p_224997_.setBlock(p_225001_, blockstate1, 2);
-				this.markAboveForPostProcessing(p_224997_, p_225001_);
-				flag = true;
+						for(BlockState blockstate : context.config().targets()) {
+							if (blockstate.is(block)) {
+								world.setBlock(blockpos, context.config().state(), 2);
+								flag = true;
+								break;
+							}
+						}
+					}
+				}
 			}
 		}
 

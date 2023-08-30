@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+		"bugging_out:termostone_wall",
+		"bugging_out:termostone_brick_wall"
+	]
+}

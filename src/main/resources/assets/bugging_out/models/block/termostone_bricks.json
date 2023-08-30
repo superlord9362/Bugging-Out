@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "bugging_out:block/termostone_bricks"
+    }
+}

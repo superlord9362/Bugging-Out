@@ -33,7 +33,7 @@ public class TermiteSoldier extends Animal {
 		super(type, world);
 	}
 	
-	public MobType getCreatureAttribute() {
+	public MobType getMobType() {
 		return BOCreatureAttributes.TERMITE;
 	}
 

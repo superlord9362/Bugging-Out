@@ -9,27 +9,31 @@ import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.RegisterEvent;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.particle.TermiteMushroomSporeParticle;
+import superlord.bugs.common.particle.TermostoneDustParticle;
 
 @Mod.EventBusSubscriber(modid = BuggingOut.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BOParticles {
 	
 	public static final SimpleParticleType TERMITE_MUSHROOM_SPORE = registerBasicParticle("termite_mushroom_spore");
-	
+	public static final SimpleParticleType TERMOSTONE_DUST = registerBasicParticle("termostone_dust");
+
 	private static SimpleParticleType registerBasicParticle(String name) {
 		return ParticleRegistry.registerParticle(name, new SimpleParticleType(false));
 	}
 	
-	@SuppressWarnings({ "resource", "deprecation" })
+	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void registerFactories(ParticleFactoryRegisterEvent e) {
 		ParticleEngine particles = Minecraft.getInstance().particleEngine;
 		particles.register(TERMITE_MUSHROOM_SPORE, TermiteMushroomSporeParticle.Provider::new);
+		particles.register(TERMOSTONE_DUST, TermostoneDustParticle.Provider::new);
 	}
 	
 	@Mod.EventBusSubscriber(modid = BuggingOut.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -44,10 +48,10 @@ public class BOParticles {
 		}
 		
 		@SubscribeEvent
-		public static void registerParticles(RegisterEvent event) {
-			IForgeRegistry<ParticleType<?>> registry = event.getForgeRegistry();
+		public static void registerParticles(RegistryEvent.Register<ParticleType<?>> event) {
+			IForgeRegistry<ParticleType<?>> registry = event.getRegistry();
 			for (ParticleType<?> particle : PARTICLE_TYPES) {
-				registry.register(particle.toString(), particle);
+				registry.register(particle);
 			}
 		}
 		

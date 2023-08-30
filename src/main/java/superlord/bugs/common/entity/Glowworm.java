@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -66,7 +66,7 @@ public class Glowworm extends Animal {
 		return this.subEntities;
 	}
 
-	public void recreateFromPacket(ClientboundAddEntityPacket p_149572_) {
+	public void recreateFromPacket(ClientboundAddMobPacket p_149572_) {
 		super.recreateFromPacket(p_149572_);
 		GlowwormPart[] glowwormPart = this.getSubEntities();
 
@@ -237,6 +237,7 @@ public class Glowworm extends Animal {
 			this.setAttachedToHole(false);
 			this.holePos = null;
 		}
+		System.out.println(holePos);
 		int mandibleMovementAllowed = random.nextInt(100);
 		if (this.isAttachedToHole()) {
 			this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0);

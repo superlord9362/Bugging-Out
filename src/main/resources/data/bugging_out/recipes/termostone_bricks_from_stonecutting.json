@@ -1,0 +1,8 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "bugging_out:polished_termostone"
+	},
+	"result": "bugging_out:termostone_bricks",
+	"count": 1
+}

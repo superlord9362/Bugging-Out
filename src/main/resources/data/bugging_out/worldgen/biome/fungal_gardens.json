@@ -11,6 +11,12 @@
 		"block_search_extent": 8,
 		"offset": 2.0
 	},
+    "particle": {
+      "options": {
+        "type": "bugging_out:termostone_dust"
+      },
+      "probability": 0.118093334
+    },
 	"sky_color": 15922646,
 	"foliage_color": 7372597,
 	"grass_color": 8242525,
@@ -20,9 +26,7 @@
 	},
 	"carvers": {
 		"air": [
-			"minecraft:cave",
-			"minecraft:cave_extra_underground",
-			"minecraft:nether_cave"
+			"bugging_out:configured_bug_cave"
 		]
 	},
 	"features": [
@@ -35,9 +39,14 @@
 		[],
 		[],
 		[
-			"bugging_out:placed_ferrous_termostone",
 			"bugging_out:placed_porous_termostone",
-			"bugging_out:placed_termite_mushroom_mycelium"
+			"bugging_out:placed_termite_mushroom_mycelium",
+			"bugging_out:placed_mycelium_rock",
+			"bugging_out:placed_termite_mycelium_ceiling_blob",
+			"bugging_out:placed_porous_termostone_ceiling_blob",
+			"bugging_out:placed_termostone_ceiling_blob",
+			"bugging_out:placed_termostone_pillar",
+			"bugging_out:placed_infested_porous_termostone"
 		],
 		[],
 		[

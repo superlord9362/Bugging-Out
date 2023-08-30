@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "bugging_out:polished_termostone"
+		}
+	},
+	"result": {
+		"item": "bugging_out:polished_termostone_stairs",
+		"count": 4
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "bugging_out:termostone"
+  },
+  "result": "bugging_out:termostone_glass",
+  "cookingtime": 200
+}

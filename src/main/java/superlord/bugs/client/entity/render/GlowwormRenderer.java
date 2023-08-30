@@ -15,6 +15,7 @@ import superlord.bugs.common.entity.Glowworm;
 public class GlowwormRenderer extends MobRenderer<Glowworm, GlowwormModel> {
 	
 	private static final ResourceLocation GLOWWORM = new ResourceLocation(BuggingOut.MOD_ID, "textures/entity/glowworm.png");
+	private static final ResourceLocation GLOWWORM_HIDING = new ResourceLocation(BuggingOut.MOD_ID, "textures/entity/glowworm_hiding.png");
 
 	public GlowwormRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new GlowwormModel(renderManagerIn.bakeLayer(ClientEvents.GLOWWORM)), 1F);
@@ -23,7 +24,8 @@ public class GlowwormRenderer extends MobRenderer<Glowworm, GlowwormModel> {
 	
 	@Override
 	public ResourceLocation getTextureLocation(Glowworm entity) {
-		return GLOWWORM;
+		if (entity.isAttachedToHole() && !entity.isEntityInRange()) return GLOWWORM_HIDING;
+		else return GLOWWORM;
 	}
 	
 	@Override

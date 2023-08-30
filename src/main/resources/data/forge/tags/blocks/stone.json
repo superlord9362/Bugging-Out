@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "bugging_out:termostone",
+    "bugging_out:porous_termostone",
+    "bugging_out:termite_mushroom_mycelium",
+    "bugging_out:ferrous_termostone"
+  ]
+}

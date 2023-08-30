@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "bugging_out:termostone"
+		}
+	},
+	"result": {
+		"item": "bugging_out:termostone_wall",
+		"count": 6
+	}
+}

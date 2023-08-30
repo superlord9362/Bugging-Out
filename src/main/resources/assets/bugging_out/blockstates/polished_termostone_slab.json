@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "bugging_out:block/polished_termostone_slab" },
+        "type=top": { "model": "bugging_out:block/polished_termostone_slab_top" },
+        "type=double": { "model": "bugging_out:block/polished_termostone" }
+    }
+}

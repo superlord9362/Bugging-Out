@@ -1,6 +1,12 @@
 package superlord.bugs.common.entity;
 
+import java.util.EnumSet;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -16,17 +22,22 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import superlord.bugs.common.block.TermiteInfestedBlock;
 import superlord.bugs.common.block.TermiteMushroomBlock;
 import superlord.bugs.common.entity.goal.AttractedToGlowwormHoleGoal;
 import superlord.bugs.init.BOBlocks;
@@ -42,7 +53,8 @@ public class TermiteNymph extends Animal {
 		super(type, world);
 	}
 
-	public MobType getCreatureAttribute() {
+	@Override
+	public MobType getMobType() {
 		return BOCreatureAttributes.TERMITE;
 	}
 
@@ -67,6 +79,8 @@ public class TermiteNymph extends Animal {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new TermiteEatMushroomGoal((double)1.2F, 12, 1));
 		this.goalSelector.addGoal(2, new AttractedToGlowwormHoleGoal(this, 1.0F, 6));
+		this.goalSelector.addGoal(5, new TermiteMergeWithPorousTermostoneGoal(this));
+		this.goalSelector.addGoal(1, new TermiteNymph.TermiteNymphWakeUpFriendsGoal(this));
 	}
 
 	class MeleeAttackGoal extends net.minecraft.world.entity.ai.goal.MeleeAttackGoal {
@@ -221,6 +235,110 @@ public class TermiteNymph extends Animal {
 			return this.getTeam() == null && entity.getTeam() == null;
 		} else {
 			return false;
+		}
+	}
+
+	static class TermiteMergeWithPorousTermostoneGoal extends RandomStrollGoal {
+		@Nullable
+		private Direction selectedDirection;
+		private boolean doMerge;
+
+		public TermiteMergeWithPorousTermostoneGoal(TermiteNymph p_33558_) {
+			super(p_33558_, 1.0D, 10);
+			this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+		}
+
+		public boolean canUse() {
+			if (this.mob.getTarget() != null) {
+				return false;
+			} else if (!this.mob.getNavigation().isDone()) {
+				return false;
+			} else {
+				Random random = this.mob.getRandom();
+				if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.mob.level, this.mob) && random.nextInt(10) == 0) {
+					this.selectedDirection = Direction.getRandom(random);
+					BlockPos blockpos = (new BlockPos(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
+					BlockState blockstate = this.mob.level.getBlockState(blockpos);
+					if (TermiteInfestedBlock.isCompatibleHostBlock(blockstate)) {
+						this.doMerge = true;
+						return true;
+					}
+				}
+
+				this.doMerge = false;
+				return super.canUse();
+			}
+		}
+
+		public boolean canContinueToUse() {
+			return this.doMerge ? false : super.canContinueToUse();
+		}
+
+		public void start() {
+			if (!this.doMerge) {
+				super.start();
+			} else {
+				LevelAccessor levelaccessor = this.mob.level;
+				BlockPos blockpos = (new BlockPos(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
+				BlockState blockstate = levelaccessor.getBlockState(blockpos);
+				if (TermiteInfestedBlock.isCompatibleHostBlock(blockstate)) {
+					levelaccessor.setBlock(blockpos, TermiteInfestedBlock.infestedStateByHost(blockstate), 3);
+					this.mob.spawnAnim();
+					this.mob.discard();
+				}
+
+			}
+		}
+	}
+
+	static class TermiteNymphWakeUpFriendsGoal extends Goal {
+		private final TermiteNymph termiteNymph;
+		private int lookForFriends;
+
+		public TermiteNymphWakeUpFriendsGoal(TermiteNymph p_33565_) {
+			this.termiteNymph = p_33565_;
+		}
+
+		public void notifyHurt() {
+			if (this.lookForFriends == 0) {
+				this.lookForFriends = this.adjustedTickDelay(20);
+			}
+
+		}
+
+		public boolean canUse() {
+			return this.lookForFriends > 0;
+		}
+
+		public void tick() {
+			--this.lookForFriends;
+			if (this.lookForFriends <= 0) {
+				Level level = this.termiteNymph.level;
+				Random random = this.termiteNymph.getRandom();
+				BlockPos blockpos = this.termiteNymph.blockPosition();
+
+				for(int i = 0; i <= 5 && i >= -5; i = (i <= 0 ? 1 : 0) - i) {
+					for(int j = 0; j <= 10 && j >= -10; j = (j <= 0 ? 1 : 0) - j) {
+						for(int k = 0; k <= 10 && k >= -10; k = (k <= 0 ? 1 : 0) - k) {
+							BlockPos blockpos1 = blockpos.offset(j, i, k);
+							BlockState blockstate = level.getBlockState(blockpos1);
+							Block block = blockstate.getBlock();
+							if (block instanceof TermiteInfestedBlock) {
+								if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(level, this.termiteNymph)) {
+									level.destroyBlock(blockpos1, true, this.termiteNymph);
+								} else {
+									level.setBlock(blockpos1, ((TermiteInfestedBlock)block).hostStateByInfested(level.getBlockState(blockpos1)), 3);
+								}
+
+								if (random.nextBoolean()) {
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+
 		}
 	}
 
