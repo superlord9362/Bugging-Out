@@ -1,13 +1,20 @@
 package superlord.bugs.init;
 
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
+import superlord.bugs.common.item.BOItemTiers;
 import superlord.bugs.common.item.BOSpawnEggItem;
+import superlord.bugs.common.item.TermiteAcidItem;
 import superlord.bugs.common.item.TermiteMushroomSporesItem;
 
 public class BOItems {
@@ -45,6 +52,16 @@ public class BOItems {
 	public static final RegistryObject<Item> TERMITE_SOLDIER_SPAWN_EGG = REGISTER.register("termite_soldier_spawn_egg", () -> new BOSpawnEggItem(BOEntities.TERMITE_SOLDIER, 0xB3895C, 0x673117, new Item.Properties().tab(BuggingOut.BUGS_SPAWN_EGGS)));
 	public static final RegistryObject<Item> GLOWWORM_SPAWN_EGG = REGISTER.register("glowworm_spawn_egg", () -> new BOSpawnEggItem(BOEntities.GLOWWORM, 0xD5C488, 0xB4FA7B, new Item.Properties().tab(BuggingOut.BUGS_SPAWN_EGGS)));
 
+	public static final RegistryObject<Item> TNTEE = REGISTER.register("tntree", () -> new BlockItem(BOBlocks.TNTREE.get(), new Item.Properties().tab(BuggingOut.BUGS_MISC)));
 	public static final RegistryObject<Item> TERMITE_MUSHROOM_SPORES = REGISTER.register("termite_mushroom_spores", () -> new TermiteMushroomSporesItem(new Item.Properties().tab(BuggingOut.BUGS_MISC)));
-	
+	public static final RegistryObject<Item> TERMITE_ACID = REGISTER.register("termite_acid", () -> new TermiteAcidItem(new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> CHITIN = REGISTER.register("chitin", () -> new Item(new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> MANDIBLE = REGISTER.register("mandible", () -> new Item(new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+
+	public static final RegistryObject<Item> MANDIBLE_HOE = REGISTER.register("mandible_hoe", () -> new HoeItem(BOItemTiers.MANDIBLE, -1, -1.5F, new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> MANDIBLE_SHOVEL = REGISTER.register("mandible_shovel", () -> new ShovelItem(BOItemTiers.MANDIBLE, 1.5F, -3, new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> MANDIBLE_PICKAXE = REGISTER.register("mandible_pickaxe", () -> new PickaxeItem(BOItemTiers.MANDIBLE, 1, -2.8F, new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> MANDBILE_AXE = REGISTER.register("mandible_axe", () -> new AxeItem(BOItemTiers.MANDIBLE, 6.5F, -3.2F, new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+	public static final RegistryObject<Item> MANDIBLE_SWORD = REGISTER.register("mandible_sword", () -> new SwordItem(BOItemTiers.MANDIBLE, 3, -2.4F, new Item.Properties().tab(BuggingOut.BUGS_MISC)));
+
 }

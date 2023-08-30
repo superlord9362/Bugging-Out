@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "bugging_out:block/tntree_top",
+		"side": "bugging_out:block/tntree_side"
+ 	}
+}

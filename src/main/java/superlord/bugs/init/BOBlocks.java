@@ -21,6 +21,7 @@ import superlord.bugs.BuggingOut;
 import superlord.bugs.common.block.AcidSplatBlock;
 import superlord.bugs.common.block.CrumblyTermostoneBlock;
 import superlord.bugs.common.block.GlowWormHoleBlock;
+import superlord.bugs.common.block.TNTreeBlock;
 import superlord.bugs.common.block.TermiteInfestedBlock;
 import superlord.bugs.common.block.TermiteMushroomBlock;
 import superlord.bugs.common.block.TermiteMushroomCapBlock;
@@ -67,6 +68,8 @@ public class BOBlocks {
 
 	public static final RegistryObject<Block> INFESTED_POROUS_TERMOSTONE = REGISTER.register("infested_porous_termostone", () -> new TermiteInfestedBlock(POROUS_TERMOSTONE.get(), BlockBehaviour.Properties.of(Material.STONE)));
 
+	public static final RegistryObject<Block> TNTREE = REGISTER.register("tntree", () -> new TNTreeBlock(Block.Properties.of(Material.EXPLOSIVE).instabreak().sound(SoundType.GRASS)));
+	
 	private static Boolean never(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
 		return (boolean)false;
 	}

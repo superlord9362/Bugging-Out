@@ -22,6 +22,8 @@ import superlord.bugs.client.entity.render.TermiteKamikazeRenderer;
 import superlord.bugs.client.entity.render.TermiteNymphRenderer;
 import superlord.bugs.client.entity.render.TermiteSoldierRenderer;
 import superlord.bugs.client.entity.render.TermiteWorkerRenderer;
+import superlord.bugs.client.entity.render.item.TNTreeRenderer;
+import superlord.bugs.client.entity.render.item.TermiteAcidRenderer;
 import superlord.bugs.common.item.BOSpawnEggItem;
 import superlord.bugs.init.BOEntities;
 
@@ -55,6 +57,8 @@ public class ClientEvents {
 		event.registerEntityRenderer(BOEntities.TERMITE_KAMIKAZE.get(), TermiteKamikazeRenderer::new);
 		event.registerEntityRenderer(BOEntities.TERMITE_NYMPH.get(), TermiteNymphRenderer::new);
 		event.registerEntityRenderer(BOEntities.GLOWWORM.get(), GlowwormRenderer::new);
+		event.registerEntityRenderer(BOEntities.TERMITE_ACID.get(), TermiteAcidRenderer::new);
+		event.registerEntityRenderer(BOEntities.TNTREE.get(), TNTreeRenderer::new);
 	}
 	
 	@SubscribeEvent

@@ -19,16 +19,16 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
+import superlord.bugs.common.block.TermiteMushroomBlock;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class BOConfiguredFeatures {
 
 	public static final DeferredRegister<ConfiguredFeature<?,?>> REGISTER = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, BuggingOut.MOD_ID);
-
-
+	
 	public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_TERMITE_MUSHROOM = REGISTER.register("configured_huge_termite_mushroom", () -> new ConfiguredFeature<>(BOFeatures.HUGE_TERMITE_MUSHROOM.get(), new NoneFeatureConfiguration()));
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMITE_MUSHROOMS = REGISTER.register("configured_termite_mushrooms", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.TERMITE_MUSHROOM.get()), 32)));
+	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMITE_MUSHROOMS = REGISTER.register("configured_termite_mushrooms", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 4)), 32)));
 
 	public static final RegistryObject<ConfiguredFeature<?, ?>> FERROUS_TERMOSTONE = REGISTER.register("configured_ferrous_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState()))));
 	public static final RegistryObject<ConfiguredFeature<?, ?>> POROUS_TERMOSTONE = REGISTER.register("configured_porous_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState()))));

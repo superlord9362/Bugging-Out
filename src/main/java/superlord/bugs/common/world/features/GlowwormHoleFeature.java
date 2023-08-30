@@ -29,7 +29,6 @@ public class GlowwormHoleFeature extends Feature<NoneFeatureConfiguration> {
 		for (int i = yPos; i < 320; i++) {
 				BlockPos blockPos = new BlockPos(xPos, i, zPos);
 				if (!world.isEmptyBlock(blockPos)) {
-				System.out.println(pos);
 				if (direction == 0) {
 					if (world.getBlockState(blockPos.north()).isAir()) {
 						world.setBlock(blockPos, BOBlocks.GLOW_WORM_HOLE.get().defaultBlockState().setValue(GlowWormHoleBlock.FACING, Direction.SOUTH), 2);

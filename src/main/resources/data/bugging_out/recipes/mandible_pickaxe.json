@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX",
+		" S ",
+		" S "
+	],
+	"key": {
+		"X": {
+			"item": "bugging_out:mandible"
+		},
+		"S": {
+			"item": "bugging_out:chitin"
+		}
+	},
+	"result": {
+		"item": "bugging_out:mandible_pickaxe"
+	}
+}

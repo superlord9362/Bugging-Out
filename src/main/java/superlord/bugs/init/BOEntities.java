@@ -8,10 +8,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.entity.Glowworm;
+import superlord.bugs.common.entity.TNTree;
 import superlord.bugs.common.entity.TermiteKamikaze;
 import superlord.bugs.common.entity.TermiteNymph;
 import superlord.bugs.common.entity.TermiteSoldier;
 import superlord.bugs.common.entity.TermiteWorker;
+import superlord.bugs.common.entity.item.TermiteAcid;
 
 public class BOEntities {
 	
@@ -23,4 +25,7 @@ public class BOEntities {
 	public static final RegistryObject<EntityType<TermiteNymph>> TERMITE_NYMPH = REGISTER.register("termite_nymph", () -> EntityType.Builder.<TermiteNymph>of(TermiteNymph::new, MobCategory.CREATURE).sized(0.5F, 0.5F).build(new ResourceLocation(BuggingOut.MOD_ID, "termite_nymph").toString()));
 	public static final RegistryObject<EntityType<Glowworm>> GLOWWORM = REGISTER.register("glowworm", () -> EntityType.Builder.<Glowworm>of(Glowworm::new, MobCategory.CREATURE).sized(1F, 1F).build(new ResourceLocation(BuggingOut.MOD_ID, "glowworm").toString()));
 
+	public static final RegistryObject<EntityType<TermiteAcid>> TERMITE_ACID = REGISTER.register("termite_acid", () -> EntityType.Builder.<TermiteAcid>of(TermiteAcid::new, MobCategory.MISC).sized(0.25F, 0.25F).build(new ResourceLocation(BuggingOut.MOD_ID, "termite_acid").toString()));
+	public static final RegistryObject<EntityType<TNTree>> TNTREE = REGISTER.register("tntree", () -> EntityType.Builder.<TNTree>of(TNTree::new, MobCategory.MISC).fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10).build(new ResourceLocation(BuggingOut.MOD_ID, "tntree").toString()));
+	
 }

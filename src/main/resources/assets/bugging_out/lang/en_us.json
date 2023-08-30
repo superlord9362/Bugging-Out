@@ -23,6 +23,7 @@
 	"block.bugging_out.glow_worm_hole": "Glowworm Hole",
 	"block.bugging_out.acid_splat": "Acid Splat",
 	"block.bugging_out.crumbly_termostone": "Crumbly Termostone",
+	"block.bugging_out.tntree": "TNTree",
 	
 	"item.bugging_out.termite_worker_spawn_egg": "Termite Worker Spawn Egg",
 	"item.bugging_out.termite_nymph_spawn_egg": "Termite Nymph Spawn Egg",
@@ -31,12 +32,22 @@
 	"item.bugging_out.glowworm_spawn_egg": "Glowworm Spawn Egg",
 	
 	"item.bugging_out.termite_mushroom_spores": "Termite Mushroom Spores",
+	"item.bugging_out.termite_acid": "Termite Acid",
+	"item.bugging_out.chitin": "Chitin",
+	"item.bugging_out.mandible": "Mandible",
+	"item.bugging_out.mandible_hoe": "Mandible Hoe",
+	"item.bugging_out.mandible_shovel": "Mandible Shovel",
+	"item.bugging_out.mandible_pickaxe": "Mandible Pickaxe",
+	"item.bugging_out.mandible_axe": "Mandible Axe",
+	"item.bugging_out.mandible_sword": "Mandible Sword",
 	
 	"entity.bugging_out.termite_nymph": "Termite Nymph",
 	"entity.bugging_out.termite_worker": "Termite Worker",
 	"entity.bugging_out.termite_soldier": "Termite Soldier",
 	"entity.bugging_out.termite_kamikaze": "Termite Kamikaze",
 	"entity.bugging_out.glowworm": "Glowworm",
+	"entity.bugging_out.termite_acid": "Termite Acid",
+	"entity.bugging_out.tntree": "TNTree",
 	
 	"itemGroup.bugs_building_tab": "Bugging Out! Building Blocks",
 	"itemGroup.bugs_decoration_tab": "Bugging Out! Decoration Blocks",
