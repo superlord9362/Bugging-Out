@@ -116,11 +116,11 @@ public class BuggingOut {
 	}
 	
 	public void setup(final FMLCommonSetupEvent event) {
-		SpawnPlacements.register(BOEntities.GLOWWORM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Glowworm::canGlowwormSpawn);
-		SpawnPlacements.register(BOEntities.TERMITE_KAMIKAZE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteKamikaze::canTermiteSpawn);
-		SpawnPlacements.register(BOEntities.TERMITE_NYMPH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteNymph::canTermiteSpawn);
-		SpawnPlacements.register(BOEntities.TERMITE_SOLDIER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteSoldier::canTermiteSpawn);
-		SpawnPlacements.register(BOEntities.TERMITE_WORKER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteWorker::canTermiteSpawn);
+		SpawnPlacements.register(BOEntities.GLOWWORM.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Glowworm::canGlowwormSpawn);
+		SpawnPlacements.register(BOEntities.TERMITE_KAMIKAZE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteKamikaze::canTermiteSpawn);
+		SpawnPlacements.register(BOEntities.TERMITE_NYMPH.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteNymph::canTermiteSpawn);
+		SpawnPlacements.register(BOEntities.TERMITE_SOLDIER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteSoldier::canTermiteSpawn);
+		SpawnPlacements.register(BOEntities.TERMITE_WORKER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteWorker::canTermiteSpawn);
 	}
 	
 }

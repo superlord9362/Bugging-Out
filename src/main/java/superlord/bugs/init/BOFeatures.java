@@ -21,19 +21,19 @@ import superlord.bugs.common.world.features.TermostonePillarFeature;
 
 public class BOFeatures {
 
-    public static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(ForgeRegistries.FEATURES, BuggingOut.MOD_ID);
+	public static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(ForgeRegistries.FEATURES, BuggingOut.MOD_ID);
 
-    public static final RegistryObject<HugeTermiteMushroomFeature> HUGE_TERMITE_MUSHROOM = REGISTER.register("hige_termite_mushroom", () -> new HugeTermiteMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
-    public static final RegistryObject<LandSphereReplaceFeature> LAND_DISK = REGISTER.register("land_disk", () -> new LandSphereReplaceFeature(DiskConfiguration.CODEC.stable()));
-    public static final RegistryObject<TermiteMyceliumCeilingBlobFeature> TERMITE_MYCELIUM_CEILING_BLOB = REGISTER.register("termite_mycelium_ceiling_blob", () -> new TermiteMyceliumCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
-    public static final RegistryObject<TermostoneCeilingBlobFeature> TERMOSTONE_CEILING_BLOB = REGISTER.register("termostone_ceiling_blob", () -> new TermostoneCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
-    public static final RegistryObject<PorousTermostoneCeilingBlobFeature> POROUS_TERMOSTONE_CEILING_BLOB = REGISTER.register("porous_termostone_ceiling_blob", () -> new PorousTermostoneCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<HugeTermiteMushroomFeature> HUGE_TERMITE_MUSHROOM = REGISTER.register("hige_termite_mushroom", () -> new HugeTermiteMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<LandSphereReplaceFeature> LAND_DISK = REGISTER.register("land_disk", () -> new LandSphereReplaceFeature(DiskConfiguration.CODEC.stable()));
+	public static final RegistryObject<TermiteMyceliumCeilingBlobFeature> TERMITE_MYCELIUM_CEILING_BLOB = REGISTER.register("termite_mycelium_ceiling_blob", () -> new TermiteMyceliumCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<TermostoneCeilingBlobFeature> TERMOSTONE_CEILING_BLOB = REGISTER.register("termostone_ceiling_blob", () -> new TermostoneCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<PorousTermostoneCeilingBlobFeature> POROUS_TERMOSTONE_CEILING_BLOB = REGISTER.register("porous_termostone_ceiling_blob", () -> new PorousTermostoneCeilingBlobFeature(NoneFeatureConfiguration.CODEC.stable()));
 
-    public static final RegistryObject<GlowwormHoleFeature> GLOWWORM_HOLE = REGISTER.register("glowworm_hole", () -> new GlowwormHoleFeature(NoneFeatureConfiguration.CODEC.stable()));
-    
-    public static final RegistryObject<TermostonePillarFeature> TERMOSTONE_PILLAR = REGISTER.register("termostone_pillar", () -> new TermostonePillarFeature(LargeDripstoneConfiguration.CODEC.stable()));
-    
-    public static final RegistryObject<TermiteMoundFeature> TERMINTE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMINTE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<GlowwormHoleFeature> GLOWWORM_HOLE = REGISTER.register("glowworm_hole", () -> new GlowwormHoleFeature(NoneFeatureConfiguration.CODEC.stable()));
+
+	public static final RegistryObject<TermostonePillarFeature> TERMOSTONE_PILLAR = REGISTER.register("termostone_pillar", () -> new TermostonePillarFeature(LargeDripstoneConfiguration.CODEC.stable()));
+
+	public static final RegistryObject<TermiteMoundFeature> TERMINTE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMINTE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
 
 }

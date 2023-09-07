@@ -1,5 +1,21 @@
 {
     "variants": {
-        "": { "model": "bugging_out:block/acid_splat" }
+        "": [
+			{
+				"model": "bugging_out:block/acid_splat"
+			},
+			{ 
+				"model": "bugging_out:block/acid_splat",
+				"y": 90
+			},
+			{ 
+				"model": "bugging_out:block/acid_splat",
+				"y": 180
+			},
+			{ 
+				"model": "bugging_out:block/acid_splat",
+				"y": 270
+			}
+		]
     }
 }

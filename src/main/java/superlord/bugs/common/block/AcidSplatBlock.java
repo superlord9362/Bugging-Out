@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import superlord.bugs.init.BOCreatureAttributes;
 
 public class AcidSplatBlock extends Block {
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
@@ -46,7 +48,12 @@ public class AcidSplatBlock extends Block {
 	}
 
 	public void entityInside(BlockState p_51148_, Level p_51149_, BlockPos p_51150_, Entity p_51151_) {
-		p_51151_.hurt(DamageSource.MAGIC, 1.0F);
+		if (p_51151_ instanceof LivingEntity) {
+			LivingEntity entity = (LivingEntity) p_51151_;
+			if (entity.getMobType() != BOCreatureAttributes.TERMITE) {
+				entity.hurt(DamageSource.MAGIC, 1.0F);
+			}
+		}
 	}
 
 }

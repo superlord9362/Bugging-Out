@@ -40,7 +40,7 @@ public class BOPlacedFeatures {
 	public static final RegistryObject<PlacedFeature> CRUMBLY_TERMOSTONE_MOUND = REGISTER.register("placed_crumbly_termostone_mound", () -> new PlacedFeature(BOConfiguredFeatures.CRUMBLY_TERMOSTONE_MOUND.getHolder().orElseThrow(), List.of(CountOnEveryLayerPlacement.of(2), BiomeFilter.biome())));
 
 	public static final RegistryObject<PlacedFeature> GLOWWORM_HOLE = REGISTER.register("placed_glowworm_hole", () -> new PlacedFeature(BOConfiguredFeatures.GLOWWORM_HOLE.getHolder().orElseThrow(), List.of(CountOnEveryLayerPlacement.of(5), BiomeFilter.biome())));
-	
+
 	public static List<PlacementModifier> worldSurfaceSquaredWithCount(int p_195475_) {
 		return List.of(CountPlacement.of(p_195475_), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 	}

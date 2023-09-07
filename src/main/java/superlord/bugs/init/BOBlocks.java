@@ -62,7 +62,7 @@ public class BOBlocks {
 	public static final RegistryObject<Block> TERMITE_MUSHROOM_MYCELIUM = REGISTER.register("termite_mushroom_mycelium", () -> new TermiteMushroomMyceliumBlock(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.5F).randomTicks().sound(SoundType.STONE)));
 	public static final RegistryObject<Block> GLOW_WORM_HOLE = REGISTER.register("glow_worm_hole", () -> new GlowWormHoleBlock(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.5F).sound(SoundType.STONE)));
 
-	public static final RegistryObject<Block> CRUMBLY_TERMOSTONE = REGISTER.register("crumbly_termostone", () -> new CrumblyTermostoneBlock(Block.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(2.5F).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> CRUMBLY_TERMOSTONE = REGISTER.register("crumbly_termostone", () -> new CrumblyTermostoneBlock(Block.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(0.5F).sound(SoundType.STONE)));
 
 	public static final RegistryObject<Block> ACID_SPLAT = REGISTER.register("acid_splat", () -> new AcidSplatBlock(Block.Properties.of(Material.WEB).noCollission().noDrops().strength(0).sound(SoundType.SLIME_BLOCK).randomTicks()));
 

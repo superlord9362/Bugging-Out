@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import superlord.bugs.init.BOBlocks;
 import superlord.bugs.init.BOEffects;
 
 public class TermiteMushroomBlock extends MushroomBlock {
@@ -65,7 +66,7 @@ public class TermiteMushroomBlock extends MushroomBlock {
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState p_52292_, ServerLevel p_52293_, BlockPos p_52294_, Random p_52295_) {
 		if (!p_52293_.isAreaLoaded(p_52294_, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-		if (p_52293_.getRawBrightness(p_52294_, 0) >= 9) {
+		if (p_52293_.getBlockState(p_52294_.below()).is(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get())) {
 			int i = this.getAge(p_52292_);
 			if (i < this.getMaxAge()) {
 				float f = getGrowthSpeed(this, p_52293_, p_52294_);

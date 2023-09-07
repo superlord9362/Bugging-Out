@@ -109,13 +109,13 @@ public class TermiteSoldierModel extends EntityModel<TermiteSoldier> {
 		this.antenna_r.xRot = -0.15F * (Mth.sin(0.075F * ageInTicks + 1));
 		this.antenna_l.xRot = -0.15F * Mth.sin(0.075F * ageInTicks);
 		if (entity.areMandiblesMoving()) {
-			this.mandible_r.yRot = -Math.abs(-0.5F * Mth.sin(0.15F * ageInTicks));
-			this.mandible_r2.yRot = Math.abs(0.5F * Mth.sin(0.15F * ageInTicks + 8));
+			this.mandible_r2.yRot = -Math.abs(-0.5F * Mth.sin(0.15F * ageInTicks));
+			this.mandible_r.yRot = Math.abs(0.5F * Mth.sin(0.15F * ageInTicks + 8));
 			this.lip_b.xRot = Math.abs(0.25F * Mth.sin(0.025F * ageInTicks)) - 0.2F;
 			this.lip_t.xRot = -Math.abs(0.25F * Mth.sin(0.025F * ageInTicks)) - 0F;
 		} else {
-			this.mandible_r.yRot = -0.1F;
-			this.mandible_r2.yRot = 0.1F;
+			this.mandible_r2.yRot = -0.1F;
+			this.mandible_r.yRot = 0.1F;
 			this.lip_b.xRot =  -0.2F;
 			this.lip_t.xRot = 0F;
 		}

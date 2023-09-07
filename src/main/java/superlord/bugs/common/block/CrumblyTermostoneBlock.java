@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +25,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import superlord.bugs.init.BOCreatureAttributes;
 
 public class CrumblyTermostoneBlock extends Block {
-	protected static final VoxelShape AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+	protected static final VoxelShape COLLISION_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+	protected static final VoxelShape OUTLINE_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+
 	public static final EnumProperty<Breaking> BREAKING = EnumProperty.create("breaking", Breaking.class);
 	private static final Object2IntMap<Breaking> DELAY_UNTIL_NEXT_TILT_STATE = Util.make(new Object2IntArrayMap<>(), (p_152305_) -> {
 		p_152305_.defaultReturnValue(-1);
@@ -38,16 +41,29 @@ public class CrumblyTermostoneBlock extends Block {
 		this.registerDefaultState(this.stateDefinition.any().setValue(BREAKING, Breaking.NONE));
 	}
 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return AABB;
+	public VoxelShape getCollisionShape(BlockState p_51176_, BlockGetter p_51177_, BlockPos p_51178_, CollisionContext p_51179_) {
+		return COLLISION_SHAPE;
+	}
+
+	public VoxelShape getShape(BlockState p_51171_, BlockGetter p_51172_, BlockPos p_51173_, CollisionContext p_51174_) {
+		return OUTLINE_SHAPE;
 	}
 
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
 			LivingEntity entity = (LivingEntity) entityIn;
 			if (entity.getMobType() != BOCreatureAttributes.TERMITE) {
-				if (state.getValue(BREAKING) == Breaking.NONE) {
-					this.setBreakandScheduleTick(state, worldIn, pos, Breaking.STABLE);
+				if (entity instanceof Player) {
+					Player player = (Player) entity;
+					if (!player.isCreative()) {
+						if (state.getValue(BREAKING) == Breaking.NONE) {
+							this.setBreakandScheduleTick(state, worldIn, pos, Breaking.STABLE);
+						}
+					}
+				} else {
+					if (state.getValue(BREAKING) == Breaking.NONE) {
+						this.setBreakandScheduleTick(state, worldIn, pos, Breaking.STABLE);
+					}
 				}
 			}
 		}
