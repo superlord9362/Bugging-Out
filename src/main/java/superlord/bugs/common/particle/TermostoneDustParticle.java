@@ -1,12 +1,11 @@
 package superlord.bugs.common.particle;
 
-import java.util.Random;
-
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -26,7 +25,7 @@ public class TermostoneDustParticle extends BaseTermostoneDustParticle {
 		}
 
 		public Particle createParticle(SimpleParticleType p_108534_, ClientLevel p_108535_, double p_108536_, double p_108537_, double p_108538_, double p_108539_, double p_108540_, double p_108541_) {
-			Random random = p_108535_.random;
+			RandomSource random = p_108535_.random;
 			double d0 = (double)random.nextFloat() * -1.9D * (double)random.nextFloat() * 0.1D;
 			double d1 = (double)random.nextFloat() * -0.5D * (double)random.nextFloat() * 0.1D * 5.0D;
 			double d2 = (double)random.nextFloat() * -1.9D * (double)random.nextFloat() * 0.1D;

@@ -33,7 +33,7 @@ public class BOFeatures {
 
 	public static final RegistryObject<TermostonePillarFeature> TERMOSTONE_PILLAR = REGISTER.register("termostone_pillar", () -> new TermostonePillarFeature(LargeDripstoneConfiguration.CODEC.stable()));
 
-	public static final RegistryObject<TermiteMoundFeature> TERMINTE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
-	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMINTE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<TermiteMoundFeature> TERMITE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMITE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
 
 }

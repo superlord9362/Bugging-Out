@@ -4,6 +4,22 @@
 		"bugging_out:termite_mushroom",
 		"bugging_out:termite_mushroom_stem",
 		"bugging_out:termite_mushroom_block",
-		"bugging_out:bug_lamp"	  
+		"bugging_out:rotten_log",
+		"bugging_out:stripped_rotten_log",
+		"bugging_out:rotten_wood",
+		"bugging_out:stripped_rotten_wood",
+		"bugging_out:rotten_planks",
+		"bugging_out:rotten_door",
+		"bugging_out:rotten_pressure_plate",
+		"bugging_out:rotten_fence",
+		"bugging_out:rotten_trapdoor",
+		"bugging_out:rotten_fence_gate",
+		"bugging_out:rotten_button",
+		"bugging_out:rotten_slab",
+		"bugging_out:rotten_stairs",
+		"bugging_out:rotten_sign",
+		"bugging_out:rotten_wall_sign",
+		"bugging_out:bug_lamp",
+		"bugging_out:rotten_charcoal_ore"  
 	]
 }

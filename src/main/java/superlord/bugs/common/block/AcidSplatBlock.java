@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
@@ -51,7 +50,7 @@ public class AcidSplatBlock extends Block {
 		if (p_51151_ instanceof LivingEntity) {
 			LivingEntity entity = (LivingEntity) p_51151_;
 			if (entity.getMobType() != BOCreatureAttributes.TERMITE) {
-				entity.hurt(DamageSource.MAGIC, 1.0F);
+				entity.hurt(entity.damageSources().magic(), 1.0F);
 			}
 		}
 	}

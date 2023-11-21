@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "bugging_out:block/stripped_rotten_log_top",
+        "side": "bugging_out:block/stripped_rotten_log"
+    }
+}

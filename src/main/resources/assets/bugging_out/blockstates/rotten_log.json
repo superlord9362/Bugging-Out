@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y":  { "model": "bugging_out:block/rotten_log" },
+        "axis=z":   { "model": "bugging_out:block/rotten_log", "x": 90 },
+        "axis=x":   { "model": "bugging_out:block/rotten_log", "x": 90, "y": 90 }
+    }
+}

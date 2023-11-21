@@ -1,12 +1,12 @@
 package superlord.bugs.client;
 
-import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +17,7 @@ import superlord.bugs.client.entity.model.TermiteKamikazeModel;
 import superlord.bugs.client.entity.model.TermiteNymphModel;
 import superlord.bugs.client.entity.model.TermiteSoldierModel;
 import superlord.bugs.client.entity.model.TermiteWorkerModel;
+import superlord.bugs.client.entity.render.BOBoatRenderer;
 import superlord.bugs.client.entity.render.GlowwormRenderer;
 import superlord.bugs.client.entity.render.TermiteKamikazeRenderer;
 import superlord.bugs.client.entity.render.TermiteNymphRenderer;
@@ -24,8 +25,9 @@ import superlord.bugs.client.entity.render.TermiteSoldierRenderer;
 import superlord.bugs.client.entity.render.TermiteWorkerRenderer;
 import superlord.bugs.client.entity.render.item.TNTreeRenderer;
 import superlord.bugs.client.entity.render.item.TermiteAcidRenderer;
-import superlord.bugs.common.item.BOSpawnEggItem;
+import superlord.bugs.init.BOBlockEntities;
 import superlord.bugs.init.BOEntities;
+import superlord.bugs.init.BOWoodTypes;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = BuggingOut.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -33,6 +35,10 @@ public class ClientEvents {
 	
 	@SubscribeEvent
 	public static void init(final FMLClientSetupEvent event) {
+		BlockEntityRenderers.register(BOBlockEntities.SIGN.get(), SignRenderer::new);
+		event.enqueueWork(() -> {
+			Sheets.addWoodType(BOWoodTypes.ROTTEN);
+		});
 		ClientProxy.setUpBlockRenders();
 	}
 	
@@ -41,14 +47,6 @@ public class ClientEvents {
 	public static ModelLayerLocation TERMITE_KAMIKAZE = new ModelLayerLocation(new ResourceLocation(BuggingOut.MOD_ID, "termite_kamikaze"), "termite_kamikaze");
 	public static ModelLayerLocation TERMITE_NYMPH = new ModelLayerLocation(new ResourceLocation(BuggingOut.MOD_ID, "termite_nymph"), "termite_nymph");
 	public static ModelLayerLocation GLOWWORM = new ModelLayerLocation(new ResourceLocation(BuggingOut.MOD_ID, "glowworm"), "glowworm");
-
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public static void itemColors(ColorHandlerEvent.Item event) {
-		ItemColors handler = event.getItemColors();
-		ItemColor eggColor = (stack, tintIndex) -> ((BOSpawnEggItem) stack.getItem()).getColor(tintIndex);
-		for (BOSpawnEggItem e : BOSpawnEggItem.UNADDED_EGGS) handler.register(eggColor, e);
-	}
 	
 	@SubscribeEvent
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
@@ -59,6 +57,7 @@ public class ClientEvents {
 		event.registerEntityRenderer(BOEntities.GLOWWORM.get(), GlowwormRenderer::new);
 		event.registerEntityRenderer(BOEntities.TERMITE_ACID.get(), TermiteAcidRenderer::new);
 		event.registerEntityRenderer(BOEntities.TNTREE.get(), TNTreeRenderer::new);
+		event.registerEntityRenderer(BOEntities.BOAT.get(), BOBoatRenderer::new);
 	}
 	
 	@SubscribeEvent

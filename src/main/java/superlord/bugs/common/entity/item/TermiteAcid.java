@@ -8,7 +8,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -45,7 +45,7 @@ public class TermiteAcid extends ThrowableItemProjectile {
 
 	@Nonnull
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -59,19 +59,19 @@ public class TermiteAcid extends ThrowableItemProjectile {
 		BlockPos pos = result.getBlockPos();
 		Direction dir = result.getDirection();
 		if (dir == Direction.UP) {
-			this.level.setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+			this.level().setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 		}
-		if (dir == Direction.EAST && this.level.getBlockState(pos.east()).isAir() && this.level.getBlockState(pos.east().below()).isFaceSturdy(level, pos.east().above(), Direction.UP)) {
-			this.level.setBlock(pos.east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+		if (dir == Direction.EAST && this.level().getBlockState(pos.east()).isAir() && this.level().getBlockState(pos.east().below()).isFaceSturdy(level(), pos.east().above(), Direction.UP)) {
+			this.level().setBlock(pos.east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 		}
-		if (dir == Direction.WEST && this.level.getBlockState(pos.west()).isAir() && this.level.getBlockState(pos.west().below()).isFaceSturdy(level, pos.west().above(), Direction.UP)) {
-			this.level.setBlock(pos.west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+		if (dir == Direction.WEST && this.level().getBlockState(pos.west()).isAir() && this.level().getBlockState(pos.west().below()).isFaceSturdy(level(), pos.west().above(), Direction.UP)) {
+			this.level().setBlock(pos.west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 		}
-		if (dir == Direction.NORTH && this.level.getBlockState(pos.north()).isAir() && this.level.getBlockState(pos.north().below()).isFaceSturdy(level, pos.north().above(), Direction.UP)) {
-			this.level.setBlock(pos.north(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+		if (dir == Direction.NORTH && this.level().getBlockState(pos.north()).isAir() && this.level().getBlockState(pos.north().below()).isFaceSturdy(level(), pos.north().above(), Direction.UP)) {
+			this.level().setBlock(pos.north(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 		}
-		if (dir == Direction.SOUTH && this.level.getBlockState(pos.south()).isAir() && this.level.getBlockState(pos.south().below()).isFaceSturdy(level, pos.south().above(), Direction.UP)) {
-			this.level.setBlock(pos.south(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+		if (dir == Direction.SOUTH && this.level().getBlockState(pos.south()).isAir() && this.level().getBlockState(pos.south().below()).isFaceSturdy(level(), pos.south().above(), Direction.UP)) {
+			this.level().setBlock(pos.south(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class TermiteAcid extends ThrowableItemProjectile {
 			ParticleOptions particleoptions = this.getParticle();
 
 			for(int i = 0; i < 8; ++i) {
-				this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+				this.level().addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
@@ -95,11 +95,11 @@ public class TermiteAcid extends ThrowableItemProjectile {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 			if (livingEntity.getMobType() == BOCreatureAttributes.TERMITE) {
-				livingEntity.hurt(DamageSource.thrown(this, this.getOwner()), 1);
+				livingEntity.hurt(livingEntity.damageSources().thrown(this, this.getOwner()), 1);
 			}
 		}
 		BlockPos pos = entity.getOnPos();
-		this.level.setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+		this.level().setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
 	}
 
 }

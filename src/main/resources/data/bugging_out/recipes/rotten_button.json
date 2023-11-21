@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "wooden_button",
+	"ingredients": [
+		{
+			"item": "bugging_out:rotten_planks"
+		}
+	],
+	"result": {
+		"item": "bugging_out:rotten_button"
+	}
+}

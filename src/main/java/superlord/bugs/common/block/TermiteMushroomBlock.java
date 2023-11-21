@@ -1,12 +1,11 @@
 package superlord.bugs.common.block;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,7 +28,7 @@ public class TermiteMushroomBlock extends MushroomBlock {
 	public static final int MAX_AGE = 4;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 
-	public TermiteMushroomBlock(Properties p_153983_, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> p_153984_) {
+	public TermiteMushroomBlock(Properties p_153983_, ResourceKey<ConfiguredFeature<?, ?>> p_153984_) {
 		super(p_153983_, p_153984_);
 		this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), Integer.valueOf(0)));
 	}

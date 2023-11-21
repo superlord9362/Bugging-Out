@@ -1,18 +1,17 @@
 package superlord.bugs.common.entity;
 
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.protocol.game.ClientboundAddMobPacket;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -68,7 +67,7 @@ public class Glowworm extends PathfinderMob {
 		return this.subEntities;
 	}
 
-	public void recreateFromPacket(ClientboundAddMobPacket p_149572_) {
+	public void recreateFromPacket(ClientboundAddEntityPacket p_149572_) {
 		super.recreateFromPacket(p_149572_);
 		GlowwormPart[] glowwormPart = this.getSubEntities();
 
@@ -109,6 +108,7 @@ public class Glowworm extends PathfinderMob {
 		this.entityData.set(ENTITY_IN_RANGE, isEntityInRange);
 	}
 
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
@@ -124,7 +124,7 @@ public class Glowworm extends PathfinderMob {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, 0.1D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.FOLLOW_RANGE, 3.0D);
 	}
-	
+
 	class MeleeAttackGoal extends net.minecraft.world.entity.ai.goal.MeleeAttackGoal {
 
 		public MeleeAttackGoal() {
@@ -227,70 +227,76 @@ public class Glowworm extends PathfinderMob {
 		return this.holePos;
 	}
 
+	@SuppressWarnings("resource")
 	public void aiStep() {
-		updateParts();
 		super.aiStep();
-		if (!this.isHoleValid()) {
-			this.setAttachedToHole(false);
-			this.holePos = null;
-		}
-		System.out.println(holePos);
-		int mandibleMovementAllowed = random.nextInt(100);
-		if (this.isAttachedToHole()) {
-			this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0);
-			setMandiblesMoving(false);
-			for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 0, 5))) {
-				if (entity != null && !(entity instanceof Glowworm)) {
-					if (this.holePos != null) {
-						Direction direction = this.level.getBlockState(holePos).getValue(GlowWormHoleBlock.FACING);
-						if (direction == Direction.SOUTH) {
-							this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.999);
+		if (!level().isClientSide) {
+			updateParts();
+			if (!this.isHoleValid()) {
+				this.setAttachedToHole(false);
+				this.holePos = null;
+			}
+			int mandibleMovementAllowed = random.nextInt(100);
+			if (this.isAttachedToHole()) {
+				this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0);
+				setMandiblesMoving(false);
+				for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5, 0, 5))) {
+					if (entity != null && !(entity instanceof Glowworm)) {
+						if (this.holePos != null) {
+							Direction direction = this.level().getBlockState(holePos).getValue(GlowWormHoleBlock.FACING);
+							if (direction == Direction.SOUTH) {
+								if (this.position() != new Vec3(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.999))
+									this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.999);
+							}
+							if (direction == Direction.NORTH) {
+								if (this.position() != new Vec3(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.001))
+									this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.001);
+							}
+							if (direction == Direction.EAST) {
+								if (this.position() != new Vec3(this.holePos.getX() + 0.999, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5))
+									this.moveTo(this.holePos.getX() + 0.999, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5);
+							}
+							if (direction == Direction.WEST) {
+								if (this.position() != new Vec3(this.holePos.getX() + 0.001, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5))
+									this.moveTo(this.holePos.getX() + 0.001, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5F);
+							}
 						}
-						if (direction == Direction.NORTH) {
-							this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.001);
-						}
-						if (direction == Direction.EAST) {
-							this.moveTo(this.holePos.getX() + 0.999, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5);
-						}
-						if (direction == Direction.WEST) {
-							this.moveTo(this.holePos.getX() + 0.001, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5F);
-						}
-					}
-					this.setEntityInRange(true);
-				} else {
-					this.setEntityInRange(false);
-					if (this.holePos != null) {
-						Direction direction = this.level.getBlockState(holePos).getValue(GlowWormHoleBlock.FACING);
-						this.lookControl.setLookAt(holePos.getX() + 0.5F, holePos.getY() + 1F, holePos.getZ() + 0.5F);
-						if (direction == Direction.SOUTH) {
-							this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() - 2.5);
-						}
-						if (direction == Direction.NORTH) {
-							this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 3.5);
-						}
-						if (direction == Direction.EAST) {
-							this.moveTo(this.holePos.getX() - 2.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5);
-						}
-						if (direction == Direction.WEST) {
-							this.moveTo(this.holePos.getX() + 3.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5F);
+						this.setEntityInRange(true);
+					} else {
+						this.setEntityInRange(false);
+						if (this.holePos != null) {
+							Direction direction = this.level().getBlockState(holePos).getValue(GlowWormHoleBlock.FACING);
+							this.lookControl.setLookAt(holePos.getX() + 0.5F, holePos.getY() + 1F, holePos.getZ() + 0.5F);
+							if (direction == Direction.SOUTH) {
+								if (this.position() != new Vec3(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() - 2.5)) this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() - 2.5);
+							}
+							if (direction == Direction.NORTH) {
+								this.moveTo(this.holePos.getX() + 0.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 3.5);
+							}
+							if (direction == Direction.EAST) {
+								this.moveTo(this.holePos.getX() - 2.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5);
+							}
+							if (direction == Direction.WEST) {
+								this.moveTo(this.holePos.getX() + 3.5, this.holePos.getY() + 0.25F, this.holePos.getZ() + 0.5F);
+							}
 						}
 					}
 				}
-			}
-		} else {
-			if (mandibleMovementAllowed < 2) {
-				setMandiblesMoving(true);
-			} else if (mandibleMovementAllowed > 95) {
-				setMandiblesMoving(false);
-			}
+			} else {
+				if (mandibleMovementAllowed < 2) {
+					setMandiblesMoving(true);
+				} else if (mandibleMovementAllowed > 95) {
+					setMandiblesMoving(false);
+				}
 
-			this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+				this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+			}
 		}
 	}
 
 	@Override
 	public boolean isInWall() {
-		if (this.isAttachedToHole()) {
+		if (this.hasHole()) {
 			return false;
 		} else {
 			return super.isInWall();
@@ -301,7 +307,7 @@ public class Glowworm extends PathfinderMob {
 		if (!this.hasHole()) {
 			return false;
 		} else {
-			Block block = this.level.getBlockState(this.holePos).getBlock();
+			Block block = this.level().getBlockState(this.holePos).getBlock();
 			return block == BOBlocks.GLOW_WORM_HOLE.get();
 		}
 	}
@@ -360,15 +366,15 @@ public class Glowworm extends PathfinderMob {
 		}
 
 		protected void onReachedTarget() {
-			BlockState blockstate = Glowworm.this.level.getBlockState(this.blockPos);
+			BlockState blockstate = Glowworm.this.level().getBlockState(this.blockPos);
 			if (blockstate.is(BOBlocks.GLOW_WORM_HOLE.get())) {
 				this.hideInHole(blockstate);
 			}
 		}
 
 		private void hideInHole(BlockState p_148929_) {
-			BlockState blockState = Glowworm.this.level.getBlockState(this.blockPos);
-			Glowworm.this.level.setBlock(this.blockPos, blockState.setValue(GlowWormHoleBlock.HAS_GLOWWORM, true), 2);
+			BlockState blockState = Glowworm.this.level().getBlockState(this.blockPos);
+			Glowworm.this.level().setBlock(this.blockPos, blockState.setValue(GlowWormHoleBlock.HAS_GLOWWORM, true), 2);
 			Glowworm.this.holePos = blockPos;
 			Glowworm.this.setAttachedToHole(true);
 		}
@@ -384,11 +390,11 @@ public class Glowworm extends PathfinderMob {
 	}
 
 	public int getGlowwormBrightness(boolean sky) {
-		BlockPos eyePos = new BlockPos(this.getEyePosition(1.0F));
-		while (eyePos.getY() < 256 && !level.isEmptyBlock(eyePos)) {
+		BlockPos eyePos = BlockPos.containing(this.getEyePosition(1.0F));
+		while (eyePos.getY() < 256 && !level().isEmptyBlock(eyePos)) {
 			eyePos = eyePos.above();
 		}
-		int light = this.level.getBrightness(sky ? LightLayer.SKY : LightLayer.BLOCK, eyePos.above());
+		int light = this.level().getBrightness(sky ? LightLayer.SKY : LightLayer.BLOCK, eyePos.above());
 		return light;
 	}
 
@@ -413,9 +419,9 @@ public class Glowworm extends PathfinderMob {
 			return super.getFollowDistance() * 0.5D;
 		}
 	}
-	
-	public static boolean canGlowwormSpawn(EntityType<? extends Glowworm> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
-        return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
-    }
+
+	public static boolean canGlowwormSpawn(EntityType<? extends Glowworm> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
+	}
 
 }

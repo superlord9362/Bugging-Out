@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "bugging_out:block/rotten_door_bottom",
+    "top": "bugging_out:block/rotten_door_top"
+  }
+}

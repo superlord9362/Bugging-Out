@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "bugging_out:block/rotten_slab" },
+        "type=top": { "model": "bugging_out:block/rotten_slab_top" },
+        "type=double": { "model": "bugging_out:block/rotten_planks" }
+    }
+}

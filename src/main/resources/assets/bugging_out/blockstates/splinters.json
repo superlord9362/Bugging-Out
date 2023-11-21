@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+			{
+				"model": "bugging_out:block/splinters"
+			},
+			{ 
+				"model": "bugging_out:block/splinters",
+				"y": 90
+			},
+			{ 
+				"model": "bugging_out:block/splinters",
+				"y": 180
+			},
+			{ 
+				"model": "bugging_out:block/splinters",
+				"y": 270
+			}
+		]
+    }
+}

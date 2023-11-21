@@ -2,61 +2,10 @@
 	"type": "bugging_out:bugs",
 	"forge:use_server_seed": true,
 	"generator": {
-		"type": "minecraft:noise",
-		"seed": 9,
-		"settings": "bugging_out:bugs_noise_settings",
+		"type": "bugging_out:bugging_out_chunk_generator",
 		"biome_source": {
-			"type": "minecraft:multi_noise",
-			"biomes": [
-				{
-					"biome": "bugging_out:termite_tunnels",
-					"parameters": {
-						"temperature": 0.9,
-						"humidity": 0.9,
-						"depth": -0.4,
-						"weirdness": 1.5,
-						"continentalness": -0.5,
-						"erosion": -0.5,
-						"offset": 0
-					}
-				},
-				{
-					"biome": "bugging_out:infested_tunnels",
-					"parameters": {
-						"temperature": 0.9,
-						"humidity": 0.9,
-						"depth": -0.7,
-						"weirdness": 1,
-						"continentalness": 0,
-						"erosion": 1,
-						"offset": 0
-					}
-				},
-				{
-					"biome": "bugging_out:fungal_gardens",
-					"parameters": {
-						"temperature": 0.9,
-						"humidity": 0.9,
-						"depth": -0.4,
-						"weirdness": 1.5,
-						"continentalness": -0.5,
-						"erosion": 0,
-						"offset": 0
-					}
-				},
-				{
-					"biome": "bugging_out:termite_gallery",
-					"parameters": {
-						"temperature": 0.9,
-						"humidity": 0.9,
-						"depth": -0.4,
-						"weirdness": 1.5,
-						"continentalness": 0,
-						"erosion": 0,
-						"offset": 0
-					}
-				}
-			]
-		}
+			"type": "bugging_out:bugging_out_biome_source"
+		},
+		"settings": "bugging_out:bugs_noise_settings"
 	}
 }

@@ -12,6 +12,9 @@ public enum BOItemTiers implements Tier {
 	
 	MANDIBLE(2, 187, 5.0F, 2.0F, 8, () -> {
 		return Ingredient.of(BOItems.MANDIBLE.get());
+	}),
+	TERMITE(3, 1742, 8.5F, 3.5F, 13, () -> {
+		return Ingredient.of(BOItems.ROYAL_TERMOSTONE.get());
 	});
 	
 	private final int level;

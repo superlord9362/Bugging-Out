@@ -21,7 +21,7 @@ public class TermiteMushroomCapBlock extends HugeMushroomBlock {
 	      double d0 = (double)i + p_154707_.nextDouble();
 	      double d1 = (double)j - 0.2D;
 	      double d2 = (double)k + p_154707_.nextDouble();
-	      p_154705_.addParticle(BOParticles.TERMITE_MUSHROOM_SPORE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+	      p_154705_.addParticle(BOParticles.TERMITE_MUSHROOM_SPORE.get(), d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	   }
 
 }

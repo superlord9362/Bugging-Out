@@ -1,9 +1,7 @@
 {
-	"player_spawn_friendly": true,
-	"precipitation": "none",
+	"has_precipitation": false,
 	"temperature": 1,
 	"downfall": 0,
-	"category": "none",
 	"effects": {
 		"mood_sound": {
 		"sound": "minecraft:ambient.cave",
@@ -25,9 +23,6 @@
 	"water_fog_color": 5267523
 	},
 	"carvers": {
-		"air": [
-			"bugging_out:configured_bug_cave"
-		]
 	},
 	"features": [
 		[],

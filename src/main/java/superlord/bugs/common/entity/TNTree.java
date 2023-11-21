@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -55,6 +56,7 @@ public class TNTree extends Entity {
 		return !this.isRemoved();
 	}
 
+	@SuppressWarnings("resource")
 	public void tick() {
 		if (!this.isNoGravity()) {
 			this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.04D, 0.0D));
@@ -62,7 +64,7 @@ public class TNTree extends Entity {
 
 		this.move(MoverType.SELF, this.getDeltaMovement());
 		this.setDeltaMovement(this.getDeltaMovement().scale(0.98D));
-		if (this.onGround) {
+		if (this.onGround()) {
 			this.setDeltaMovement(this.getDeltaMovement().multiply(0.7D, -0.5D, 0.7D));
 		}
 
@@ -70,20 +72,25 @@ public class TNTree extends Entity {
 		this.setFuse(i);
 		if (i <= 0) {
 			this.discard();
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.explode();
 			}
 		} else {
 			this.updateInWaterStateAndDoFluidPushing();
-			if (this.level.isClientSide) {
-				this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+			if (this.level().isClientSide) {
+				if (i == 1) {
+					this.level().addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+				}
+				this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 	}
 
 	protected void explode() {
-		this.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4.0F, WoodExplosion.BlockInteraction.BREAK);
+		this.level().addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+
+		this.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4.0F, WoodExplosion.BlockInteraction.DESTROY);
 	}
 
 	protected void addAdditionalSaveData(CompoundTag p_32097_) {
@@ -111,13 +118,12 @@ public class TNTree extends Entity {
 		return this.entityData.get(DATA_FUSE_ID);
 	}
 
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return new ClientboundAddEntityPacket(this);
 	}
 
 	public WoodExplosion explode(@Nullable Entity p_46526_, @Nullable DamageSource p_46527_, @Nullable ExplosionDamageCalculator p_46528_, double p_46529_, double p_46530_, double p_46531_, float p_46532_, boolean p_46533_, WoodExplosion.BlockInteraction p_46534_) {
-		WoodExplosion explosion = new WoodExplosion(this.level, p_46526_, p_46527_, p_46528_, p_46529_, p_46530_, p_46531_, p_46532_, p_46533_, p_46534_);
-		if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(this.level, explosion)) return explosion;
+		WoodExplosion explosion = new WoodExplosion(this.level(), p_46526_, p_46527_, p_46528_, p_46529_, p_46530_, p_46531_, p_46532_, p_46533_, p_46534_);
 		explosion.explode();
 		explosion.finalizeExplosion(true);
 		return explosion;
