@@ -46,6 +46,8 @@
 	"item.bugging_out.rotten_sign": "Rotten Sign",
 	"item.bugging_out.rotten_boat": "Rotten Boat",
 	
+	"block.bugging_out.shelf_mushrooms": "Shelf Mushrooms",
+	
 	"item.bugging_out.termite_worker_spawn_egg": "Termite Worker Spawn Egg",
 	"item.bugging_out.termite_nymph_spawn_egg": "Termite Nymph Spawn Egg",
 	"item.bugging_out.termite_soldier_spawn_egg": "Termite Soldier Spawn Egg",
@@ -65,6 +67,9 @@
 	"item.bugging_out.shrinking_soup": "Shrinking Soup",
 	"block.bugging_out.fuzzy_moss": "Fuzzy Moss",
 	"block.bugging_out.fuzzy_moss_block": "Block of Fuzzy Moss",
+	"item.bugging_out.mandible_shears": "Mandible Shears",
+	"item.bugging_out.splinter": "Splinter",
+	"item.bugging_out.splinter_bow": "Splinter Bow",
 	
 	"entity.bugging_out.termite_nymph": "Termite Nymph",
 	"entity.bugging_out.termite_worker": "Termite Worker",
@@ -73,6 +78,7 @@
 	"entity.bugging_out.glowworm": "Glowworm",
 	"entity.bugging_out.termite_acid": "Termite Acid",
 	"entity.bugging_out.tntree": "TNTree",
+	"entity.bugging_out.splinter": "Splinter",
 	"entity.bugging_out.boat": "Boat",
 	
 	"itemGroup.bugs_building_tab": "Bugging Out! Building Blocks",

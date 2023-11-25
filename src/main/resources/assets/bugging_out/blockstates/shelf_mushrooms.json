@@ -1,0 +1,72 @@
+{
+	"variants": {
+		"facing=east": [
+			{
+				"model": "bugging_out:block/shelf_fungus_1",
+				"y": 90
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_2",
+				"y": 90
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_3",
+				"y": 90
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_4",
+				"y": 90
+			}
+		],
+		"facing=north": [
+			{
+				"model": "bugging_out:block/shelf_fungus_1"
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_2"
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_3"
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_4"
+			}
+		],
+		"facing=south": [
+			{
+				"model": "bugging_out:block/shelf_fungus_1",
+				"y": 180
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_2",
+				"y": 180
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_3",
+				"y": 180
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_4",
+				"y": 180
+			}
+		],
+		"facing=west": [
+			{
+				"model": "bugging_out:block/shelf_fungus_1",
+     	 		"y": 270
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_2",
+      			"y": 270
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_3",
+     	 		"y": 270
+			},
+			{
+				"model": "bugging_out:block/shelf_fungus_4",
+     	 		"y": 270
+			}
+		]
+	}
+}

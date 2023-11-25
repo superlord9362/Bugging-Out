@@ -1,0 +1,69 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 10051133,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "bugging_out:termite_dush"
+      },
+      "probability": 0.118093334
+    },
+    "sky_color": 7357740,
+    "water_color": 7372597,
+    "water_fog_color": 5267523
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugging_out:placed_ferrous_termostone",
+      "bugging_out:placed_common_termostone_pillar",
+      "bugging_out:placed_termostone_ceiling_blob",
+      "bugging_out:placed_termostone_pillar"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": [
+      {
+        "type": "bugging_out:termite_worker",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "bugging_out:termite_soldier",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "bugging_out:termite_kamikaze",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ]
+  },
+  "temperature": 1.0
+}

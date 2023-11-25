@@ -14,5 +14,5 @@ public class BOBiomeSources {
 	public static final DeferredRegister<Codec<? extends BiomeSource>> REGISTER = DeferredRegister.create(Registries.BIOME_SOURCE, BuggingOut.MOD_ID);
 	
 	public static final RegistryObject<Codec<BOBiomeSource>> BUGGING_OUT_BIOME_SOURCE = REGISTER.register("bugging_out_biome_source", () -> BOBiomeSource.CODEC);
-
+	
 }

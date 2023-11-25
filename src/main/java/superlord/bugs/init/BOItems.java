@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SignItem;
 import net.minecraft.world.item.SwordItem;
@@ -19,6 +20,8 @@ import superlord.bugs.common.item.BOBoatItem;
 import superlord.bugs.common.item.BOItemTiers;
 import superlord.bugs.common.item.PaxelItem;
 import superlord.bugs.common.item.ShrinkingSoupItem;
+import superlord.bugs.common.item.SplinterBowItem;
+import superlord.bugs.common.item.SplinterItem;
 import superlord.bugs.common.item.TermiteAcidItem;
 import superlord.bugs.common.item.TermiteMushroomSporesItem;
 
@@ -74,6 +77,7 @@ public class BOItems {
 	public static final RegistryObject<BlockItem> ROTTEN_CHARCOAL_ORE = DECORATIONS.register("rotten_charcoal_ore", () -> new BlockItem(BOBlocks.ROTTEN_CHARCOAL_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> FUZZY_MOSS_BLOCk = DECORATIONS.register("fuzzy_moss_block", () -> new BlockItem(BOBlocks.FUZZY_MOSS_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> FUZZY_MOSS = DECORATIONS.register("fuzzy_moss", () -> new BlockItem(BOBlocks.FUZZY_MOSS.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> SHELF_MUSHROOMS = DECORATIONS.register("shelf_mushrooms", () -> new BlockItem(BOBlocks.SHELF_MUSHROOMS.get(), new Item.Properties()));
 	
 	public static final RegistryObject<Item> TERMITE_NYMPH_SPAWN_EGG = SPAWN_EGGS.register("termite_nymph_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_NYMPH, 0xCDBBA4, 0xB69E85, new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_WORKER_SPAWN_EGG = SPAWN_EGGS.register("termite_worker_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_WORKER, 0xCAB99D, 0x995D38, new Item.Properties()));
@@ -93,7 +97,10 @@ public class BOItems {
 	public static final RegistryObject<Item> MANDBILE_AXE = MISC.register("mandible_axe", () -> new AxeItem(BOItemTiers.MANDIBLE, 6.5F, -3.2F, new Item.Properties()));
 	public static final RegistryObject<Item> MANDIBLE_SWORD = MISC.register("mandible_sword", () -> new SwordItem(BOItemTiers.MANDIBLE, 3, -2.4F, new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_PAXEL = MISC.register("termite_paxel", () -> new PaxelItem(BOItemTiers.TERMITE, 4, -2.5F, new Item.Properties()));
+	public static final RegistryObject<Item> SPLINTER_BOW = MISC.register("splinter_bow", () -> new SplinterBowItem(new Item.Properties().stacksTo(1).durability(384)));
+	public static final RegistryObject<Item> SPLINTER = MISC.register("splinter", () -> new SplinterItem(new Item.Properties()));
 	
+	public static final RegistryObject<Item> MANDIBLE_SHEARS = MISC.register("mandible_shears", () -> new ShearsItem(new Item.Properties().durability(238)));
 	
 	public static final RegistryObject<Item> SHRINKING_SOUP = MISC.register("shrinking_soup", () -> new ShrinkingSoupItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.8F).alwaysEat().build())));
 	

@@ -1,8 +1,15 @@
 package superlord.bugs;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mojang.serialization.Codec;
+
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -11,6 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +31,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import superlord.bugs.client.ClientProxy;
 import superlord.bugs.common.CommonProxy;
 import superlord.bugs.common.entity.Glowworm;
@@ -30,6 +41,7 @@ import superlord.bugs.common.entity.TermiteNymph;
 import superlord.bugs.common.entity.TermiteSoldier;
 import superlord.bugs.common.entity.TermiteWorker;
 import superlord.bugs.common.util.ShrinkingSoupTeleporter;
+import superlord.bugs.common.world.BOBiomeModifier;
 import superlord.bugs.config.BOConfigHolder;
 import superlord.bugs.config.BuggingOutConfig;
 import superlord.bugs.init.BOBiomeSources;
@@ -41,6 +53,7 @@ import superlord.bugs.init.BOEffects;
 import superlord.bugs.init.BOEntities;
 import superlord.bugs.init.BOFeatures;
 import superlord.bugs.init.BOItems;
+import superlord.bugs.init.BOLevelStemGenerator;
 import superlord.bugs.init.BOParticles;
 import superlord.bugs.init.BOPlacedFeatures;
 import superlord.bugs.init.BOTabs;
@@ -77,15 +90,26 @@ public class BuggingOut {
 		BOEffects.REGISTER.register(bus);
 		BOBiomeSources.REGISTER.register(bus);
 		BOChunkGenerators.REGISTER.register(bus);
+		final DeferredRegister<Codec<? extends BiomeModifier>> biomeModifiers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, BuggingOut.MOD_ID);
+		biomeModifiers.register(bus);
+		biomeModifiers.register("bugging_out_biome_modifiers", BOBiomeModifier::makeCodec);
 
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, BOConfigHolder.CLIENT_SPEC);
 		modLoadingContext.registerConfig(ModConfig.Type.COMMON, BOConfigHolder.SERVER_SPEC);
 
 		bus.addListener(this::registerEntityAttributes);
-		//bus.addListener(this::gatherData);
+		bus.addListener(this::gatherData);
 		
 		PROXY.init();
 	}
+	
+	public void gatherData(GatherDataEvent event) {
+        DataGenerator dataGenerator = event.getGenerator();
+        PackOutput packOutput = dataGenerator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        boolean server = event.includeServer();
+        dataGenerator.addProvider(server, new BOLevelStemGenerator(packOutput, lookupProvider));
+    }
 
 	@SubscribeEvent
 	public void onModConfigEvent(final ModConfigEvent event) {

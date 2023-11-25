@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_column",
     "textures": {
-        "end": "bugging_out:block/fuzzy_moss",
-        "side": "bugging_out:block/fuzzy_moss_top"
+        "end": "bugging_out:block/fuzzy_moss_top",
+        "side": "bugging_out:block/fuzzy_moss"
     }
 }

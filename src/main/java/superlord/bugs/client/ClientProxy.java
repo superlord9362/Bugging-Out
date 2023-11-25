@@ -33,6 +33,7 @@ public class ClientProxy extends CommonProxy {
 		ItemBlockRenderTypes.setRenderLayer(BOBlocks.ROTTEN_DOOR.get(), cutoutRenderType);
 		ItemBlockRenderTypes.setRenderLayer(BOBlocks.ROTTEN_TRAPDOOR.get(), cutoutRenderType);
 		ItemBlockRenderTypes.setRenderLayer(BOBlocks.FUZZY_MOSS.get(), cutoutRenderType);
+		ItemBlockRenderTypes.setRenderLayer(BOBlocks.SHELF_MUSHROOMS.get(), cutoutRenderType);
 		ItemBlockRenderTypes.setRenderLayer(BOBlocks.TERMOSTONE_GLASS.get(), translucentRenderType);
 	}
 

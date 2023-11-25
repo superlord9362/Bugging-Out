@@ -38,6 +38,7 @@ import superlord.bugs.common.block.TermiteInfestedBlock;
 import superlord.bugs.common.block.TermiteMushroomBlock;
 import superlord.bugs.common.block.TermiteMushroomCapBlock;
 import superlord.bugs.common.block.TermiteMushroomMyceliumBlock;
+import superlord.bugs.common.block.WallFungusBlock;
 
 @SuppressWarnings("deprecation")
 public class BOBlocks {
@@ -99,7 +100,8 @@ public class BOBlocks {
 	
 	public static final RegistryObject<Block> FUZZY_MOSS = REGISTER.register("fuzzy_moss", () -> new FuzzyMossBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.1F).randomTicks().noOcclusion().sound(SoundType.MOSS)));
 	public static final RegistryObject<Block> FUZZY_MOSS_BLOCK = REGISTER.register("fuzzy_moss_block", () -> new Block(Block.Properties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.MOSS_CARPET)));
-
+	public static final RegistryObject<Block> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new WallFungusBlock(Block.Properties.of().noCollission().strength(0.2F).sound(SoundType.GRASS)));
+	
 	private static Boolean never(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
 		return (boolean)false;
 	}

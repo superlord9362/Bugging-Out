@@ -1,0 +1,30 @@
+{
+  "type": "bugging_out:land_disk",
+  "config": {
+    "half_height": 3,
+    "radius": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 3,
+        "min_inclusive": 1
+      }
+    },
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "bugging_out:porous_termostone"
+        }
+      },
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "bugging_out:termostone",
+        "bugging_out:ferrous_termostone",
+        "bugging_out:termite_mushroom_mycelium"
+      ]
+    }
+  }
+}

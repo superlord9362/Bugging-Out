@@ -27,9 +27,9 @@ public class AbstractSphereReplaceConfig extends Feature<DiskConfiguration> {
 				int i1 = k - pos.getZ();
 				if (l * l + i1 * i1 <= i * i) {
 					for(int j1 = pos.getY() - context.config().halfHeight(); j1 <= pos.getY() + context.config().halfHeight(); ++j1) {
-						BlockPos blockpos = new BlockPos(j, j1, k);
-						if (context.config().target().test(world, pos)) {
-							world.setBlock(blockpos, context.config().stateProvider().getState(world, rand, pos), 2);
+						BlockPos blockpos = new BlockPos(j, j1, k);	
+						if (context.config().target().test(world, blockpos)) {
+							world.setBlock(blockpos, context.config().stateProvider().getState(world, rand, blockpos), 2);
 							flag = true;
 							break;
 						}

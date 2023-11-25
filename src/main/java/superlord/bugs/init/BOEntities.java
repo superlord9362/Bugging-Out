@@ -14,6 +14,7 @@ import superlord.bugs.common.entity.TermiteKamikaze;
 import superlord.bugs.common.entity.TermiteNymph;
 import superlord.bugs.common.entity.TermiteSoldier;
 import superlord.bugs.common.entity.TermiteWorker;
+import superlord.bugs.common.entity.item.Splinter;
 import superlord.bugs.common.entity.item.TermiteAcid;
 
 public class BOEntities {
@@ -28,7 +29,8 @@ public class BOEntities {
 
 	public static final RegistryObject<EntityType<TermiteAcid>> TERMITE_ACID = REGISTER.register("termite_acid", () -> EntityType.Builder.<TermiteAcid>of(TermiteAcid::new, MobCategory.MISC).sized(0.25F, 0.25F).build(new ResourceLocation(BuggingOut.MOD_ID, "termite_acid").toString()));
 	public static final RegistryObject<EntityType<TNTree>> TNTREE = REGISTER.register("tntree", () -> EntityType.Builder.<TNTree>of(TNTree::new, MobCategory.MISC).fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10).build(new ResourceLocation(BuggingOut.MOD_ID, "tntree").toString()));
-	
+	public static final RegistryObject<EntityType<Splinter>> SPLINTER = REGISTER.register("splinter", () -> EntityType.Builder.<Splinter>of(Splinter::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build(new ResourceLocation(BuggingOut.MOD_ID, "splinter").toString()));
+
 	public static final RegistryObject<EntityType<BOBoat>> BOAT = REGISTER.register("boat", () -> EntityType.Builder.<BOBoat>of(BOBoat::new, MobCategory.MISC).sized(1.375F, 0.5625F).build(new ResourceLocation(BuggingOut.MOD_ID, "boat").toString()));
 	
 }

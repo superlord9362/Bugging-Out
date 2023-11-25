@@ -10,10 +10,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.world.features.CrumblyTermiteMoundFeature;
+import superlord.bugs.common.world.features.FuzzyCeilingMossFeature;
+import superlord.bugs.common.world.features.FuzzyMossFeature;
+import superlord.bugs.common.world.features.FuzzyWallMossFeature;
 import superlord.bugs.common.world.features.GlowwormHoleFeature;
 import superlord.bugs.common.world.features.HugeTermiteMushroomFeature;
 import superlord.bugs.common.world.features.LandSphereReplaceFeature;
 import superlord.bugs.common.world.features.PorousTermostoneCeilingBlobFeature;
+import superlord.bugs.common.world.features.ShelfMushroomFeature;
 import superlord.bugs.common.world.features.TermiteMoundFeature;
 import superlord.bugs.common.world.features.TermiteMyceliumCeilingBlobFeature;
 import superlord.bugs.common.world.features.TermostoneCeilingBlobFeature;
@@ -36,4 +40,9 @@ public class BOFeatures {
 	public static final RegistryObject<TermiteMoundFeature> TERMITE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
 	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMITE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
 
+	public static final RegistryObject<FuzzyMossFeature> FUZZY_MOSS = REGISTER.register("fuzzy_moss", () -> new FuzzyMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<FuzzyWallMossFeature> FUZZY_WALL_MOSS = REGISTER.register("fuzzy_wall_moss", () -> new FuzzyWallMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<FuzzyCeilingMossFeature> FUZZY_CEILING_MOSS = REGISTER.register("fuzzy_ceiling_moss", () -> new FuzzyCeilingMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<ShelfMushroomFeature> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new ShelfMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+	
 }

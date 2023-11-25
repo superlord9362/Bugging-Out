@@ -3,6 +3,7 @@ package superlord.bugs.common.world.surfacedecorators;
 import java.util.HashMap;
 
 import net.minecraft.resources.ResourceLocation;
+import superlord.bugs.BuggingOut;
 import superlord.bugs.common.util.FastNoise;
 
 public class SurfaceDecorators {
@@ -12,7 +13,20 @@ public class SurfaceDecorators {
 	static FastNoise noise;
 	
 	static {
-		
+		register(new ResourceLocation(BuggingOut.MOD_ID, "moldy_grotto"),
+				new RottenLogSurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "mossy_regrowth"),
+				new RottenLogSurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "beetle_nest"),
+				new RottenLogSurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "rotten_passages"),
+				new RottenLogSurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "dirt_tunnels"),
+				new DirtySurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "grassy_meadows"),
+				new DirtySurfaceDecorator());
+		register(new ResourceLocation(BuggingOut.MOD_ID, "flower_meadows"),
+				new DirtySurfaceDecorator());
 	}
 	
 	public static void setFastNoise(FastNoise noise) {
