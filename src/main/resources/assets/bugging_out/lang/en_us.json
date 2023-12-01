@@ -26,6 +26,9 @@
 	"block.bugging_out.tntree": "TNTree",
 	"block.bugging_out.splinters": "Splinters",
 	"block.bugging_out.mulch": "Mulch",
+	"block.bugging_out.mold_carpet": "Mold Carpet",
+	"block.bugging_out.mold_stalks": "Mold Stalks",
+	"block.bugging_out.mold_spore_spreader": "Mold Spore Spreader",
 	
 	"block.bugging_out.rotten_log": "Rotten Log",
 	"block.bugging_out.stripped_rotten_log": "Stripped Rotten Log",
@@ -47,6 +50,7 @@
 	"item.bugging_out.rotten_boat": "Rotten Boat",
 	
 	"block.bugging_out.shelf_mushrooms": "Shelf Mushrooms",
+	"block.bugging_out.large_shelf_mushrooms": "Large Shelf Mushrooms",
 	
 	"item.bugging_out.termite_worker_spawn_egg": "Termite Worker Spawn Egg",
 	"item.bugging_out.termite_nymph_spawn_egg": "Termite Nymph Spawn Egg",

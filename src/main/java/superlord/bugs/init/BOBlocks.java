@@ -28,9 +28,12 @@ import superlord.bugs.BuggingOut;
 import superlord.bugs.common.block.AcidSplatBlock;
 import superlord.bugs.common.block.BOStandingSignBlock;
 import superlord.bugs.common.block.BOWallSignBlock;
+import superlord.bugs.common.block.BigShelfMushroomBlock;
 import superlord.bugs.common.block.CrumblyTermostoneBlock;
 import superlord.bugs.common.block.FuzzyMossBlock;
 import superlord.bugs.common.block.GlowWormHoleBlock;
+import superlord.bugs.common.block.MoldBlock;
+import superlord.bugs.common.block.MoldSporeSpreaderBlock;
 import superlord.bugs.common.block.MulchBlock;
 import superlord.bugs.common.block.SplinterBlock;
 import superlord.bugs.common.block.TNTreeBlock;
@@ -101,6 +104,11 @@ public class BOBlocks {
 	public static final RegistryObject<Block> FUZZY_MOSS = REGISTER.register("fuzzy_moss", () -> new FuzzyMossBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.1F).randomTicks().noOcclusion().sound(SoundType.MOSS)));
 	public static final RegistryObject<Block> FUZZY_MOSS_BLOCK = REGISTER.register("fuzzy_moss_block", () -> new Block(Block.Properties.of().mapColor(MapColor.PLANT).strength(0.5F).sound(SoundType.MOSS_CARPET)));
 	public static final RegistryObject<Block> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new WallFungusBlock(Block.Properties.of().noCollission().strength(0.2F).sound(SoundType.GRASS)));
+	public static final RegistryObject<Block> LARGE_SHELF_MUSHROOMS = REGISTER.register("large_shelf_mushrooms", () -> new BigShelfMushroomBlock(Block.Properties.of().strength(0.5F).sound(SoundType.GRASS).noOcclusion()));
+	
+	public static final RegistryObject<Block> MOLD_CARPET = REGISTER.register("mold_carpet", () -> new MoldBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().sound(SoundType.GRASS)));
+	public static final RegistryObject<Block> MOLD_STALKS = REGISTER.register("mold_stalks", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().noCollission().sound(SoundType.GRASS)));
+	public static final RegistryObject<Block> MOLD_SPORE_SPREADER = REGISTER.register("mold_spore_spreader", () -> new MoldSporeSpreaderBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.5F).randomTicks().sound(SoundType.GRASS)));
 	
 	private static Boolean never(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
 		return (boolean)false;

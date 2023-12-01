@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": [
+              "minecraft:shears",
+              "bugging_out:mandible_shears"
+            ]
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugging_out:shelf_mushrooms"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "bugging_out:block/shelf_mushrooms"
+}

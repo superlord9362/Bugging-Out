@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+			{
+				"model": "bugging_out:block/mold_stalks"
+			},
+			{ 
+				"model": "bugging_out:block/mold_stalks",
+				"y": 90
+			},
+			{ 
+				"model": "bugging_out:block/mold_stalks",
+				"y": 180
+			},
+			{ 
+				"model": "bugging_out:block/mold_stalks",
+				"y": 270
+			}
+		]
+    }
+}

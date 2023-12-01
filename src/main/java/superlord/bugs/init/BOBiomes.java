@@ -188,6 +188,10 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MULCH);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);
+		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLDY_WALL);
+		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLDY_WALL);
+		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLD_STALKS);
+		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLD_SPORE_SPREADER);
 		return biome(6836531, 5324584, 2905980, 2509931, false, 1, 0, spawnSettings, biomeFeatures);
 	}
 	
@@ -209,6 +213,7 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BOPlacedFeatures.FUZZY_WALL_MOSS);
 		biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BOPlacedFeatures.FUZZY_CEILING_MOSS);
 		biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BOPlacedFeatures.SHELF_MUSHROOMS);
+		biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BOPlacedFeatures.LARGE_SHELF_MUSHROOMS);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MULCH);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);

@@ -51,6 +51,11 @@ public class BOPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> SPLINTERS = registerPlacedFeature("placed_splinters");
 	public static final ResourceKey<PlacedFeature> RARE_SPLINTERS = registerPlacedFeature("placed_rare_splinters");
 	public static final ResourceKey<PlacedFeature> SHELF_MUSHROOMS = registerPlacedFeature("placed_shelf_mushrooms");
+	public static final ResourceKey<PlacedFeature> LARGE_SHELF_MUSHROOMS = registerPlacedFeature("placed_large_shelf_mushrooms");
+	public static final ResourceKey<PlacedFeature> MOLDY_CEILING = registerPlacedFeature("placed_moldy_ceiling");
+	public static final ResourceKey<PlacedFeature> MOLDY_WALL = registerPlacedFeature("placed_moldy_wall");
+	public static final ResourceKey<PlacedFeature> MOLD_STALKS = registerPlacedFeature("placed_mold_stalks");
+	public static final ResourceKey<PlacedFeature> MOLD_SPORE_SPREADER = registerPlacedFeature("placed_mold_spore_spreader");
 	
 	public static void bootstrap(BootstapContext<PlacedFeature> bootstapContext) {
 		HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstapContext.lookup(Registries.CONFIGURED_FEATURE);
@@ -83,6 +88,11 @@ public class BOPlacedFeatures {
 		PlacementUtils.register(bootstapContext, SPLINTERS, holderGetter.getOrThrow(BOConfiguredFeatures.SPLINTERS), List.of(CountOnEveryLayerPlacement.of(3), BiomeFilter.biome()));
 		PlacementUtils.register(bootstapContext, RARE_SPLINTERS, holderGetter.getOrThrow(BOConfiguredFeatures.SPLINTERS), List.of(CountOnEveryLayerPlacement.of(1), BiomeFilter.biome()));
 		PlacementUtils.register(bootstapContext, SHELF_MUSHROOMS, holderGetter.getOrThrow(BOConfiguredFeatures.SHELF_MUSHROOMS), List.of(CountOnEveryLayerPlacement.of(50), BiomeFilter.biome()));
+		PlacementUtils.register(bootstapContext, LARGE_SHELF_MUSHROOMS, holderGetter.getOrThrow(BOConfiguredFeatures.LARGE_SHELF_MUSHROOMS), List.of(CountOnEveryLayerPlacement.of(20), BiomeFilter.biome()));
+		PlacementUtils.register(bootstapContext, MOLDY_CEILING, holderGetter.getOrThrow(BOConfiguredFeatures.MOLDY_CEILING), List.of(CountOnEveryLayerPlacement.of(100), BiomeFilter.biome()));
+		PlacementUtils.register(bootstapContext, MOLDY_WALL, holderGetter.getOrThrow(BOConfiguredFeatures.MOLDY_WALL), List.of(CountOnEveryLayerPlacement.of(100), BiomeFilter.biome()));
+		PlacementUtils.register(bootstapContext, MOLD_STALKS, holderGetter.getOrThrow(BOConfiguredFeatures.MOLD_STALK), List.of(CountOnEveryLayerPlacement.of(10), BiomeFilter.biome()));
+		PlacementUtils.register(bootstapContext, MOLD_SPORE_SPREADER, holderGetter.getOrThrow(BOConfiguredFeatures.MOLD_SPORE_SPREADER), List.of(CountOnEveryLayerPlacement.of(1), BiomeFilter.biome()));
 	}
 	
 	public static ResourceKey<PlacedFeature> registerPlacedFeature(String id) {

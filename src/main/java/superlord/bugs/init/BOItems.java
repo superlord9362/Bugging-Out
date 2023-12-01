@@ -78,6 +78,10 @@ public class BOItems {
 	public static final RegistryObject<BlockItem> FUZZY_MOSS_BLOCk = DECORATIONS.register("fuzzy_moss_block", () -> new BlockItem(BOBlocks.FUZZY_MOSS_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> FUZZY_MOSS = DECORATIONS.register("fuzzy_moss", () -> new BlockItem(BOBlocks.FUZZY_MOSS.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> SHELF_MUSHROOMS = DECORATIONS.register("shelf_mushrooms", () -> new BlockItem(BOBlocks.SHELF_MUSHROOMS.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> LARGE_SHELF_MUSHROOMS = DECORATIONS.register("large_shelf_mushrooms", () -> new BlockItem(BOBlocks.LARGE_SHELF_MUSHROOMS.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> MOLD_CARPET = DECORATIONS.register("mold_carpet", () -> new BlockItem(BOBlocks.MOLD_CARPET.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> MOLD_STALKS = DECORATIONS.register("mold_stalks", () -> new BlockItem(BOBlocks.MOLD_STALKS.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> MOLD_SPORE_SPREADER = DECORATIONS.register("mold_spore_spreader", () -> new BlockItem(BOBlocks.MOLD_SPORE_SPREADER.get(), new Item.Properties()));
 	
 	public static final RegistryObject<Item> TERMITE_NYMPH_SPAWN_EGG = SPAWN_EGGS.register("termite_nymph_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_NYMPH, 0xCDBBA4, 0xB69E85, new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_WORKER_SPAWN_EGG = SPAWN_EGGS.register("termite_worker_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_WORKER, 0xCAB99D, 0x995D38, new Item.Properties()));

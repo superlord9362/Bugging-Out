@@ -16,6 +16,9 @@ import superlord.bugs.common.world.features.FuzzyWallMossFeature;
 import superlord.bugs.common.world.features.GlowwormHoleFeature;
 import superlord.bugs.common.world.features.HugeTermiteMushroomFeature;
 import superlord.bugs.common.world.features.LandSphereReplaceFeature;
+import superlord.bugs.common.world.features.LargeShelfMushroomFeature;
+import superlord.bugs.common.world.features.MoldyCeilingFeature;
+import superlord.bugs.common.world.features.MoldyWallFeature;
 import superlord.bugs.common.world.features.PorousTermostoneCeilingBlobFeature;
 import superlord.bugs.common.world.features.ShelfMushroomFeature;
 import superlord.bugs.common.world.features.TermiteMoundFeature;
@@ -44,5 +47,9 @@ public class BOFeatures {
 	public static final RegistryObject<FuzzyWallMossFeature> FUZZY_WALL_MOSS = REGISTER.register("fuzzy_wall_moss", () -> new FuzzyWallMossFeature(NoneFeatureConfiguration.CODEC.stable()));
 	public static final RegistryObject<FuzzyCeilingMossFeature> FUZZY_CEILING_MOSS = REGISTER.register("fuzzy_ceiling_moss", () -> new FuzzyCeilingMossFeature(NoneFeatureConfiguration.CODEC.stable()));
 	public static final RegistryObject<ShelfMushroomFeature> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new ShelfMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<LargeShelfMushroomFeature> LARGE_SHELF_MUSHROOMS = REGISTER.register("large_shelf_mushrooms", () -> new LargeShelfMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+
+	public static final RegistryObject<MoldyCeilingFeature> MOLDY_CEILING = REGISTER.register("moldy_ceiling", () -> new MoldyCeilingFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<MoldyWallFeature> MOLDY_WALL = REGISTER.register("moldy_wall", () -> new MoldyWallFeature(NoneFeatureConfiguration.CODEC.stable()));
 	
 }

@@ -24,7 +24,11 @@
     [
       "bugging_out:placed_mulch",
       "bugging_out:placed_stripped_rotten_wood",
-      "bugging_out:placed_rotten_charcoal"
+      "bugging_out:placed_rotten_charcoal",
+      "bugging_out:placed_moldy_wall",
+      "bugging_out:placed_moldy_wall",
+      "bugging_out:placed_mold_stalks",
+      "bugging_out:placed_mold_spore_spreader"
     ],
     [],
     [

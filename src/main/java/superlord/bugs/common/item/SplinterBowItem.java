@@ -32,11 +32,12 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 		if (p_40669_ instanceof Player player) {
 			boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, p_40667_) > 0;
 			ItemStack itemstack = getProjectile(player, p_40667_);
-
+			
 			int i = this.getUseDuration(p_40667_) - p_40670_;
+			int i1 = itemstack.getCount();
 			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(p_40667_, p_40668_, player, i, !itemstack.isEmpty() || flag);
 			if (i < 0) return;
-
+			if (i1 < 3) return;
 			if (!itemstack.isEmpty() || flag) {
 				if (itemstack.isEmpty()) {
 					itemstack = new ItemStack(BOItems.SPLINTER.get());
@@ -48,24 +49,38 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 					if (!p_40668_.isClientSide) {
 						SplinterItem splinteritem = (SplinterItem)(itemstack.getItem() instanceof SplinterItem ? itemstack.getItem() : BOItems.SPLINTER.get());
 						AbstractSplinter abstracsplinter = splinteritem.createArrow(p_40668_, itemstack, player);
+						AbstractSplinter abstracsplinter2 = splinteritem.createArrow(p_40668_, itemstack, player);
+						AbstractSplinter abstracsplinter3 = splinteritem.createArrow(p_40668_, itemstack, player);
 						abstracsplinter = customArrow(abstracsplinter);
+						abstracsplinter2 = customArrow(abstracsplinter2);
+						abstracsplinter3 = customArrow(abstracsplinter3);
 						abstracsplinter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
+						abstracsplinter2.shootFromRotation(player, player.getXRot() + 10, player.getYRot(), 0.0F, f * 3.0F, 1.0F);
+						abstracsplinter3.shootFromRotation(player, player.getXRot() - 10, player.getYRot(), 0.0F, f * 3.0F, 1.0F);
 						if (f == 1.0F) {
 							abstracsplinter.setCritArrow(true);
+							abstracsplinter2.setCritArrow(true);
+							abstracsplinter3.setCritArrow(true);
 						}
 
 						int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, p_40667_);
 						if (j > 0) {
 							abstracsplinter.setBaseDamage(abstracsplinter.getBaseDamage() + (double)j * 0.5D + 0.5D);
+							abstracsplinter2.setBaseDamage(abstracsplinter2.getBaseDamage() + (double)j * 0.5D + 0.5D);
+							abstracsplinter3.setBaseDamage(abstracsplinter3.getBaseDamage() + (double)j * 0.5D + 0.5D);
 						}
 
 						int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, p_40667_);
 						if (k > 0) {
 							abstracsplinter.setKnockback(k);
+							abstracsplinter2.setKnockback(k);
+							abstracsplinter3.setKnockback(k);
 						}
 
 						if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, p_40667_) > 0) {
 							abstracsplinter.setSecondsOnFire(100);
+							abstracsplinter2.setSecondsOnFire(100);
+							abstracsplinter3.setSecondsOnFire(100);
 						}
 
 						p_40667_.hurtAndBreak(1, player, (p_289501_) -> {
@@ -73,14 +88,18 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 						});
 						if (flag1 || player.getAbilities().instabuild) {
 							abstracsplinter.pickup = AbstractSplinter.Pickup.CREATIVE_ONLY;
+							abstracsplinter2.pickup = AbstractSplinter.Pickup.CREATIVE_ONLY;
+							abstracsplinter3.pickup = AbstractSplinter.Pickup.CREATIVE_ONLY;
 						}
 
 						p_40668_.addFreshEntity(abstracsplinter);
+						p_40668_.addFreshEntity(abstracsplinter2);
+						p_40668_.addFreshEntity(abstracsplinter3);
 					}
 
 					p_40668_.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (p_40668_.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 					if (!flag1 && !player.getAbilities().instabuild) {
-						itemstack.shrink(1);
+						itemstack.shrink(3);
 						if (itemstack.isEmpty()) {
 							player.getInventory().removeItem(itemstack);
 						}
@@ -109,29 +128,29 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 	public UseAnim getUseAnimation(ItemStack p_40678_) {
 		return UseAnim.BOW;
 	}
-	
+
 	public ItemStack getProjectile(Player player, ItemStack p_36349_) {
-	      if (!(p_36349_.getItem() instanceof BOProjectileWeaponItem)) {
-	         return ItemStack.EMPTY;
-	      } else {
-	         Predicate<ItemStack> predicate = ((BOProjectileWeaponItem)p_36349_.getItem()).getSupportedHeldProjectiles();
-	         ItemStack itemstack = BOProjectileWeaponItem.getHeldProjectile(player, predicate);
-	         if (!itemstack.isEmpty()) {
-	            return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, itemstack);
-	         } else {
-	            predicate = ((BOProjectileWeaponItem)p_36349_.getItem()).getAllSupportedProjectiles();
+		if (!(p_36349_.getItem() instanceof BOProjectileWeaponItem)) {
+			return ItemStack.EMPTY;
+		} else {
+			Predicate<ItemStack> predicate = ((BOProjectileWeaponItem)p_36349_.getItem()).getSupportedHeldProjectiles();
+			ItemStack itemstack = BOProjectileWeaponItem.getHeldProjectile(player, predicate);
+			if (!itemstack.isEmpty()) {
+				return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, itemstack);
+			} else {
+				predicate = ((BOProjectileWeaponItem)p_36349_.getItem()).getAllSupportedProjectiles();
 
-	            for(int i = 0; i < player.getInventory().getContainerSize(); ++i) {
-	               ItemStack itemstack1 = player.getInventory().getItem(i);
-	               if (predicate.test(itemstack1)) {
-	                  return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, itemstack1);
-	               }
-	            }
+				for(int i = 0; i < player.getInventory().getContainerSize(); ++i) {
+					ItemStack itemstack1 = player.getInventory().getItem(i);
+					if (predicate.test(itemstack1)) {
+						return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, itemstack1);
+					}
+				}
 
-	            return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, player.getAbilities().instabuild ? new ItemStack(BOItems.SPLINTER.get()) : ItemStack.EMPTY);
-	         }
-	      }
-	   }
+				return net.minecraftforge.common.ForgeHooks.getProjectile(player, p_36349_, player.getAbilities().instabuild ? new ItemStack(BOItems.SPLINTER.get()) : ItemStack.EMPTY);
+			}
+		}
+	}
 
 	public InteractionResultHolder<ItemStack> use(Level p_40672_, Player player, InteractionHand p_40674_) {
 		ItemStack itemstack = player.getItemInHand(p_40674_);

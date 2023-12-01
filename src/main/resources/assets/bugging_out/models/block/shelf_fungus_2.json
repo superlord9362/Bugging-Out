@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+    "ambientocclusion": false,
 	"textures": {
 		"0": "bugging_out:block/shelf_fungus",
 		"particle": "bugging_out:block/shelf_fungus"

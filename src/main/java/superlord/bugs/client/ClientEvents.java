@@ -4,6 +4,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -28,6 +29,7 @@ import superlord.bugs.client.entity.render.item.TNTreeRenderer;
 import superlord.bugs.client.entity.render.item.TermiteAcidRenderer;
 import superlord.bugs.init.BOBlockEntities;
 import superlord.bugs.init.BOEntities;
+import superlord.bugs.init.BOItems;
 import superlord.bugs.init.BOWoodTypes;
 
 @OnlyIn(Dist.CLIENT)
@@ -41,6 +43,16 @@ public class ClientEvents {
 			Sheets.addWoodType(BOWoodTypes.ROTTEN);
 		});
 		ClientProxy.setUpBlockRenders();
+		ItemProperties.register(BOItems.SPLINTER_BOW.get(), new ResourceLocation(BuggingOut.MOD_ID, "pulling"), (stack, world, player, i) -> {
+			return player != null && player.isUsingItem() && player.getUseItem() == stack ? 1.0F : 0.0F;
+		});
+		ItemProperties.register(BOItems.SPLINTER_BOW.get(), new ResourceLocation(BuggingOut.MOD_ID, "pull"), (stack, world, player, i) -> {
+			if (player == null) {
+				return 0.0F;
+			} else {
+				return player.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - player.getUseItemRemainingTicks()) / 20.0F;
+			}
+		});
 	}
 	
 	public static ModelLayerLocation TERMITE_WORKER = new ModelLayerLocation(new ResourceLocation(BuggingOut.MOD_ID, "termite_worker"), "termite_worker");

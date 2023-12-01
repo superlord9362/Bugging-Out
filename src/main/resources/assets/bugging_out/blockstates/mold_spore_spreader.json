@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"half=lower": [
+			{
+				"model": "bugging_out:block/mold_spore_spreader_bottom_1"
+			},
+			{
+				"model": "bugging_out:block/mold_spore_spreader_bottom_2"
+			}
+		],
+		"half=upper": {
+			"model": "bugging_out:block/mold_spore_spreader_top"
+		}
+	}
+}

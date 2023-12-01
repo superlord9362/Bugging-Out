@@ -38,7 +38,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "minecraft:stick"
+              "name": "bugging_out:splinter"
             }
           ]
         }

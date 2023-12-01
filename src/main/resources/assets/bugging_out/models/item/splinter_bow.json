@@ -28,21 +28,21 @@
     "overrides": [
         {
             "predicate": {
-                "pulling": 1
+                "bugging_out:pulling": 1
             },
             "model": "bugging_out:item/splinter_bow_pulling_0"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 0.65
+                "bugging_out:pulling": 1,
+                "bugging_out:pull": 0.65
             },
             "model": "bugging_out:item/splinter_bow_pulling_1"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 0.9
+                "bugging_out:pulling": 1,
+                "bugging_out:pull": 0.9
             },
             "model": "bugging_out:item/splinter_bow_pulling_2"
         }

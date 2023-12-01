@@ -59,7 +59,13 @@ public class BOConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_CEILING_MOSS = registerConfiguredFeature("configured_fuzzy_ceiling_moss");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SPLINTERS = registerConfiguredFeature("configured_splinters");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHELF_MUSHROOMS = registerConfiguredFeature("configured_shelf_mushrooms");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_MUSHROOMS = registerConfiguredFeature("configured_large_shelf_mushrooms");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_CHARCOAL = registerConfiguredFeature("configured_rotten_charcoal");
+	
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_CEILING = registerConfiguredFeature("configured_moldy_ceiling");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_WALL = registerConfiguredFeature("configured_moldy_wall");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLD_STALK = registerConfiguredFeature("configured_mold_stalk");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLD_SPORE_SPREADER = registerConfiguredFeature("configured_mold_spore_spreader");
 
 	public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext) {
 		FeatureUtils.register(bootstapContext, HUGE_TERMITE_MUSHROOM, BOFeatures.HUGE_TERMITE_MUSHROOM.get(), new NoneFeatureConfiguration());
@@ -87,6 +93,11 @@ public class BOConfiguredFeatures {
 		FeatureUtils.register(bootstapContext, FUZZY_CEILING_MOSS, BOFeatures.FUZZY_CEILING_MOSS.get(), new NoneFeatureConfiguration());
 		FeatureUtils.register(bootstapContext, SPLINTERS, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.SPLINTERS.get()), 32));
 		FeatureUtils.register(bootstapContext, SHELF_MUSHROOMS, BOFeatures.SHELF_MUSHROOMS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, LARGE_SHELF_MUSHROOMS, BOFeatures.LARGE_SHELF_MUSHROOMS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLDY_CEILING, BOFeatures.MOLDY_CEILING.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLDY_WALL, BOFeatures.MOLDY_WALL.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLD_STALK, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.MOLD_STALKS.get()), 32));
+		FeatureUtils.register(bootstapContext, MOLD_SPORE_SPREADER, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.MOLD_SPORE_SPREADER.get()), 32));
 	}
 
 	private static RandomPatchConfiguration grassPatch(BlockStateProvider p_195203_, int p_195204_) {
