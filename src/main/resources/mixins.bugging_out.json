@@ -5,7 +5,8 @@
 	"refmap": "bugging_out.refmap.json",
 	"mixins": [
 		"ItemInHandRenderMixin",
-		"AbstractClientPlayerMixin"
+		"AbstractClientPlayerMixin",
+		"GasMaskOverlayMixin"
 	],
 	"client": [
 		

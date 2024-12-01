@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+    "ambientocclusion": false,
 	"textures": {
 		"2": "bugging_out:block/mold_fuzz",
 		"3": "bugging_out:block/mold_rhizoids",

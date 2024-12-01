@@ -46,6 +46,8 @@
 	"block.bugging_out.rotten_sign": "Rotten Sign",
 	"block.bugging_out.rotten_charcoal_ore": "Rotten Charcoal Ore",
 	"block.bugging_out.rotten_wall_sign": "Rotten Sign",
+	"block.bugging_out.infested_rotten_wood": "Beetle Infested Rotten Wood",
+	"block.bugging_out.sap_resin_ore": "Sap Resin Ore",
 	"item.bugging_out.rotten_sign": "Rotten Sign",
 	"item.bugging_out.rotten_boat": "Rotten Boat",
 	
@@ -57,6 +59,8 @@
 	"item.bugging_out.termite_soldier_spawn_egg": "Termite Soldier Spawn Egg",
 	"item.bugging_out.termite_kamikaze_spawn_egg": "Termite Kamikaze Spawn Egg",
 	"item.bugging_out.glowworm_spawn_egg": "Glowworm Spawn Egg",
+	"item.bugging_out.springtail_spawn_egg": "Springtail Spawn Egg",
+	"item.bugging_out.bark_beetle_spawn_egg": "Bark Beetle Spawn Egg",
 	
 	"item.bugging_out.termite_mushroom_spores": "Termite Mushroom Spores",
 	"item.bugging_out.termite_acid": "Termite Acid",
@@ -74,6 +78,10 @@
 	"item.bugging_out.mandible_shears": "Mandible Shears",
 	"item.bugging_out.splinter": "Splinter",
 	"item.bugging_out.splinter_bow": "Splinter Bow",
+	"item.bugging_out.sap_resin": "Sap Resin",
+	"item.bugging_out.gas_mask": "Gas Mask",
+	"item.bugging_out.purple_springtail": "Purple Springtail",
+	"item.bugging_out.yellow_springtail": "Yellow Springtail",
 	
 	"entity.bugging_out.termite_nymph": "Termite Nymph",
 	"entity.bugging_out.termite_worker": "Termite Worker",
@@ -84,6 +92,8 @@
 	"entity.bugging_out.tntree": "TNTree",
 	"entity.bugging_out.splinter": "Splinter",
 	"entity.bugging_out.boat": "Boat",
+	"entity.bugging_out.springtail": "Springtail",
+	"entity.bugging_out.bark_beetle": "Bark Beetle",
 	
 	"itemGroup.bugs_building_tab": "Bugging Out! Building Blocks",
 	"itemGroup.bugs_decoration_tab": "Bugging Out! Decoration Blocks",

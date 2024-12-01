@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TermiteMushroomSporeParticle extends TextureSheetParticle {
+	
 
 	protected TermiteMushroomSporeParticle(ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ, float scale, SpriteSet spriteWithAge) {
 		super(world, x, y, z, 0.1F, 0.1F, 0.1F);

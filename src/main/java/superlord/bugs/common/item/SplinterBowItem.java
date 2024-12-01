@@ -1,5 +1,6 @@
 package superlord.bugs.common.item;
 
+import java.util.Random;
 import java.util.function.Predicate;
 
 import net.minecraft.sounds.SoundEvents;
@@ -20,7 +21,7 @@ import superlord.bugs.common.entity.item.AbstractSplinter;
 import superlord.bugs.init.BOItems;
 
 public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishable {
-	public static final int MAX_DRAW_DURATION = 20;
+	public static final int MAX_DRAW_DURATION = 60;
 	public static final int DEFAULT_RANGE = 15;
 
 	public SplinterBowItem(Item.Properties p_40660_) {
@@ -36,8 +37,8 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 			int i = this.getUseDuration(p_40667_) - p_40670_;
 			int i1 = itemstack.getCount();
 			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(p_40667_, p_40668_, player, i, !itemstack.isEmpty() || flag);
-			if (i < 0) return;
-			if (i1 < 3) return;
+			//if (i < 0) return;
+			if (i1 < 3 && !player.isCreative()) return;
 			if (!itemstack.isEmpty() || flag) {
 				if (itemstack.isEmpty()) {
 					itemstack = new ItemStack(BOItems.SPLINTER.get());
@@ -54,9 +55,10 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 						abstracsplinter = customArrow(abstracsplinter);
 						abstracsplinter2 = customArrow(abstracsplinter2);
 						abstracsplinter3 = customArrow(abstracsplinter3);
+						Random random = new Random();
 						abstracsplinter.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
-						abstracsplinter2.shootFromRotation(player, player.getXRot() + 10, player.getYRot(), 0.0F, f * 3.0F, 1.0F);
-						abstracsplinter3.shootFromRotation(player, player.getXRot() - 10, player.getYRot(), 0.0F, f * 3.0F, 1.0F);
+						abstracsplinter2.shootFromRotation(player, player.getXRot() +- random.nextInt(10), player.getYRot() +- random.nextInt(10), 0.0F +- random.nextInt(10), f * 3.0F, 1.0F);
+						abstracsplinter3.shootFromRotation(player, player.getXRot() +- random.nextInt(10), player.getYRot() +- random.nextInt(10), 0.0F +- random.nextInt(10), f * 3.0F, 1.0F);
 						if (f == 1.0F) {
 							abstracsplinter.setCritArrow(true);
 							abstracsplinter2.setCritArrow(true);
@@ -122,7 +124,7 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 	}
 
 	public int getUseDuration(ItemStack p_40680_) {
-		return 72000;
+		return 216000;
 	}
 
 	public UseAnim getUseAnimation(ItemStack p_40678_) {
@@ -154,7 +156,9 @@ public class SplinterBowItem extends BOProjectileWeaponItem implements Vanishabl
 
 	public InteractionResultHolder<ItemStack> use(Level p_40672_, Player player, InteractionHand p_40674_) {
 		ItemStack itemstack = player.getItemInHand(p_40674_);
-		boolean flag = !getProjectile(player, itemstack).isEmpty();
+		ItemStack itemstack1 = getProjectile(player, itemstack);
+		int i1 = itemstack1.getCount();
+		boolean flag = !getProjectile(player, itemstack).isEmpty() && i1 >= 3;
 
 		InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, p_40672_, player, p_40674_, flag);
 		if (ret != null) return ret;

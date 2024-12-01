@@ -26,7 +26,6 @@
       "bugging_out:placed_stripped_rotten_wood",
       "bugging_out:placed_rotten_charcoal",
       "bugging_out:placed_moldy_wall",
-      "bugging_out:placed_moldy_wall",
       "bugging_out:placed_mold_stalks",
       "bugging_out:placed_mold_spore_spreader"
     ],
@@ -45,7 +44,14 @@
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "water_creature": [
+      {
+        "type": "bugging_out:springtail",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 17
+      }
+    ]
   },
   "temperature": 1.0
 }

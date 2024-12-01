@@ -2,6 +2,7 @@ package superlord.bugs.common.entity.item;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -400,6 +401,10 @@ public abstract class AbstractSplinter extends Projectile {
 	}
 
 	protected void onHitBlock(BlockHitResult p_36755_) {
+		Random random = new Random();
+		if (random.nextInt(10) == 0) {
+			this.remove(RemovalReason.DISCARDED);
+		}
 		this.lastState = this.level().getBlockState(p_36755_.getBlockPos());
 		super.onHitBlock(p_36755_);
 		Vec3 vec3 = p_36755_.getLocation().subtract(this.getX(), this.getY(), this.getZ());

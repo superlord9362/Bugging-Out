@@ -2,6 +2,8 @@ package superlord.bugs.init;
 
 import java.util.List;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -11,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.block.TermiteMushroomBlock;
 
@@ -53,7 +57,7 @@ public class BOConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_MOUND = registerConfiguredFeature("configured_termostone_mound");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CRUMBLY_TERMOSTONE_MOUND = registerConfiguredFeature("configured_crumbly_termostone_mound");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_PILLAR = registerConfiguredFeature("configured_termostone_pillar");
-	
+
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_MOSS = registerConfiguredFeature("configured_fuzzy_moss");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_WALL_MOSS = registerConfiguredFeature("configured_fuzzy_wall_moss");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_CEILING_MOSS = registerConfiguredFeature("configured_fuzzy_ceiling_moss");
@@ -61,7 +65,7 @@ public class BOConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHELF_MUSHROOMS = registerConfiguredFeature("configured_shelf_mushrooms");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_MUSHROOMS = registerConfiguredFeature("configured_large_shelf_mushrooms");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_CHARCOAL = registerConfiguredFeature("configured_rotten_charcoal");
-	
+
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_CEILING = registerConfiguredFeature("configured_moldy_ceiling");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_WALL = registerConfiguredFeature("configured_moldy_wall");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLD_STALK = registerConfiguredFeature("configured_mold_stalk");
@@ -97,11 +101,34 @@ public class BOConfiguredFeatures {
 		FeatureUtils.register(bootstapContext, MOLDY_CEILING, BOFeatures.MOLDY_CEILING.get(), new NoneFeatureConfiguration());
 		FeatureUtils.register(bootstapContext, MOLDY_WALL, BOFeatures.MOLDY_WALL.get(), new NoneFeatureConfiguration());
 		FeatureUtils.register(bootstapContext, MOLD_STALK, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.MOLD_STALKS.get()), 32));
-		FeatureUtils.register(bootstapContext, MOLD_SPORE_SPREADER, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.MOLD_SPORE_SPREADER.get()), 32));
+		FeatureUtils.register(bootstapContext, MOLD_SPORE_SPREADER, Feature.RANDOM_PATCH, BOConfiguredFeatures.simplePatchConfiguration(BOFeatures.MOLD_SPORE_SPREADER.get(), new NoneFeatureConfiguration()));
 	}
 
 	private static RandomPatchConfiguration grassPatch(BlockStateProvider p_195203_, int p_195204_) {
 		return FeatureUtils.simpleRandomPatchConfiguration(p_195204_, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(p_195203_)));
+	}
+
+	public static RandomPatchConfiguration simpleRandomPatchConfiguration(int p_206471_, Holder<PlacedFeature> p_206472_) {
+		return new RandomPatchConfiguration(p_206471_, 7, 3, p_206472_);
+	}
+
+	private static BlockPredicate simplePatchPredicate(List<Block> p_195009_) {
+		BlockPredicate blockpredicate;
+		if (!p_195009_.isEmpty()) {
+			blockpredicate = BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), p_195009_));
+		} else {
+			blockpredicate = BlockPredicate.ONLY_IN_AIR_PREDICATE;
+		}
+
+		return blockpredicate;
+	}
+
+	public static <FC extends FeatureConfiguration, F extends Feature<FC>> RandomPatchConfiguration simplePatchConfiguration(F p_206481_, FC p_206482_, List<Block> p_206483_, int p_206484_) {
+		return simpleRandomPatchConfiguration(p_206484_, PlacementUtils.filtered(p_206481_, p_206482_, simplePatchPredicate(p_206483_)));
+	}
+
+	public static <FC extends FeatureConfiguration, F extends Feature<FC>> RandomPatchConfiguration simplePatchConfiguration(F p_206474_, FC p_206475_) {
+		return simplePatchConfiguration(p_206474_, p_206475_, List.of(), 96);
 	}
 
 	public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {

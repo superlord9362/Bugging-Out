@@ -29,6 +29,18 @@ public class BuggingOutConfig {
 	public static int termiteNymphFungalGardenSpawnWeight = 8;
 	public static int termiteSoldierFungalGardenSpawnWeight = 5;
 	public static int termiteWorkerFungalGardenSpawnWeight = 15;
+	//Moldy Grotto
+	public static int barkBeetleMoldyGrottoSpawnWeight = 0;
+	public static int springtailMoldyGrottoSpawnWeight = 17;
+	//Beetle Nest
+	public static int barkBeetleBeetleNestSpawnWeight = 20;
+	public static int springtailBeetleNestSpawnWeight = 0;
+	//Mossy Regrowth
+	public static int barkBeetleMossyRegrowthSpawnWeight = 6;
+	public static int springtailMossyRegrowthSpawnWeight  = 8;
+	//Rotten Passages
+	public static int barkBeetleRottenPassagesSpawnWeight = 8;
+	public static int springtailRottenPassagesSpawnWeight = 3;
 	//Misc settings
 	public static boolean superSecretSettings = false;
 	
@@ -57,6 +69,14 @@ public class BuggingOutConfig {
 			termiteNymphFungalGardenSpawnWeight = BOConfigHolder.SERVER.termiteNymphFungalGardenSpawnWeight.get();
 			termiteSoldierFungalGardenSpawnWeight = BOConfigHolder.SERVER.termiteSoldierFungalGardenSpawnWeight.get();
 			termiteWorkerFungalGardenSpawnWeight = BOConfigHolder.SERVER.termiteWorkerFungalGardenSpawnWeight.get();
+			barkBeetleMoldyGrottoSpawnWeight = BOConfigHolder.SERVER.barkBeetleMoldyGrottoSpawnWeight.get();
+			springtailMoldyGrottoSpawnWeight = BOConfigHolder.SERVER.springtailMoldyGrottoSpawnWeight.get();
+			barkBeetleBeetleNestSpawnWeight = BOConfigHolder.SERVER.barkBeetleBeetleNestSpawnWeight.get();
+			springtailBeetleNestSpawnWeight = BOConfigHolder.SERVER.springtailBeetleNestSpawnWeight.get();
+			barkBeetleMossyRegrowthSpawnWeight = BOConfigHolder.SERVER.barkBeetleMossyRegrowthSpawnWeight.get();
+			springtailMossyRegrowthSpawnWeight = BOConfigHolder.SERVER.springtailMossyRegrowthSpawnWeight.get();
+			barkBeetleRottenPassagesSpawnWeight = BOConfigHolder.SERVER.barkBeetleRottenPassagesSpawnWeight.get();
+			springtailRottenPassagesSpawnWeight = BOConfigHolder.SERVER.springtailRottenPassagesSpawnWeight.get();
 			superSecretSettings = BOConfigHolder.SERVER.superSecretSettings.get();
 		} catch (Exception e) {
 			BuggingOut.LOGGER.warn("An exception was caused trying to load the config for Bugging Out!");

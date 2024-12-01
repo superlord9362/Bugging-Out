@@ -35,7 +35,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import superlord.bugs.client.ClientProxy;
 import superlord.bugs.common.CommonProxy;
+import superlord.bugs.common.entity.BarkBeetle;
 import superlord.bugs.common.entity.Glowworm;
+import superlord.bugs.common.entity.Springtail;
 import superlord.bugs.common.entity.TermiteKamikaze;
 import superlord.bugs.common.entity.TermiteNymph;
 import superlord.bugs.common.entity.TermiteSoldier;
@@ -100,9 +102,11 @@ public class BuggingOut {
 		bus.addListener(this::registerEntityAttributes);
 		bus.addListener(this::gatherData);
 		
-		PROXY.init();
+		PROXY.commonInit();
+		PROXY.clientInit();
 	}
 	
+	@SubscribeEvent
 	public void gatherData(GatherDataEvent event) {
         DataGenerator dataGenerator = event.getGenerator();
         PackOutput packOutput = dataGenerator.getPackOutput();
@@ -128,6 +132,8 @@ public class BuggingOut {
 		event.put(BOEntities.TERMITE_NYMPH.get(), TermiteNymph.createAttributes().build());
 		event.put(BOEntities.TERMITE_KAMIKAZE.get(), TermiteKamikaze.createAttributes().build());
 		event.put(BOEntities.GLOWWORM.get(), Glowworm.createAttributes().build());
+		event.put(BOEntities.SPRINGTAIL.get(), Springtail.createAttributes().build());
+		event.put(BOEntities.BARK_BEETLE.get(), BarkBeetle.createAttributes().build());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -141,6 +147,8 @@ public class BuggingOut {
 		SpawnPlacements.register(BOEntities.TERMITE_NYMPH.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteNymph::canTermiteSpawn);
 		SpawnPlacements.register(BOEntities.TERMITE_SOLDIER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteSoldier::canTermiteSpawn);
 		SpawnPlacements.register(BOEntities.TERMITE_WORKER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TermiteWorker::canTermiteSpawn);
+		SpawnPlacements.register(BOEntities.SPRINGTAIL.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Springtail::canSpringtailSpawn);
+		SpawnPlacements.register(BOEntities.BARK_BEETLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BarkBeetle::canBarkBeetleSpawn);
 	}
 
 	@SubscribeEvent

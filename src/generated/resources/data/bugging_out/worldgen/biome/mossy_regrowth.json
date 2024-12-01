@@ -53,7 +53,14 @@
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "water_creature": [
+      {
+        "type": "bugging_out:springtail",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 8
+      }
+    ]
   },
   "temperature": 1.0
 }

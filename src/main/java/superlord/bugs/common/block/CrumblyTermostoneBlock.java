@@ -1,7 +1,5 @@
 package superlord.bugs.common.block;
 
-import java.util.Random;
-
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.Util;
@@ -94,7 +92,7 @@ public class CrumblyTermostoneBlock extends Block {
 		return 20;
 	}
 
-	public void animateTick(BlockState p_57494_, Level world, BlockPos pos, Random p_57497_) {
+	public void animateTick(BlockState p_57494_, Level world, BlockPos pos, RandomSource p_57497_) {
 		double d0 = (double)pos.getX() + 0.5D;
 		double d1 = (double)pos.getY() + 0.7D;
 		double d2 = (double)pos.getZ() + 0.5D;

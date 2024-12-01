@@ -28,12 +28,14 @@ import superlord.bugs.BuggingOut;
 import superlord.bugs.common.block.AcidSplatBlock;
 import superlord.bugs.common.block.BOStandingSignBlock;
 import superlord.bugs.common.block.BOWallSignBlock;
+import superlord.bugs.common.block.BarkBeetleInfestedBlock;
 import superlord.bugs.common.block.BigShelfMushroomBlock;
 import superlord.bugs.common.block.CrumblyTermostoneBlock;
 import superlord.bugs.common.block.FuzzyMossBlock;
 import superlord.bugs.common.block.GlowWormHoleBlock;
 import superlord.bugs.common.block.MoldBlock;
 import superlord.bugs.common.block.MoldSporeSpreaderBlock;
+import superlord.bugs.common.block.MoldStalksBlock;
 import superlord.bugs.common.block.MulchBlock;
 import superlord.bugs.common.block.SplinterBlock;
 import superlord.bugs.common.block.TNTreeBlock;
@@ -86,6 +88,7 @@ public class BOBlocks {
 	public static final RegistryObject<Block> STRIPPED_ROTTEN_LOG = REGISTER.register("stripped_rotten_log", () -> createLog());
 	public static final RegistryObject<Block> ROTTEN_WOOD = REGISTER.register("rotten_wood", () -> createLog());
 	public static final RegistryObject<Block> STRIPPED_ROTTEN_WOOD = REGISTER.register("stripped_rotten_wood", () -> createLog());
+	public static final RegistryObject<Block> INFESTED_ROTTEN_WOOD = REGISTER.register("infested_rotten_wood", () -> new BarkBeetleInfestedBlock(ROTTEN_WOOD.get(), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD)));
 	public static final RegistryObject<Block> ROTTEN_PLANKS = REGISTER.register("rotten_planks", () -> new Block(Block.Properties.of().mapColor(MapColor.WOOD).strength(1.0F, 1.5F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> ROTTEN_DOOR = REGISTER.register("rotten_door", () -> new DoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD).noOcclusion(), BOWoodTypes.ROTTEN_TYPE));
 	public static final RegistryObject<Block> ROTTEN_PRESSURE_PLATE = REGISTER.register("rotten_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.of().mapColor(MapColor.WOOD).noCollission().strength(0.25F).sound(SoundType.WOOD), BOWoodTypes.ROTTEN_TYPE));
@@ -99,6 +102,7 @@ public class BOBlocks {
 	public static final RegistryObject<Block> ROTTEN_WALL_SIGN = REGISTER.register("rotten_wall_sign", () -> new BOWallSignBlock(Properties.of().mapColor(MapColor.WOOD).noCollission().strength(0.5F).sound(SoundType.WOOD).dropsLike(ROTTEN_SIGN.get()), BOWoodTypes.ROTTEN));
 	public static final RegistryObject<Block> MULCH = REGISTER.register("mulch", () -> new MulchBlock(Block.Properties.of().mapColor(MapColor.DIRT).strength(1.0F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> ROTTEN_CHARCOAL_ORE = REGISTER.register("rotten_charcoal_ore", () -> new Block(Block.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> SAP_RESIN_ORE = REGISTER.register("sap_resin_ore", () -> new Block(Block.Properties.of().mapColor(MapColor.WOOD).strength(1.5F).sound(SoundType.WOOD)));
 	public static final RegistryObject<Block> SPLINTERS = REGISTER.register("splinters", () -> new SplinterBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD).noCollission()));
 	
 	public static final RegistryObject<Block> FUZZY_MOSS = REGISTER.register("fuzzy_moss", () -> new FuzzyMossBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.1F).randomTicks().noOcclusion().sound(SoundType.MOSS)));
@@ -106,9 +110,9 @@ public class BOBlocks {
 	public static final RegistryObject<Block> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new WallFungusBlock(Block.Properties.of().noCollission().strength(0.2F).sound(SoundType.GRASS)));
 	public static final RegistryObject<Block> LARGE_SHELF_MUSHROOMS = REGISTER.register("large_shelf_mushrooms", () -> new BigShelfMushroomBlock(Block.Properties.of().strength(0.5F).sound(SoundType.GRASS).noOcclusion()));
 	
-	public static final RegistryObject<Block> MOLD_CARPET = REGISTER.register("mold_carpet", () -> new MoldBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().sound(SoundType.GRASS)));
-	public static final RegistryObject<Block> MOLD_STALKS = REGISTER.register("mold_stalks", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().noCollission().sound(SoundType.GRASS)));
-	public static final RegistryObject<Block> MOLD_SPORE_SPREADER = REGISTER.register("mold_spore_spreader", () -> new MoldSporeSpreaderBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.5F).randomTicks().sound(SoundType.GRASS)));
+	public static final RegistryObject<Block> MOLD_CARPET = REGISTER.register("mold_carpet", () -> new MoldBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().sound(SoundType.GRASS).noCollission().noOcclusion().randomTicks()));
+	public static final RegistryObject<Block> MOLD_STALKS = REGISTER.register("mold_stalks", () -> new MoldStalksBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instabreak().noCollission().sound(SoundType.GRASS).noOcclusion().randomTicks()));
+	public static final RegistryObject<Block> MOLD_SPORE_SPREADER = REGISTER.register("mold_spore_spreader", () -> new MoldSporeSpreaderBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.5F).randomTicks().sound(SoundType.GRASS).noOcclusion()));
 	
 	private static Boolean never(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
 		return (boolean)false;

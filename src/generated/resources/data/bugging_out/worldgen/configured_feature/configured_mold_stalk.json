@@ -8,7 +8,10 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "bugging_out:mold_stalks"
+              "Name": "bugging_out:mold_stalks",
+              "Properties": {
+                "stalk_conversion": "false"
+              }
             }
           }
         }

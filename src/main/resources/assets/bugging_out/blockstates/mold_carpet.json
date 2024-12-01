@@ -2,7 +2,9 @@
 	"multipart": [
 		{
 			"apply": {
-				"model": "bugging_out:block/mold"
+				"model": "bugging_out:block/mold",
+        		"uvlock": true,
+        		"x": 270
 			},
 			"when": {
 				"north": "true"
@@ -12,7 +14,8 @@
 			"apply": {
 				"model": "bugging_out:block/mold",
         		"uvlock": true,
-        		"y": 90
+        		"y": 270,
+        		"x": 90
       		},
       		"when": {
         		"east": "true"
@@ -22,7 +25,7 @@
     		"apply": {
         		"model": "bugging_out:block/mold",
         		"uvlock": true,
-        		"y": 180
+        		"x": 90
       		},
       		"when": {
         		"south": "true"
@@ -32,7 +35,8 @@
       		"apply": {
         		"model": "bugging_out:block/mold",
         		"uvlock": true,
-		        "y": 270
+        		"y": 90,
+        		"x": 90
 			},
 			"when": {
         		"west": "true"
@@ -42,7 +46,7 @@
       		"apply": {
         		"model": "bugging_out:block/mold",
         		"uvlock": true,
-        		"x": 270
+        		"x": 180
       	},
       		"when": {
       	  		"up": "true"
@@ -51,8 +55,7 @@
     	{
       		"apply": {
         		"model": "bugging_out:block/mold",
-        		"uvlock": true,
-        		"x": 90
+        		"uvlock": true
       		},
       		"when": {
         		"down": "true"

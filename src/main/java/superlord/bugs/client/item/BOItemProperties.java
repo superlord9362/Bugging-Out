@@ -21,10 +21,8 @@ public class BOItemProperties extends ItemProperties {
 	static {
 		register(BOItems.SPLINTER_BOW.get(), new ResourceLocation(BuggingOut.MOD_ID, "pull"), (p_174635_, p_174636_, p_174637_, p_174638_) -> {
 			if (p_174637_ == null) {
-				System.out.println("Hi");
 				return 0.0F;
 			} else {
-				System.out.println("Hello");
 				return p_174637_.getUseItem() != p_174635_ ? 0.0F : (float)(p_174635_.getUseDuration() - p_174637_.getUseItemRemainingTicks()) / 20.0F;
 			}
 		});

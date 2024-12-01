@@ -11,7 +11,7 @@
     },
     "particle": {
       "options": {
-        "type": "bugging_out:termite_dush"
+        "type": "bugging_out:termite_dust"
       },
       "probability": 0.118093334
     },

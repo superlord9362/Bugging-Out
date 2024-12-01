@@ -189,9 +189,10 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLDY_WALL);
-		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLDY_WALL);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLD_STALKS);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOLD_SPORE_SPREADER);
+		if (BuggingOutConfig.springtailMoldyGrottoSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.SPRINGTAIL.get(), BuggingOutConfig.springtailMoldyGrottoSpawnWeight, 2, 4));
+		if (BuggingOutConfig.barkBeetleMoldyGrottoSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.BARK_BEETLE.get(), BuggingOutConfig.barkBeetleMoldyGrottoSpawnWeight, 3, 5));
 		return biome(6836531, 5324584, 2905980, 2509931, false, 1, 0, spawnSettings, biomeFeatures);
 	}
 	
@@ -202,6 +203,8 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MULCH);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);
+		if (BuggingOutConfig.springtailRottenPassagesSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.SPRINGTAIL.get(), BuggingOutConfig.springtailRottenPassagesSpawnWeight, 2, 4));
+		if (BuggingOutConfig.barkBeetleRottenPassagesSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.BARK_BEETLE.get(), BuggingOutConfig.barkBeetleRottenPassagesSpawnWeight, 3, 5));
 		return biome(6836531, 5324584, 2905980, 2509931, false, 1, 0, spawnSettings, biomeFeatures);
 	}
 	
@@ -218,6 +221,8 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MOSS);
+		if (BuggingOutConfig.springtailMossyRegrowthSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.SPRINGTAIL.get(), BuggingOutConfig.springtailMossyRegrowthSpawnWeight, 2, 4));
+		if (BuggingOutConfig.barkBeetleMossyRegrowthSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.BARK_BEETLE.get(), BuggingOutConfig.barkBeetleMossyRegrowthSpawnWeight, 3, 5));
 		return wetBiome(6836531, 5324584, 2905980, 2509931, false, 1, 0, spawnSettings, biomeFeatures);
 	}
 	
@@ -227,6 +232,8 @@ public class BOBiomes {
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.MULCH);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.STRIPPED_ROTTEN_WOOD);
 		biomeFeatures.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, BOPlacedFeatures.ROTTEN_CHARCOAL);
+		if (BuggingOutConfig.springtailBeetleNestSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.SPRINGTAIL.get(), BuggingOutConfig.springtailBeetleNestSpawnWeight, 2, 4));
+		if (BuggingOutConfig.barkBeetleBeetleNestSpawnWeight != 0) spawnSettings.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BOEntities.BARK_BEETLE.get(), BuggingOutConfig.barkBeetleBeetleNestSpawnWeight, 3, 5));
 		return biome(6836531, 5324584, 2905980, 2509931, false, 1, 0, spawnSettings, biomeFeatures);
 	}
 	

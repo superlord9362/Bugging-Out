@@ -1,6 +1,7 @@
 package superlord.bugs.init;
 
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.HoeItem;
@@ -16,12 +17,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.entity.BOBoat;
+import superlord.bugs.common.item.BOArmorMaterials;
 import superlord.bugs.common.item.BOBoatItem;
 import superlord.bugs.common.item.BOItemTiers;
+import superlord.bugs.common.item.GasMaskItem;
 import superlord.bugs.common.item.PaxelItem;
 import superlord.bugs.common.item.ShrinkingSoupItem;
 import superlord.bugs.common.item.SplinterBowItem;
 import superlord.bugs.common.item.SplinterItem;
+import superlord.bugs.common.item.SpringtailItem;
 import superlord.bugs.common.item.TermiteAcidItem;
 import superlord.bugs.common.item.TermiteMushroomSporesItem;
 
@@ -66,6 +70,7 @@ public class BOItems {
 	public static final RegistryObject<BlockItem> TERMOSTONE_BRICK_WALL = DECORATIONS.register("termostone_brick_wall", () -> new BlockItem(BOBlocks.TERMOSTONE_BRICK_WALL.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> BUG_LAMP = DECORATIONS.register("bug_lamp", () -> new BlockItem(BOBlocks.BUG_LAMP.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> GLOW_WORM_HOLE = DECORATIONS.register("glow_worm_hole", () -> new BlockItem(BOBlocks.GLOW_WORM_HOLE.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> INFESTED_ROTTEN_WOOD = DECORATIONS.register("infested_rotten_wood", () -> new BlockItem(BOBlocks.INFESTED_ROTTEN_WOOD.get(), new Item.Properties()));
 	public static final RegistryObject<Item> ROTTEN_SIGN = DECORATIONS.register("rotten_sign", () -> new SignItem(new Item.Properties().stacksTo(16), BOBlocks.ROTTEN_SIGN.get(), BOBlocks.ROTTEN_WALL_SIGN.get()));
 	public static final RegistryObject<BlockItem> ROTTEN_DOOR = DECORATIONS.register("rotten_door", () -> new BlockItem(BOBlocks.ROTTEN_DOOR.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> ROTTEN_TRAPDOOR = DECORATIONS.register("rotten_trapdoor", () -> new BlockItem(BOBlocks.ROTTEN_TRAPDOOR.get(), new Item.Properties()));
@@ -75,6 +80,7 @@ public class BOItems {
 	public static final RegistryObject<BlockItem> ROTTEN_PRESSURE_PLATE = DECORATIONS.register("rotten_pressure_plate", () -> new BlockItem(BOBlocks.ROTTEN_PRESSURE_PLATE.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> SPLINTERS = DECORATIONS.register("splinters", () -> new BlockItem(BOBlocks.SPLINTERS.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> ROTTEN_CHARCOAL_ORE = DECORATIONS.register("rotten_charcoal_ore", () -> new BlockItem(BOBlocks.ROTTEN_CHARCOAL_ORE.get(), new Item.Properties()));
+	public static final RegistryObject<BlockItem> SAP_RESIN_ORE = DECORATIONS.register("sap_resin_ore", () -> new BlockItem(BOBlocks.SAP_RESIN_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> FUZZY_MOSS_BLOCk = DECORATIONS.register("fuzzy_moss_block", () -> new BlockItem(BOBlocks.FUZZY_MOSS_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> FUZZY_MOSS = DECORATIONS.register("fuzzy_moss", () -> new BlockItem(BOBlocks.FUZZY_MOSS.get(), new Item.Properties()));
 	public static final RegistryObject<BlockItem> SHELF_MUSHROOMS = DECORATIONS.register("shelf_mushrooms", () -> new BlockItem(BOBlocks.SHELF_MUSHROOMS.get(), new Item.Properties()));
@@ -88,7 +94,9 @@ public class BOItems {
 	public static final RegistryObject<Item> TERMITE_KAMIKAZE_SPAWN_EGG = SPAWN_EGGS.register("termite_kamikaze_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_KAMIKAZE, 0xA9896B, 0x73806B, new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_SOLDIER_SPAWN_EGG = SPAWN_EGGS.register("termite_soldier_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.TERMITE_SOLDIER, 0xB3895C, 0x673117, new Item.Properties()));
 	public static final RegistryObject<Item> GLOWWORM_SPAWN_EGG = SPAWN_EGGS.register("glowworm_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.GLOWWORM, 0xD5C488, 0xB4FA7B, new Item.Properties()));
-
+	public static final RegistryObject<Item> BARK_BEETLE_SPAWN_EGG = SPAWN_EGGS.register("bark_beetle_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.BARK_BEETLE, 0x893A24, 0x442015, new Item.Properties()));
+	public static final RegistryObject<Item> SPRINGTAIL_SPAWN_EGG = SPAWN_EGGS.register("springtail_spawn_egg", () -> new ForgeSpawnEggItem(BOEntities.SPRINGTAIL, 0xD7C336, 0xA46D9B, new Item.Properties()));
+	
 	public static final RegistryObject<Item> TNTEE = MISC.register("tntree", () -> new BlockItem(BOBlocks.TNTREE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_MUSHROOM_SPORES = MISC.register("termite_mushroom_spores", () -> new TermiteMushroomSporesItem(new Item.Properties()));
 	public static final RegistryObject<Item> TERMITE_ACID = MISC.register("termite_acid", () -> new TermiteAcidItem(new Item.Properties()));
@@ -103,6 +111,10 @@ public class BOItems {
 	public static final RegistryObject<Item> TERMITE_PAXEL = MISC.register("termite_paxel", () -> new PaxelItem(BOItemTiers.TERMITE, 4, -2.5F, new Item.Properties()));
 	public static final RegistryObject<Item> SPLINTER_BOW = MISC.register("splinter_bow", () -> new SplinterBowItem(new Item.Properties().stacksTo(1).durability(384)));
 	public static final RegistryObject<Item> SPLINTER = MISC.register("splinter", () -> new SplinterItem(new Item.Properties()));
+	public static final RegistryObject<Item> SAP_RESIN = MISC.register("sap_resin", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> GAS_MASK = MISC.register("gas_mask", () -> new GasMaskItem(BOArmorMaterials.GAS_MASK, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(384)));
+	public static final RegistryObject<Item> PURPLE_SPRINGTAIL = MISC.register("purple_springtail", () -> new SpringtailItem(new Item.Properties()));
+	public static final RegistryObject<Item> YELLOW_SPRINGTAIL = MISC.register("yellow_springtail", () -> new SpringtailItem(new Item.Properties()));
 	
 	public static final RegistryObject<Item> MANDIBLE_SHEARS = MISC.register("mandible_shears", () -> new ShearsItem(new Item.Properties().durability(238)));
 	

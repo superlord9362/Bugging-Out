@@ -218,7 +218,7 @@ public class BOChunkGenerator extends ChunkGenerator {
 			sample += 1.5;
 			sample *= 5;
 			sample -= (y - this.settings.value().seaLevel() - hugeCliffNoise * 64) / (16.0F / bigRockNoise * (hugeCliffWobble + 1));
-			if (biome.is(BOBiomes.ROTTEN_PASSAGES) || biome.is(BOBiomes.MOLDY_GROTTO)) {
+			if (biome.is(BOBiomes.ROTTEN_PASSAGES) || biome.is(BOBiomes.MOLDY_GROTTO) || biome.is(BOBiomes.BEETLE_NEST)) {
 				float caveSample;
 				float sample1 = noise.GetNoise(x, y, z);
 				float sample2 = noise.GetNoise(x, y + 10239129,  z);

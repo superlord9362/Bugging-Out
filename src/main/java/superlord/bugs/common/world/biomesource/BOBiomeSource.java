@@ -62,53 +62,50 @@ public class BOBiomeSource extends BiomeSource implements NoiseBiomeSource {
 		double combinedNoise = amplitude * (noiseX + noiseZ);
 		return combinedNoise;
 	}
+	
+	public double topNoise(int x, int y, int z, FastNoise noise) {
+		return noise.GetNoise(x * 0.5F, z * 0.5F);
+	}
+	
+	public double humidityNoise(int x, int y, int z, FastNoise noise) {
+		return noise.GetNoise(x * 0.7F, z * 0.7F);
+	}
+	
+	public double heatNoise(int x, int y, int z, FastNoise noise) {
+		return noise.GetNoise(x * 0.4F, z * 0.4F);
+	}
 
 	@Override
 	public Holder<Biome> getNoiseBiome(int x, int y, int z) {
+		double topNoise = topNoise(x, y, z, BOChunkGenerator.noise);
+		double humidityNoise = humidityNoise(x, y, z, BOChunkGenerator.noise);
+		double heatNoise = heatNoise(x, y, z, BOChunkGenerator.noise);
 		noiseValue = calculateNoiseValue(x, z, BOChunkGenerator.noise);
 		if (y < 0) {
-			if (noiseValue > 2 && noiseValue < 3) {
+			if (heatNoise < -0.3) {
+				return infestedTunnels;
+			}
+			if (humidityNoise > 0.4 && heatNoise > 0.4) {
 				return fungalGardens;
 			}
-			if (noiseValue > 0.5 && noiseValue <= 2 || noiseValue >= 3 && noiseValue < 5) {
+			if (humidityNoise < -0.5) {
 				return termiteGallery;
 			}
-			if (noiseValue > -2.3 && noiseValue <= 0.5) {
-				return termiteTunnels;
-			} 
-			return infestedTunnels;
-		} else if (y > 13) {
-			if (noiseValue >= 0) {
-				if (noiseValue >= 0 && noiseValue < 1 || noiseValue >= 3) {
-					return flowerMeadows;
-				}
-				return grassyMeadows;
-			} else {
-				if (noiseValue > -4 && noiseValue <= -2) {
-					return rottenPassages;
-				}
-				if (noiseValue > -2 && noiseValue < -1) {
-					return mossyRegrowth;
-				}
-				if (noiseValue >= -1) {
-					return moldyGrotto;
-				}
-				return beetleNest;
-			}
+			return termiteTunnels;
 		} else {
-			if (noiseValue >= 0) {
-				return dirtyTunnels;
-			}
-			if (noiseValue > -4 && noiseValue <= -2) {
+			if (topNoise <= 0) {
+				if (humidityNoise <= 0) return flowerMeadows;
+				else return grassyMeadows;
+			} else {
+				if (humidityNoise > 0) {
+					if (heatNoise > 0) {
+						return mossyRegrowth;
+					} else return moldyGrotto;
+				} else if (heatNoise > 0.3) {
+					return beetleNest;
+				}
 				return rottenPassages;
 			}
-			if (noiseValue > -2 && noiseValue < -1) {
-				return mossyRegrowth;
-			}
-			if (noiseValue >= -1) {
-				return moldyGrotto;
-			}
-			return beetleNest;
 		}
 	}
 

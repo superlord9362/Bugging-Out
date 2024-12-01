@@ -1,0 +1,24 @@
+{
+	"parent": "forge:item/default",
+	"loader": "forge:separate_transforms",
+	"base": {
+		"parent": "bugging_out:item/purple_springtail_handheld",
+		"textures": {
+			"layer0": "bugging_out:item/purple_springtail"
+		}
+	},
+	"perspectives": {
+		"gui": {
+			"parent": "bugging_out:item/purple_springtail_gui",
+			"textures": {
+				"layer0": "bugging_out:item/purple_springtail"
+			}
+		},
+		"fixed": {
+			"parent": "bugging_out:item/purple_springtail_gui",
+			"textures": {
+				"layer0": "bugging_out:item/purple_springtail"
+			}
+		}
+	}
+}
