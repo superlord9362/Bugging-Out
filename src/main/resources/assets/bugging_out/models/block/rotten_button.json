@@ -1,0 +1,6 @@
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "bugging_out:block/rotten_planks"
+    }
+}

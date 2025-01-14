@@ -1,0 +1,12 @@
+{
+  "feature": "bugging_out:configured_porous_termostone_ceiling_blob",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 5
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

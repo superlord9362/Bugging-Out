@@ -1,60 +1,142 @@
 package superlord.bugs.init;
 
-import com.google.common.collect.ImmutableList;
+import java.util.List;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.LargeDripstoneConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.block.TermiteMushroomBlock;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public class BOConfiguredFeatures {
 
-	public static final DeferredRegister<ConfiguredFeature<?,?>> REGISTER = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, BuggingOut.MOD_ID);
+	public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_TERMITE_MUSHROOM = registerConfiguredFeature("configured_huge_termite_mushroom");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMITE_MUSHROOMS = registerConfiguredFeature("configured_termite_mushrooms");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_TERMITE_MUSHROOM = REGISTER.register("configured_huge_termite_mushroom", () -> new ConfiguredFeature<>(BOFeatures.HUGE_TERMITE_MUSHROOM.get(), new NoneFeatureConfiguration()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> FERROUS_TERMOSTONE = registerConfiguredFeature("configured_ferrous_termostone");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> POROUS_TERMOSTONE = registerConfiguredFeature("configured_porous_termostone");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMITE_MUSHROOM_MYCELIUM = registerConfiguredFeature("configured_termite_mushroom_mycelium");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CRUMBLY_TERMOSTONE = registerConfiguredFeature("configured_crumbly_termostone");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_POROUS_TERMOSTONE = registerConfiguredFeature("configured_infested_porous_termostone");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMITE_MUSHROOMS = REGISTER.register("configured_termite_mushrooms", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 4), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 3), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 2), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 1), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 0), 1)), 32)));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MULCH = registerConfiguredFeature("configured_mulch");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> STRIPPED_ROTTEN_WOOD = registerConfiguredFeature("configured_stripped_rotten_wood");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOSS = registerConfiguredFeature("configured_moss");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> FERROUS_TERMOSTONE = REGISTER.register("configured_ferrous_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState()))));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> POROUS_TERMOSTONE = REGISTER.register("configured_porous_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState()))));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMITE_MUSHROOM_MYCELIUM = REGISTER.register("configured_termite_mushroom_mycelium", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState()))));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> CRUMBLY_TERMOSTONE = REGISTER.register("configured_crumbly_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.CRUMBLY_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState()))));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> INFESTED_POROUS_TERMOSTONE = REGISTER.register("configured_infested_porous_termostone", () -> new ConfiguredFeature(BOFeatures.LAND_DISK.get(), new DiskConfiguration(BOBlocks.INFESTED_POROUS_TERMOSTONE.get().defaultBlockState(), UniformInt.of(1, 3), 3, ImmutableList.of(BOBlocks.TERMOSTONE.get().defaultBlockState(), BOBlocks.FERROUS_TERMOSTONE.get().defaultBlockState(), BOBlocks.POROUS_TERMOSTONE.get().defaultBlockState()))));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> GLOWWORM_HOLE = registerConfiguredFeature("configured_glowworm_hole");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> GLOWWORM_HOLE = REGISTER.register("configured_glowworm_hole", () -> new ConfiguredFeature(BOFeatures.GLOWWORM_HOLE.get(), new NoneFeatureConfiguration()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MYCELIUM_ROCK = registerConfiguredFeature("configured_mycelium_rock");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_ROCK = registerConfiguredFeature("configured_termostone_rock");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMITE_MYCELIUM_CEILING_BLOB = registerConfiguredFeature("configured_termite_mycelium_ceiling_blob");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_CEILING_BLOB = registerConfiguredFeature("configured_termostone_ceiling_blob");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> POROUS_TERMOSTONE_CEILING_BLOB = registerConfiguredFeature("configured_porous_termostone_ceiling_blob");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_MOUND = registerConfiguredFeature("configured_termostone_mound");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CRUMBLY_TERMOSTONE_MOUND = registerConfiguredFeature("configured_crumbly_termostone_mound");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TERMOSTONE_PILLAR = registerConfiguredFeature("configured_termostone_pillar");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> MYCELIUM_ROCK = REGISTER.register("configured_mycelium_rock", () -> new ConfiguredFeature(Feature.FOREST_ROCK, new BlockStateConfiguration(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState())));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMOSTONE_ROCK = REGISTER.register("configured_termostone_rock", () -> new ConfiguredFeature(Feature.FOREST_ROCK, new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState())));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_MOSS = registerConfiguredFeature("configured_fuzzy_moss");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_WALL_MOSS = registerConfiguredFeature("configured_fuzzy_wall_moss");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> FUZZY_CEILING_MOSS = registerConfiguredFeature("configured_fuzzy_ceiling_moss");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> SPLINTERS = registerConfiguredFeature("configured_splinters");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> SHELF_MUSHROOMS = registerConfiguredFeature("configured_shelf_mushrooms");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_MUSHROOMS = registerConfiguredFeature("configured_large_shelf_mushrooms");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_CHARCOAL = registerConfiguredFeature("configured_rotten_charcoal");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMITE_MYCELIUM_CEILING_BLOB = REGISTER.register("configured_termite_mycelium_ceiling_blob", () -> new ConfiguredFeature(BOFeatures.TERMITE_MYCELIUM_CEILING_BLOB.get(), new NoneFeatureConfiguration()));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMOSTONE_CEILING_BLOB = REGISTER.register("configured_termostone_ceiling_blob", () -> new ConfiguredFeature(BOFeatures.TERMOSTONE_CEILING_BLOB.get(), new NoneFeatureConfiguration()));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> POROUS_TERMOSTONE_CEILING_BLOB = REGISTER.register("configured_porous_termostone_ceiling_blob", () -> new ConfiguredFeature(BOFeatures.POROUS_TERMOSTONE_CEILING_BLOB.get(), new NoneFeatureConfiguration()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_CEILING = registerConfiguredFeature("configured_moldy_ceiling");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLDY_WALL = registerConfiguredFeature("configured_moldy_wall");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLD_STALK = registerConfiguredFeature("configured_mold_stalk");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MOLD_SPORE_SPREADER = registerConfiguredFeature("configured_mold_spore_spreader");
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMOSTONE_MOUND = REGISTER.register("configured_termostone_mound", () -> new ConfiguredFeature(BOFeatures.TERMINTE_MOUND.get(), new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState())));
-	public static final RegistryObject<ConfiguredFeature<?, ?>> CRUMBLY_TERMOSTONE_MOUND = REGISTER.register("configured_crumbly_termostone_mound", () -> new ConfiguredFeature(BOFeatures.CRUMBLY_TERMINTE_MOUND.get(), new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState())));
+	public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext) {
+		FeatureUtils.register(bootstapContext, HUGE_TERMITE_MUSHROOM, BOFeatures.HUGE_TERMITE_MUSHROOM.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, TERMITE_MUSHROOMS, Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 4), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 3), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 2), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 1), 1).add(BOBlocks.TERMITE_MUSHROOM.get().defaultBlockState().setValue(TermiteMushroomBlock.AGE, 0), 1)), 32));
+		FeatureUtils.register(bootstapContext, FERROUS_TERMOSTONE, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.FERROUS_TERMOSTONE.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.TERMOSTONE.get(), BOBlocks.POROUS_TERMOSTONE.get(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get())), UniformInt.of(1, 3), 3));
+		FeatureUtils.register(bootstapContext, POROUS_TERMOSTONE, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.POROUS_TERMOSTONE.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.TERMOSTONE.get(), BOBlocks.FERROUS_TERMOSTONE.get(), BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get())), UniformInt.of(1, 3), 3));
+		FeatureUtils.register(bootstapContext, TERMITE_MUSHROOM_MYCELIUM, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.TERMOSTONE.get(), BOBlocks.FERROUS_TERMOSTONE.get(), BOBlocks.POROUS_TERMOSTONE.get())), UniformInt.of(1, 3), 3));
+		FeatureUtils.register(bootstapContext, CRUMBLY_TERMOSTONE, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.CRUMBLY_TERMOSTONE.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.TERMOSTONE.get(), BOBlocks.FERROUS_TERMOSTONE.get(), BOBlocks.POROUS_TERMOSTONE.get())), UniformInt.of(1, 3), 3));
+		FeatureUtils.register(bootstapContext, INFESTED_POROUS_TERMOSTONE, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.TERMOSTONE.get(), BOBlocks.FERROUS_TERMOSTONE.get(), BOBlocks.POROUS_TERMOSTONE.get())), UniformInt.of(1, 3), 3));
+		FeatureUtils.register(bootstapContext, MULCH, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.MULCH.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.ROTTEN_WOOD.get(), BOBlocks.MULCH.get(), BOBlocks.STRIPPED_ROTTEN_WOOD.get(), BOBlocks.FUZZY_MOSS_BLOCK.get())), UniformInt.of(1, 8), 3));
+		FeatureUtils.register(bootstapContext, MOSS, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.FUZZY_MOSS_BLOCK.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.ROTTEN_WOOD.get(), BOBlocks.MULCH.get(), BOBlocks.STRIPPED_ROTTEN_WOOD.get(), BOBlocks.FUZZY_MOSS_BLOCK.get())), UniformInt.of(1, 8), 3));
+		FeatureUtils.register(bootstapContext, STRIPPED_ROTTEN_WOOD, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.STRIPPED_ROTTEN_WOOD.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.ROTTEN_WOOD.get(), BOBlocks.MULCH.get(), BOBlocks.STRIPPED_ROTTEN_WOOD.get(), BOBlocks.FUZZY_MOSS_BLOCK.get())), UniformInt.of(1, 8), 3));
+		FeatureUtils.register(bootstapContext, ROTTEN_CHARCOAL, BOFeatures.LAND_DISK.get(), new DiskConfiguration(RuleBasedBlockStateProvider.simple(BOBlocks.ROTTEN_CHARCOAL_ORE.get()), BlockPredicate.matchesBlocks(List.of(BOBlocks.ROTTEN_WOOD.get(), BOBlocks.MULCH.get(), BOBlocks.STRIPPED_ROTTEN_WOOD.get(), BOBlocks.FUZZY_MOSS_BLOCK.get())), UniformInt.of(1, 8), 3));
+		FeatureUtils.register(bootstapContext, GLOWWORM_HOLE, BOFeatures.GLOWWORM_HOLE.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MYCELIUM_ROCK, Feature.FOREST_ROCK, new BlockStateConfiguration(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get().defaultBlockState()));
+		FeatureUtils.register(bootstapContext, TERMOSTONE_ROCK, Feature.FOREST_ROCK, new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState()));
+		FeatureUtils.register(bootstapContext, TERMITE_MYCELIUM_CEILING_BLOB, BOFeatures.TERMOSTONE_CEILING_BLOB.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, TERMOSTONE_CEILING_BLOB, BOFeatures.TERMOSTONE_CEILING_BLOB.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, POROUS_TERMOSTONE_CEILING_BLOB, BOFeatures.TERMOSTONE_CEILING_BLOB.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, TERMOSTONE_MOUND, BOFeatures.TERMITE_MOUND.get(), new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState()));
+		FeatureUtils.register(bootstapContext, CRUMBLY_TERMOSTONE_MOUND, BOFeatures.CRUMBLY_TERMITE_MOUND.get(), new BlockStateConfiguration(BOBlocks.TERMOSTONE.get().defaultBlockState()));
+		FeatureUtils.register(bootstapContext, TERMOSTONE_PILLAR, BOFeatures.TERMOSTONE_PILLAR.get(), new LargeDripstoneConfiguration(30, UniformInt.of(3, 19), UniformFloat.of(0.4F, 2.0F), 0.33F, UniformFloat.of(0.3F, 0.9F), UniformFloat.of(0.4F, 1.0F), UniformFloat.of(0.0F, 0.3F), 4, 0.6F));
+		FeatureUtils.register(bootstapContext, FUZZY_MOSS, BOFeatures.FUZZY_MOSS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, FUZZY_WALL_MOSS, BOFeatures.FUZZY_WALL_MOSS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, FUZZY_CEILING_MOSS, BOFeatures.FUZZY_CEILING_MOSS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, SPLINTERS, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.SPLINTERS.get()), 32));
+		FeatureUtils.register(bootstapContext, SHELF_MUSHROOMS, BOFeatures.SHELF_MUSHROOMS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, LARGE_SHELF_MUSHROOMS, BOFeatures.LARGE_SHELF_MUSHROOMS.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLDY_CEILING, BOFeatures.MOLDY_CEILING.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLDY_WALL, BOFeatures.MOLDY_WALL.get(), new NoneFeatureConfiguration());
+		FeatureUtils.register(bootstapContext, MOLD_STALK, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(BOBlocks.MOLD_STALKS.get()), 32));
+		FeatureUtils.register(bootstapContext, MOLD_SPORE_SPREADER, Feature.RANDOM_PATCH, BOConfiguredFeatures.simplePatchConfiguration(BOFeatures.MOLD_SPORE_SPREADER.get(), new NoneFeatureConfiguration()));
+	}
 
-	public static final RegistryObject<ConfiguredFeature<?, ?>> TERMOSTONE_PILLAR = REGISTER.register("configured_termostone_pillar", () -> new ConfiguredFeature(BOFeatures.TERMOSTONE_PILLAR.get(), new LargeDripstoneConfiguration(30, UniformInt.of(3, 19), UniformFloat.of(0.4F, 2.0F), 0.33F, UniformFloat.of(0.3F, 0.9F), UniformFloat.of(0.4F, 1.0F), UniformFloat.of(0.0F, 0.3F), 4, 0.6F)));
-	
 	private static RandomPatchConfiguration grassPatch(BlockStateProvider p_195203_, int p_195204_) {
 		return FeatureUtils.simpleRandomPatchConfiguration(p_195204_, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(p_195203_)));
+	}
+
+	public static RandomPatchConfiguration simpleRandomPatchConfiguration(int p_206471_, Holder<PlacedFeature> p_206472_) {
+		return new RandomPatchConfiguration(p_206471_, 7, 3, p_206472_);
+	}
+
+	private static BlockPredicate simplePatchPredicate(List<Block> p_195009_) {
+		BlockPredicate blockpredicate;
+		if (!p_195009_.isEmpty()) {
+			blockpredicate = BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), p_195009_));
+		} else {
+			blockpredicate = BlockPredicate.ONLY_IN_AIR_PREDICATE;
+		}
+
+		return blockpredicate;
+	}
+
+	public static <FC extends FeatureConfiguration, F extends Feature<FC>> RandomPatchConfiguration simplePatchConfiguration(F p_206481_, FC p_206482_, List<Block> p_206483_, int p_206484_) {
+		return simpleRandomPatchConfiguration(p_206484_, PlacementUtils.filtered(p_206481_, p_206482_, simplePatchPredicate(p_206483_)));
+	}
+
+	public static <FC extends FeatureConfiguration, F extends Feature<FC>> RandomPatchConfiguration simplePatchConfiguration(F p_206474_, FC p_206475_) {
+		return simplePatchConfiguration(p_206474_, p_206475_, List.of(), 96);
+	}
+
+	public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext, ResourceKey<ConfiguredFeature<?, ?>> resourceKey, F feature, FC featureConfiguration) {
+		bootstapContext.register(resourceKey, new ConfiguredFeature<>(feature, featureConfiguration));
+	}
+
+	public static ResourceKey<ConfiguredFeature<?, ?>> registerConfiguredFeature(String id) {
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(BuggingOut.MOD_ID, id));
 	}
 
 }

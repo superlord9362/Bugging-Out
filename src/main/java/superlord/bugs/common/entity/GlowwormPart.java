@@ -2,6 +2,7 @@ package superlord.bugs.common.entity;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -46,7 +47,7 @@ public class GlowwormPart extends PartEntity<Glowworm> {
 		return this == p_31031_ || this.parentMob == p_31031_;
 	}
 
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		throw new UnsupportedOperationException();
 	}
 

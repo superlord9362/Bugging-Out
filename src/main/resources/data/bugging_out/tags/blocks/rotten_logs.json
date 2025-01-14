@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"bugging_out:rotten_log",
+		"bugging_out:stripped_rotten_log",
+		"bugging_out:rotten_wood",
+		"bugging_out:stripped_rotten_wood"
+	]
+}

@@ -1,13 +1,14 @@
 package superlord.bugs.common.entity;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +34,7 @@ import superlord.bugs.init.BOEffects;
 public class TermiteKamikaze extends PathfinderMob {
 
 	private static final EntityDataAccessor<Boolean> MANDIBLE_MOVING = SynchedEntityData.defineId(TermiteKamikaze.class, EntityDataSerializers.BOOLEAN);
+	int blowUpTicks = 0;
 
 	public TermiteKamikaze(EntityType<? extends TermiteKamikaze> type, Level world) {
 		super(type, world);
@@ -114,7 +116,7 @@ public class TermiteKamikaze extends PathfinderMob {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
+		for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
 			if (entity.hasEffect(BOEffects.TERMITES_VENGEANCE.get())) {
 				this.setTarget(entity);
 			}
@@ -126,37 +128,51 @@ public class TermiteKamikaze extends PathfinderMob {
 			setMandiblesMoving(false);
 		}
 		int blowSelfUp = random.nextInt(100);
-		if (this.getTarget() != null && blowSelfUp == 0) {
-			Level world = this.getLevel();
+		if (this.getTarget() != null && blowSelfUp == 0 || blowUpTicks != 0) {
+			this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0);
+			blowUpTicks++;
+			Level world = this.level();
 			BlockPos pos = this.getOnPos();
-			if (world.isEmptyBlock(pos.above()) && !world.isEmptyBlock(pos)) {
-				world.setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+			int acid1 = random.nextInt(2);
+			int acid2 = random.nextInt(2);
+			int acid3 = random.nextInt(2);
+			int acid4 = random.nextInt(2);
+			int acid5 = random.nextInt(2);
+			int acid6 = random.nextInt(2);
+			int acid7 = random.nextInt(2);
+			int acid8 = random.nextInt(2);
+			int acid9 = random.nextInt(2);
+			if (blowUpTicks >= 60) {
+				if (world.isEmptyBlock(pos.above()) && world.getBlockState(pos.above()).canBeReplaced() && world.getBlockState(pos).isFaceSturdy(world, pos, Direction.UP) && acid1 == 0) {
+					world.setBlock(pos.above(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().east()) && world.getBlockState(pos.east().above()).canBeReplaced() && world.getBlockState(pos.east()).isFaceSturdy(world, pos.east(), Direction.UP) && acid2 == 0) {
+					world.setBlock(pos.above().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().west()) && world.getBlockState(pos.west().above()).canBeReplaced() && world.getBlockState(pos.west()).isFaceSturdy(world, pos.west(), Direction.UP) && acid3 == 0) {
+					world.setBlock(pos.above().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().north()) && world.getBlockState(pos.north().above()).canBeReplaced() && world.getBlockState(pos.north()).isFaceSturdy(world, pos.north(), Direction.UP) && acid4 == 0) {
+					world.setBlock(pos.above().north(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().south()) && world.getBlockState(pos.south().above()).canBeReplaced() && world.getBlockState(pos.south()).isFaceSturdy(world, pos.south(), Direction.UP) && acid5 == 0) {
+					world.setBlock(pos.above().south(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().north().west()) && world.getBlockState(pos.north().west().above()).canBeReplaced() && world.getBlockState(pos.north().west()).isFaceSturdy(world, pos.north().west(), Direction.UP) && acid6 == 0) {
+					world.setBlock(pos.above().north().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().north().east()) && world.getBlockState(pos.north().east().above()).canBeReplaced() && world.getBlockState(pos.north().east()).isFaceSturdy(world, pos.north().east(), Direction.UP) && acid7 == 0) {
+					world.setBlock(pos.above().north().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().south().west()) && world.getBlockState(pos.south().west().above()).canBeReplaced() && world.getBlockState(pos.south().west()).isFaceSturdy(world, pos.south().west(), Direction.UP) && acid8 == 0) {
+					world.setBlock(pos.above().south().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				if (world.isEmptyBlock(pos.above().south().east()) && world.getBlockState(pos.south().east().above()).canBeReplaced() && world.getBlockState(pos.south().east()).isFaceSturdy(world, pos.south().east(), Direction.UP) && acid9 == 0) {
+					world.setBlock(pos.above().south().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
+				}
+				level().addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 0.2F, this.getZ(), 0, 0, 0);
+				this.remove(RemovalReason.KILLED);
 			}
-			if (world.isEmptyBlock(pos.above().east()) && !world.isEmptyBlock(pos.east())) {
-				world.setBlock(pos.above().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().west()) && !world.isEmptyBlock(pos.west())) {
-				world.setBlock(pos.above().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().north()) && !world.isEmptyBlock(pos.north())) {
-				world.setBlock(pos.above().north(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().south()) && !world.isEmptyBlock(pos.south())) {
-				world.setBlock(pos.above().south(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().north().west()) && !world.isEmptyBlock(pos.north().west())) {
-				world.setBlock(pos.above().north().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().north().east()) && !world.isEmptyBlock(pos.north().east())) {
-				world.setBlock(pos.above().north().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().south().west()) && !world.isEmptyBlock(pos.south().west())) {
-				world.setBlock(pos.above().south().west(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			if (world.isEmptyBlock(pos.above().south().east()) && !world.isEmptyBlock(pos.south().east())) {
-				world.setBlock(pos.above().south().east(), BOBlocks.ACID_SPLAT.get().defaultBlockState(), 2);
-			}
-			this.remove(RemovalReason.KILLED);
 		}
 	}
 
@@ -173,9 +189,9 @@ public class TermiteKamikaze extends PathfinderMob {
 			return false;
 		}
 	}
-	
-	public static boolean canTermiteSpawn(EntityType<? extends TermiteKamikaze> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
-        return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
-    }
+
+	public static boolean canTermiteSpawn(EntityType<? extends TermiteKamikaze> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
+	}
 
 }

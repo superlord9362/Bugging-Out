@@ -1,0 +1,49 @@
+{
+	"variants": {
+		"type=bottom,facing=east": {
+			"model": "bugging_out:block/large_shelf_mushroom_bottom",
+			"y": 90
+		},
+		"type=bottom,facing=north": {
+			"model": "bugging_out:block/large_shelf_mushroom_bottom"
+		},
+		"type=bottom,facing=south": {
+			"model": "bugging_out:block/large_shelf_mushroom_bottom",
+			"y": 180
+		},
+		"type=bottom,facing=west": {
+			"model": "bugging_out:block/large_shelf_mushroom_bottom",
+			"y": 270
+		},
+        "type=top,facing=east": {
+			"model": "bugging_out:block/large_shelf_mushroom_top",
+			"y": 90
+		},
+        "type=top,facing=north": {
+			"model": "bugging_out:block/large_shelf_mushroom_top"
+		},
+        "type=top,facing=south": {
+			"model": "bugging_out:block/large_shelf_mushroom_top",
+			"y": 180
+		},
+        "type=top,facing=west": {
+			"model": "bugging_out:block/large_shelf_mushroom_top",
+			"y": 270
+		},
+        "type=double,facing=east": { 
+			"model": "bugging_out:block/large_shelf_mushroom_double",
+			"y": 90
+		},
+        "type=double,facing=north": { 
+			"model": "bugging_out:block/large_shelf_mushroom_double"
+		},
+        "type=double,facing=south": { 
+			"model": "bugging_out:block/large_shelf_mushroom_double",
+			"y": 180
+		},
+        "type=double,facing=west": { 
+			"model": "bugging_out:block/large_shelf_mushroom_double",
+			"y": 270
+		}
+    }
+}

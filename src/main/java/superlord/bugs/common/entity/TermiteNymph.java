@@ -1,7 +1,6 @@
 package superlord.bugs.common.entity;
 
 import java.util.EnumSet;
-import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -12,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -183,8 +183,8 @@ public class TermiteNymph extends PathfinderMob {
 		}
 
 		protected void onReachedTarget() {
-			if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(TermiteNymph.this.level, TermiteNymph.this)) {
-				BlockState blockstate = TermiteNymph.this.level.getBlockState(this.blockPos);
+			if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(TermiteNymph.this.level(), TermiteNymph.this)) {
+				BlockState blockstate = TermiteNymph.this.level().getBlockState(this.blockPos);
 				if (blockstate.is(BOBlocks.TERMITE_MUSHROOM.get())) {
 					this.pickMushroom(blockstate);
 				}
@@ -194,10 +194,10 @@ public class TermiteNymph extends PathfinderMob {
 
 		private void pickMushroom(BlockState p_148929_) {
 			int growthChance = TermiteNymph.this.random.nextInt(50);
-			TermiteNymph.this.level.setBlock(this.blockPos, Blocks.AIR.defaultBlockState(), 2);
+			TermiteNymph.this.level().setBlock(this.blockPos, Blocks.AIR.defaultBlockState(), 2);
 			if (growthChance == 0) {
 				BlockPos pos = TermiteNymph.this.blockPosition();
-				Level level = TermiteNymph.this.getLevel();
+				Level level = TermiteNymph.this.level();
 				TermiteWorker worker = new TermiteWorker(BOEntities.TERMITE_WORKER.get(), level);
 				TermiteNymph.this.remove(RemovalReason.DISCARDED);
 				level.addFreshEntity(worker);
@@ -205,7 +205,7 @@ public class TermiteNymph extends PathfinderMob {
 			}
 			if (growthChance == 1) {
 				BlockPos pos = TermiteNymph.this.blockPosition();
-				Level level = TermiteNymph.this.getLevel();
+				Level level = TermiteNymph.this.level();
 				TermiteSoldier soldier = new TermiteSoldier(BOEntities.TERMITE_SOLDIER.get(), level);
 				TermiteNymph.this.remove(RemovalReason.DISCARDED);
 				level.addFreshEntity(soldier);
@@ -249,11 +249,11 @@ public class TermiteNymph extends PathfinderMob {
 			} else if (!this.mob.getNavigation().isDone()) {
 				return false;
 			} else {
-				Random random = this.mob.getRandom();
-				if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.mob.level, this.mob) && random.nextInt(10) == 0) {
+				RandomSource random = this.mob.getRandom();
+				if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.mob.level(), this.mob) && random.nextInt(10) == 0) {
 					this.selectedDirection = Direction.getRandom(random);
-					BlockPos blockpos = (new BlockPos(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
-					BlockState blockstate = this.mob.level.getBlockState(blockpos);
+					BlockPos blockpos = (BlockPos.containing(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
+					BlockState blockstate = this.mob.level().getBlockState(blockpos);
 					if (TermiteInfestedBlock.isCompatibleHostBlock(blockstate)) {
 						this.doMerge = true;
 						return true;
@@ -273,8 +273,8 @@ public class TermiteNymph extends PathfinderMob {
 			if (!this.doMerge) {
 				super.start();
 			} else {
-				LevelAccessor levelaccessor = this.mob.level;
-				BlockPos blockpos = (new BlockPos(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
+				LevelAccessor levelaccessor = this.mob.level();
+				BlockPos blockpos = (BlockPos.containing(this.mob.getX(), this.mob.getY() + 0.5D, this.mob.getZ())).relative(this.selectedDirection);
 				BlockState blockstate = levelaccessor.getBlockState(blockpos);
 				if (TermiteInfestedBlock.isCompatibleHostBlock(blockstate)) {
 					levelaccessor.setBlock(blockpos, TermiteInfestedBlock.infestedStateByHost(blockstate), 3);
@@ -308,8 +308,8 @@ public class TermiteNymph extends PathfinderMob {
 		public void tick() {
 			--this.lookForFriends;
 			if (this.lookForFriends <= 0) {
-				Level level = this.termiteNymph.level;
-				Random random = this.termiteNymph.getRandom();
+				Level level = this.termiteNymph.level();
+				RandomSource random = this.termiteNymph.getRandom();
 				BlockPos blockpos = this.termiteNymph.blockPosition();
 
 				for(int i = 0; i <= 5 && i >= -5; i = (i <= 0 ? 1 : 0) - i) {
@@ -336,9 +336,9 @@ public class TermiteNymph extends PathfinderMob {
 
 		}
 	}
-	
-	public static boolean canTermiteSpawn(EntityType<? extends TermiteNymph> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
-        return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
-    }
+
+	public static boolean canTermiteSpawn(EntityType<? extends TermiteNymph> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
+	}
 
 }

@@ -10,10 +10,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
 import superlord.bugs.common.world.features.CrumblyTermiteMoundFeature;
+import superlord.bugs.common.world.features.FuzzyCeilingMossFeature;
+import superlord.bugs.common.world.features.FuzzyMossFeature;
+import superlord.bugs.common.world.features.FuzzyWallMossFeature;
 import superlord.bugs.common.world.features.GlowwormHoleFeature;
 import superlord.bugs.common.world.features.HugeTermiteMushroomFeature;
 import superlord.bugs.common.world.features.LandSphereReplaceFeature;
+import superlord.bugs.common.world.features.LargeShelfMushroomFeature;
+import superlord.bugs.common.world.features.MoldSporeSpreaderFeature;
+import superlord.bugs.common.world.features.MoldyCeilingFeature;
+import superlord.bugs.common.world.features.MoldyWallFeature;
 import superlord.bugs.common.world.features.PorousTermostoneCeilingBlobFeature;
+import superlord.bugs.common.world.features.ShelfMushroomFeature;
 import superlord.bugs.common.world.features.TermiteMoundFeature;
 import superlord.bugs.common.world.features.TermiteMyceliumCeilingBlobFeature;
 import superlord.bugs.common.world.features.TermostoneCeilingBlobFeature;
@@ -33,7 +41,17 @@ public class BOFeatures {
 
 	public static final RegistryObject<TermostonePillarFeature> TERMOSTONE_PILLAR = REGISTER.register("termostone_pillar", () -> new TermostonePillarFeature(LargeDripstoneConfiguration.CODEC.stable()));
 
-	public static final RegistryObject<TermiteMoundFeature> TERMINTE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
-	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMINTE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<TermiteMoundFeature> TERMITE_MOUND = REGISTER.register("termite_mound", () -> new TermiteMoundFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<CrumblyTermiteMoundFeature> CRUMBLY_TERMITE_MOUND = REGISTER.register("crumbly_termite_mound", () -> new CrumblyTermiteMoundFeature(BlockStateConfiguration.CODEC));
 
+	public static final RegistryObject<FuzzyMossFeature> FUZZY_MOSS = REGISTER.register("fuzzy_moss", () -> new FuzzyMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<FuzzyWallMossFeature> FUZZY_WALL_MOSS = REGISTER.register("fuzzy_wall_moss", () -> new FuzzyWallMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<FuzzyCeilingMossFeature> FUZZY_CEILING_MOSS = REGISTER.register("fuzzy_ceiling_moss", () -> new FuzzyCeilingMossFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<ShelfMushroomFeature> SHELF_MUSHROOMS = REGISTER.register("shelf_mushrooms", () -> new ShelfMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<LargeShelfMushroomFeature> LARGE_SHELF_MUSHROOMS = REGISTER.register("large_shelf_mushrooms", () -> new LargeShelfMushroomFeature(NoneFeatureConfiguration.CODEC.stable()));
+
+	public static final RegistryObject<MoldyCeilingFeature> MOLDY_CEILING = REGISTER.register("moldy_ceiling", () -> new MoldyCeilingFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<MoldyWallFeature> MOLDY_WALL = REGISTER.register("moldy_wall", () -> new MoldyWallFeature(NoneFeatureConfiguration.CODEC.stable()));
+	public static final RegistryObject<MoldSporeSpreaderFeature> MOLD_SPORE_SPREADER = REGISTER.register("mold_spore_spreader", () -> new MoldSporeSpreaderFeature(NoneFeatureConfiguration.CODEC.stable()));
+	
 }

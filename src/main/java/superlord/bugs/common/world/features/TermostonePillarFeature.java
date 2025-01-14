@@ -1,12 +1,15 @@
 package superlord.bugs.common.world.features;
 
-import com.mojang.serialization.Codec;
 import java.util.Optional;
-import java.util.Random;
+
 import javax.annotation.Nullable;
+
+import com.mojang.serialization.Codec;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +32,7 @@ public class TermostonePillarFeature extends Feature<LargeDripstoneConfiguration
 		WorldGenLevel worldgenlevel = p_159967_.level();
 		BlockPos blockpos = p_159967_.origin();
 		LargeDripstoneConfiguration largedripstoneconfiguration = p_159967_.config();
-		Random random = p_159967_.random();
+		RandomSource random = p_159967_.random();
 		if (!TermostonePillarUtils.isEmptyOrWater(worldgenlevel, blockpos)) {
 			return false;
 		} else {
@@ -69,7 +72,7 @@ public class TermostonePillarFeature extends Feature<LargeDripstoneConfiguration
 		}
 	}
 
-	private static TermostonePillarFeature.LargeDripstone makeDripstone(BlockPos p_197109_, boolean p_197110_, Random p_197111_, int p_197112_, FloatProvider p_197113_, FloatProvider p_197114_) {
+	private static TermostonePillarFeature.LargeDripstone makeDripstone(BlockPos p_197109_, boolean p_197110_, RandomSource p_197111_, int p_197112_, FloatProvider p_197113_, FloatProvider p_197114_) {
 		return new TermostonePillarFeature.LargeDripstone(p_197109_, p_197110_, p_197112_, (double)p_197113_.sample(p_197111_), (double)p_197114_.sample(p_197111_));
 	}
 
@@ -144,7 +147,7 @@ public class TermostonePillarFeature extends Feature<LargeDripstoneConfiguration
 			return (int)TermostonePillarUtils.getDripstoneHeight((double)p_159988_, (double)this.radius, this.scale, this.bluntness);
 		}
 
-		void placeBlocks(WorldGenLevel p_159993_, Random p_159994_, TermostonePillarFeature.WindOffsetter p_159995_) {
+		void placeBlocks(WorldGenLevel p_159993_, RandomSource p_159994_, TermostonePillarFeature.WindOffsetter p_159995_) {
 			for(int i = -this.radius; i <= this.radius; ++i) {
 				for(int j = -this.radius; j <= this.radius; ++j) {
 					float f = Mth.sqrt((float)(i * i + j * j));
@@ -188,7 +191,7 @@ public class TermostonePillarFeature extends Feature<LargeDripstoneConfiguration
 		@Nullable
 		private final Vec3 windSpeed;
 
-		WindOffsetter(int p_160004_, Random p_160005_, FloatProvider p_160006_) {
+		WindOffsetter(int p_160004_, RandomSource p_160005_, FloatProvider p_160006_) {
 			this.originY = p_160004_;
 			float f = p_160006_.sample(p_160005_);
 			float f1 = Mth.randomBetween(p_160005_, 0.0F, (float)Math.PI);
@@ -210,7 +213,7 @@ public class TermostonePillarFeature extends Feature<LargeDripstoneConfiguration
 			} else {
 				int i = this.originY - p_160009_.getY();
 				Vec3 vec3 = this.windSpeed.scale((double)i);
-				return p_160009_.offset(vec3.x, 0.0D, vec3.z);
+				return p_160009_.offset((int)vec3.x, 0, (int)vec3.z);
 			}
 		}
 	}

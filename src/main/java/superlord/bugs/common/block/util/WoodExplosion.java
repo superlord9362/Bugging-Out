@@ -1,6 +1,5 @@
 package superlord.bugs.common.block.util;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,12 +8,12 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -41,7 +40,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
@@ -50,6 +49,7 @@ import superlord.bugs.common.entity.TNTree;
 
 public class WoodExplosion extends Explosion {
 	private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
+	@SuppressWarnings("unused")
 	private static final int MAX_DROPS_PER_COMBINED_STACK = 16;
 	private final boolean fire;
 	private final WoodExplosion.BlockInteraction blockInteraction;
@@ -63,16 +63,16 @@ public class WoodExplosion extends Explosion {
 	private final float radius;
 	private final DamageSource damageSource;
 	private final ExplosionDamageCalculator damageCalculator;
-	private final List<BlockPos> toBlow = Lists.newArrayList();
+	private final ObjectArrayList<BlockPos> toBlow = new ObjectArrayList<>();
 	private final Map<Player, Vec3> hitPlayers = Maps.newHashMap();
 	private final Vec3 position;
 
 	public WoodExplosion(Level p_151471_, @Nullable Entity p_151472_, double p_151473_, double p_151474_, double p_151475_, float p_151476_) {
-		this(p_151471_, p_151472_, p_151473_, p_151474_, p_151475_, p_151476_, false, WoodExplosion.BlockInteraction.DESTROY);
+		this(p_151471_, p_151472_, p_151473_, p_151474_, p_151475_, p_151476_, false, WoodExplosion.BlockInteraction.DESTROY_WITH_DECAY);
 	}
 
 	public WoodExplosion(Level p_46024_, @Nullable Entity p_46025_, double p_46026_, double p_46027_, double p_46028_, float p_46029_, List<BlockPos> p_46030_) {
-		this(p_46024_, p_46025_, p_46026_, p_46027_, p_46028_, p_46029_, false, WoodExplosion.BlockInteraction.DESTROY, p_46030_);
+		this(p_46024_, p_46025_, p_46026_, p_46027_, p_46028_, p_46029_, false, WoodExplosion.BlockInteraction.DESTROY_WITH_DECAY, p_46030_);
 	}
 
 	public WoodExplosion(Level p_46041_, @Nullable Entity p_46042_, double p_46043_, double p_46044_, double p_46045_, float p_46046_, boolean p_46047_, WoodExplosion.BlockInteraction p_46048_, List<BlockPos> p_46049_) {
@@ -85,7 +85,7 @@ public class WoodExplosion extends Explosion {
 	}
 
 	public WoodExplosion(Level p_46051_, @Nullable Entity p_46052_, @Nullable DamageSource p_46053_, @Nullable ExplosionDamageCalculator p_46054_, double p_46055_, double p_46056_, double p_46057_, float p_46058_, boolean p_46059_, WoodExplosion.BlockInteraction p_46060_) {
-		super(p_46051_, p_46052_, p_46055_, p_46056_, p_46057_, p_46058_);
+		super(p_46051_, p_46052_, p_46053_, p_46054_, p_46055_, p_46056_, p_46057_, p_46058_, p_46059_, p_46060_);
 		this.level = p_46051_;
 		this.source = p_46052_;
 		this.radius = p_46058_;
@@ -94,7 +94,7 @@ public class WoodExplosion extends Explosion {
 		this.z = p_46057_;
 		this.fire = p_46059_;
 		this.blockInteraction = p_46060_;
-		this.damageSource = p_46053_ == null ? DamageSource.explosion(this) : p_46053_;
+		this.damageSource = p_46053_ == null ? p_46051_.damageSources().explosion(this) : p_46053_;
 		this.damageCalculator = p_46054_ == null ? this.makeDamageCalculator(p_46052_) : p_46054_;
 		this.position = new Vec3(this.x, this.y, this.z);
 	}
@@ -121,7 +121,7 @@ public class WoodExplosion extends Explosion {
 						double d9 = Mth.lerp(d6, aabb.minY, aabb.maxY);
 						double d10 = Mth.lerp(d7, aabb.minZ, aabb.maxZ);
 						Vec3 vec3 = new Vec3(d8 + d3, d9, d10 + d4);
-						if (p_46066_.level.clip(new ClipContext(vec3, p_46065_, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p_46066_)).getType() == HitResult.Type.MISS) {
+						if (p_46066_.level().clip(new ClipContext(vec3, p_46065_, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p_46066_)).getType() == HitResult.Type.MISS) {
 							++i;
 						}
 
@@ -136,8 +136,9 @@ public class WoodExplosion extends Explosion {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void explode() {
-		this.level.gameEvent(this.source, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
+		this.level.gameEvent(this.source, GameEvent.EXPLODE, new Vec3(this.x, this.y, this.z));
 		Set<BlockPos> set = Sets.newHashSet();
 		int i = 16;
 
@@ -158,7 +159,7 @@ public class WoodExplosion extends Explosion {
 						double d8 = this.z;
 
 						for(float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
-							BlockPos blockpos = new BlockPos(d4, d6, d8);
+							BlockPos blockpos = BlockPos.containing(d4, d6, d8);
 							BlockState blockstate = this.level.getBlockState(blockpos);
 							FluidState fluidstate = this.level.getFluidState(blockpos);
 							if (!this.level.isInWorldBounds(blockpos)) {
@@ -230,15 +231,19 @@ public class WoodExplosion extends Explosion {
 
 	}
 
+	public boolean interactsWithBlocks() {
+		return this.blockInteraction != Explosion.BlockInteraction.KEEP;
+	}
+
 	public void finalizeExplosion(boolean p_46076_) {
 		if (this.level.isClientSide) {
 			this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
 		}
 
-		boolean flag = this.blockInteraction != WoodExplosion.BlockInteraction.NONE;
+		boolean flag = this.interactsWithBlocks();
 		if (p_46076_) {
 			if (!(this.radius < 2.0F) && flag) {
-				this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
+				this.level.addParticle(ParticleTypes.EXPLOSION, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
 			} else {
 				this.level.addParticle(ParticleTypes.EXPLOSION, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
 			}
@@ -246,26 +251,30 @@ public class WoodExplosion extends Explosion {
 
 		if (flag) {
 			ObjectArrayList<Pair<ItemStack, BlockPos>> objectarraylist = new ObjectArrayList<>();
-			Collections.shuffle(this.toBlow, this.level.random);
+			boolean flag1 = this.getIndirectSourceEntity() instanceof Player;
+			Util.shuffle(this.toBlow, this.level.random);
 
 			for(BlockPos blockpos : this.toBlow) {
 				BlockState blockstate = this.level.getBlockState(blockpos);
-				Block block = blockstate.getBlock();
 				if (!blockstate.isAir() && (blockstate.is(BlockTags.LOGS) || blockstate.is(BlockTags.WOODEN_BUTTONS) || blockstate.is(BlockTags.WOODEN_DOORS) || blockstate.is(BlockTags.WOODEN_FENCES) || blockstate.is(BlockTags.WOODEN_PRESSURE_PLATES) || blockstate.is(BlockTags.WOODEN_SLABS) || blockstate.is(BlockTags.WOODEN_STAIRS) || blockstate.is(BlockTags.WOODEN_TRAPDOORS) || blockstate.is(BlockTags.LEAVES))) {
 					BlockPos blockpos1 = blockpos.immutable();
 					this.level.getProfiler().push("explosion_blocks");
 					if (blockstate.canDropFromExplosion(this.level, blockpos, this) && this.level instanceof ServerLevel) {
-						BlockEntity blockentity = blockstate.hasBlockEntity() ? this.level.getBlockEntity(blockpos) : null;
-						LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.level)).withRandom(this.level.random).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockpos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
-						if (this.blockInteraction == WoodExplosion.BlockInteraction.DESTROY) {
-							lootcontext$builder.withParameter(LootContextParams.EXPLOSION_RADIUS, this.radius);
+						Level $$9 = this.level;
+						if ($$9 instanceof ServerLevel) {
+							ServerLevel serverlevel = (ServerLevel)$$9;
+							BlockEntity blockentity = blockstate.hasBlockEntity() ? this.level.getBlockEntity(blockpos) : null;
+							LootParams.Builder lootparams$builder = (new LootParams.Builder(serverlevel)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockpos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
+							if (this.blockInteraction == Explosion.BlockInteraction.DESTROY_WITH_DECAY) {
+								lootparams$builder.withParameter(LootContextParams.EXPLOSION_RADIUS, this.radius);
+							}
+
+							blockstate.spawnAfterBreak(serverlevel, blockpos, ItemStack.EMPTY, flag1);
+							blockstate.getDrops(lootparams$builder).forEach((p_46074_) -> {
+								addBlockDrops(objectarraylist, p_46074_, blockpos1);
+							});
 						}
-
-						blockstate.getDrops(lootcontext$builder).forEach((p_46074_) -> {
-							addBlockDrops(objectarraylist, p_46074_, blockpos1);
-						});
 					}
-
 					blockstate.onBlockExploded(this.level, blockpos, this);
 					this.level.getProfiler().pop();
 				}
@@ -347,11 +356,5 @@ public class WoodExplosion extends Explosion {
 	@Nullable
 	public Entity getExploder() {
 		return this.source;
-	}
-
-	public static enum BlockInteraction {
-		NONE,
-		BREAK,
-		DESTROY;
 	}
 }

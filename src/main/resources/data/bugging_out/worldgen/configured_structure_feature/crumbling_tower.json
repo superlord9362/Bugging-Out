@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:ancient_city",
+	
+	"config": {
+		"start_pool": "bugging_out:crumbling_tower",
+		
+		"size": 1
+	},
+	
+	"biomes": "#bugging_out:has_structure/crumbling_tower",
+	
+	"adapat_noise": true,
+	
+	"spawn_overrides": {
+	}
+}

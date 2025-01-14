@@ -1,14 +1,12 @@
 package superlord.bugs.common.block;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +27,7 @@ public class TermiteMushroomBlock extends MushroomBlock {
 	public static final int MAX_AGE = 4;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 
-	public TermiteMushroomBlock(Properties p_153983_, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> p_153984_) {
+	public TermiteMushroomBlock(Properties p_153983_, ResourceKey<ConfiguredFeature<?, ?>> p_153984_) {
 		super(p_153983_, p_153984_);
 		this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), Integer.valueOf(0)));
 	}
@@ -64,7 +62,7 @@ public class TermiteMushroomBlock extends MushroomBlock {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void randomTick(BlockState p_52292_, ServerLevel p_52293_, BlockPos p_52294_, Random p_52295_) {
+	public void randomTick(BlockState p_52292_, ServerLevel p_52293_, BlockPos p_52294_, RandomSource p_52295_) {
 		if (!p_52293_.isAreaLoaded(p_52294_, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
 		if (p_52293_.getBlockState(p_52294_.below()).is(BOBlocks.TERMITE_MUSHROOM_MYCELIUM.get())) {
 			int i = this.getAge(p_52292_);

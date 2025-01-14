@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:forest_rock",
+  "config": {
+    "state": {
+      "Name": "bugging_out:termite_mushroom_mycelium"
+    }
+  }
+}

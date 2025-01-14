@@ -1,13 +1,12 @@
 package superlord.bugs.common.entity;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +36,7 @@ public class TermiteSoldier extends PathfinderMob {
 	public TermiteSoldier(EntityType<? extends TermiteSoldier> type, Level world) {
 		super(type, world);
 	}
-	
+
 	public MobType getMobType() {
 		return BOCreatureAttributes.TERMITE;
 	}
@@ -114,7 +113,7 @@ public class TermiteSoldier extends PathfinderMob {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
+		for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
 			if (entity.hasEffect(BOEffects.TERMITES_VENGEANCE.get())) {
 				this.setTarget(entity);
 			}
@@ -130,7 +129,7 @@ public class TermiteSoldier extends PathfinderMob {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.ATTACK_DAMAGE, 6.0D).add(Attributes.FOLLOW_RANGE, 20.0D);
 	}
-	
+
 	public boolean isAlliedTo(Entity entity) {
 		if (super.isAlliedTo(entity)) {
 			return true;
@@ -140,9 +139,9 @@ public class TermiteSoldier extends PathfinderMob {
 			return false;
 		}
 	}
-	
-	public static boolean canTermiteSpawn(EntityType<? extends TermiteSoldier> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
-        return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
-    }
+
+	public static boolean canTermiteSpawn(EntityType<? extends TermiteSoldier> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
+	}
 
 }

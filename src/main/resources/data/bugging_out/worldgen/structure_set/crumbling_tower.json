@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "bugging_out:crumbling_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 124256391,
+
+    "spacing": 60,
+
+    "separation": 35,
+
+    "type": "minecraft:random_spread"
+  }
+}

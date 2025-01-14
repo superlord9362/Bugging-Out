@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superlord.bugs.BuggingOut;
+import superlord.bugs.common.effect.MoldInfectionEffect;
 import superlord.bugs.common.effect.TermitesVengeanceEffect;
 
 public class BOEffects {
@@ -13,5 +14,6 @@ public class BOEffects {
 	public static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, BuggingOut.MOD_ID);
 
 	public static final RegistryObject<MobEffect> TERMITES_VENGEANCE = REGISTER.register("termites_vengeance", () -> new TermitesVengeanceEffect(MobEffectCategory.HARMFUL, 0x995D38));
+	public static final RegistryObject<MobEffect> MOLD_INFECTION = REGISTER.register("mold_infection", () -> new MoldInfectionEffect(MobEffectCategory.HARMFUL, 0x995D38));
 
 }

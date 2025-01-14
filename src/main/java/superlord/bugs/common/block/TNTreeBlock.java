@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import superlord.bugs.common.block.util.WoodExplosion;
 import superlord.bugs.common.entity.TNTree;
 
 public class TNTreeBlock extends Block {
@@ -65,7 +66,7 @@ public class TNTreeBlock extends Block {
 		super.playerWillDestroy(p_57445_, p_57446_, p_57447_, p_57448_);
 	}
 
-	public void wasExploded(Level p_57441_, BlockPos p_57442_, Explosion p_57443_) {
+	public void wasExploded(Level p_57441_, BlockPos p_57442_, WoodExplosion p_57443_) {
 		if (!p_57441_.isClientSide) {
 			TNTree primedtnt = new TNTree(p_57441_, (double)p_57442_.getX() + 0.5D, (double)p_57442_.getY(), (double)p_57442_.getZ() + 0.5D, p_57443_.getSourceMob());
 			int i = primedtnt.getFuse();

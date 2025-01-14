@@ -1,13 +1,12 @@
 package superlord.bugs.common.entity;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -120,7 +119,7 @@ public class TermiteWorker extends PathfinderMob {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
+		for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8, 4, 8))) {
 			if (entity.hasEffect(BOEffects.TERMITES_VENGEANCE.get())) {
 				this.setTarget(entity);
 			}
@@ -170,8 +169,8 @@ public class TermiteWorker extends PathfinderMob {
 		}
 
 		protected void onReachedTarget() {
-			if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(TermiteWorker.this.level, TermiteWorker.this)) {
-				BlockState blockstate = TermiteWorker.this.level.getBlockState(this.blockPos);
+			if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(TermiteWorker.this.level(), TermiteWorker.this)) {
+				BlockState blockstate = TermiteWorker.this.level().getBlockState(this.blockPos);
 				if (blockstate.is(BOBlocks.TERMITE_MUSHROOM.get())) {
 					this.pickMushroom(blockstate);
 				}
@@ -180,7 +179,7 @@ public class TermiteWorker extends PathfinderMob {
 		}
 
 		private void pickMushroom(BlockState p_148929_) {
-			TermiteWorker.this.level.setBlock(this.blockPos, Blocks.AIR.defaultBlockState(), 2);
+			TermiteWorker.this.level().setBlock(this.blockPos, Blocks.AIR.defaultBlockState(), 2);
 		}
 
 		public boolean canUse() {
@@ -203,7 +202,7 @@ public class TermiteWorker extends PathfinderMob {
 		}
 	}
 	
-	public static boolean canTermiteSpawn(EntityType<? extends TermiteWorker> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
+	public static boolean canTermiteSpawn(EntityType<? extends TermiteWorker> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return random.nextFloat() > 0.95F && (worldIn.getBlockState(pos.below()).is(BlockTags.DIRT) || worldIn.getBlockState(pos.below()).is(BOBlocks.TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.CRUMBLY_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.FERROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.INFESTED_POROUS_TERMOSTONE.get()) || worldIn.getBlockState(pos.below()).is(BOBlocks.GLOW_WORM_HOLE.get()));
 	}
 
